@@ -1,0 +1,286 @@
+.sidebar-main-title .welcome-card {
+    white-space: normal !important;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-direction: column;
+}
+
+.sidebar-main-title .welcome-card.flex .logo-circle {
+    border-radius: 50%;
+    width: 48px;
+}
+
+.sidebar-main-title .welcome-card .logo-circle {
+    border-radius: 10px;
+    background-color: white;
+    width: 100%;
+    height: 48px;
+    padding: 5px;
+    margin-bottom: 8px;
+}
+
+.sidebar-main-title .welcome-card .welcome-text {
+    width: 100%;
+}
+
+.sidebar-main-title .logo-circle img {
+    height: 100%;
+}
+
+.page-wrapper .sidebar-main-title p {
+    line-height: 1.5;
+    text-transform: none;
+}
+
+.page-wrapper .page-header .header-wrapper {
+    justify-content: space-between;
+}
+
+.dataTables_wrapper {
+    padding: 2px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding-top: 5px;
+}
+
+.select2-container {
+    z-index: 1050;
+}
+
+.select2-normal {
+    z-index: 2 !important;
+}
+
+.selection .select2-selection .select2-search__field {
+    margin: 2px;
+    padding-left: 8px;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content>li {
+    margin-bottom: 4px;
+}
+
+.btn-link-custom {
+    text-decoration: none;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper {
+    height: 81px;
+    padding: 15px 50px 15px 40px;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-icon-wrapper {
+    height: 81px;
+    padding: 17px 24px;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-icon-wrapper img {
+    width: 48px;
+}
+
+.media.profile-media {
+    align-items: center;
+}
+
+.logo-header {
+    max-width: 170px;
+}
+
+.logo-wrapper {
+    display: flex;
+}
+
+.logo-wrapper a {
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper {
+        height: 56px;
+        padding: 10px 40px;
+    }
+}
+
+label {
+    font-size: 16px;
+}
+
+.text-red {
+    color: red;
+}
+
+.btn-sm .small-icon {
+    width: auto;
+    height: 14px;
+}
+
+.card .card-header,
+.card .card-body {
+    padding: 24px;
+}
+
+.btn-primary {
+    background-color: #3c88f7 !important;
+    border-color: #3c88f7 !important;
+}
+
+.btn-success {
+    background-color: #f54e49 !important;
+    border-color: #f54e49 !important;
+}
+
+.btn-green {
+    background-color: #51bb25 !important;
+    border-color: #51bb25 !important;
+    color: white !important;
+}
+
+.btn-warning {
+    color: black !important;
+}
+
+.btn {
+    padding: 8px 16px;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
+.hr-custom {
+    margin: 4px 0;
+}
+
+#aksi-filter div .print {
+    float: right;
+}
+
+@media only screen and (max-width: 599px) {
+    #aksi-filter div {
+        margin-bottom: 5px;
+    }
+    #aksi-filter div .print {
+        float: left;
+    }
+}
+
+.datepickers-container,
+.datepicker {
+    z-index: 1500 !important;
+}
+
+.column-action {
+    display: flex;
+    gap: 8px;
+}
+
+.badge-warning {
+    color: black !important;
+}
+
+.badge-blue {
+    background-color: #3c88f7;
+}
+
+.badge-orange {
+    background-color: #ecab14;
+}
+
+.badge-green {
+    background-color: #51bb25;
+}
+
+.badge-pink {
+    background-color: #dd8c93;
+}
+
+.flex-row-between-center {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.me-4p {
+    margin-right: 4px;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content>li.sidebar-list .badge {
+    position: inherit;
+    right: inherit;
+    top: initial;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content>li.sidebar-list .badge-danger {
+    color: white !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content>li.sidebar-list .badge-danger:hover {
+    color: white !important;
+}
+
+.ecommerce-widgets .fa {
+    background: linear-gradient(to right, var(--theme-deafult) 10%, #a927f9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 2px;
+    font-size: 25px;
+}
+
+.btn-gray {
+    background-color: #d1d1d1 !important;
+    border-color: #d1d1d1 !important;
+    color: black;
+}
+
+.apexcharts-radial-series path {
+    stroke-width: 10px;
+    stroke-dasharray: 10, 20;
+    stroke-linecap: round;
+}
+
+.stepwizard .stepwizard-row:before {
+    height: 4px;
+}
+
+@mixin modal-fullscreen() {
+    padding: 0 !important; // override inline padding-right added from js
+    .modal-dialog {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        margin: 0;
+    }
+    .modal-content {
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+    }
+    .modal-body {
+        overflow-y: auto;
+    }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-down($breakpoint) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+        .modal-fullscreen#{$infix} {
+            @include modal-fullscreen();
+        }
+    }
+}
+
+.blink_badge {
+    animation: blinker 1.5s linear infinite;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0.1;
+    }
+  }
