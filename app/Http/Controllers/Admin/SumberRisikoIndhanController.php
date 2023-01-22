@@ -7,14 +7,14 @@ use App\Models\DefendidUser;
 use Illuminate\Http\Request;
 use App\Models\SRisiko;
 use App\Models\Risk;
-use App\Models\PengukuranIndhan;
+use App\Models\PengukuranKorporasi;
 use App\Models\Pengukuran;
 use App\Models\RiskDetail;
 use App\Models\Divisi;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 
-class SumberRisikoIndhanController extends Controller
+class SumberRisikoKorporasiController extends Controller
 {
     public function index()
     {
@@ -32,7 +32,7 @@ class SumberRisikoIndhanController extends Controller
         $risiko = Risk::join('konteks', 'risk.id_risk', 'konteks.id_risk')
         ->orderBy('risk.id_risk')
         ->get();
-        return view('admin.sumber-risiko-indhan', compact('divisi','sumber_risiko', 'divisi_filter', 'risiko', 'tahun_filter'));
+        return view('admin.sumber-risiko-korporasi', compact('divisi','sumber_risiko', 'divisi_filter', 'risiko', 'tahun_filter'));
     }
     
     public function store(Request $request) {
@@ -53,7 +53,7 @@ class SumberRisikoIndhanController extends Controller
           'updated_at' => now(),
         ]);
   
-        return Redirect::back()->with('created-alert', 'Data sumber risiko INDHAN berhasil disimpan.');
+        return Redirect::back()->with('created-alert', 'Data sumber risiko KORPORASI berhasil disimpan.');
 
     }
 
@@ -70,7 +70,7 @@ class SumberRisikoIndhanController extends Controller
         'updated_at' => now(),
       ]);
 
-      return Redirect::back()->with('updated-alert', 'Data sumber risiko INDHAN berhasil diubah.');
+      return Redirect::back()->with('updated-alert', 'Data sumber risiko KORPORASI berhasil diubah.');
     }
 
     /**
@@ -81,14 +81,14 @@ class SumberRisikoIndhanController extends Controller
      */
     public function destroy($id)
     {
-      $count = PengukuranIndhan::where('id_s_risiko', '=', $id)->count('id_s_risiko');
+      $count = PengukuranKorporasi::where('id_s_risiko', '=', $id)->count('id_s_risiko');
       $count += Pengukuran::where('id_s_risiko', '=', $id)->count('id_s_risiko');
       $count += RiskDetail::where('id_s_risiko', '=', $id)->count('id_s_risiko');
       if ($count > 0) {
-        return back()->with(["error-swal" => 'Data ini masih digunakan pada detail risiko, pengukuran dan atau pengukuran Indhan. Mohon hapus data yang menggunakan sumber risiko ini terlebih dahulu.']);
+        return back()->with(["error-swal" => 'Data ini masih digunakan pada detail risiko, pengukuran dan atau pengukuran Korporasi. Mohon hapus data yang menggunakan sumber risiko ini terlebih dahulu.']);
       }
       SRisiko::find($id)->delete();
-      return Redirect::back()->with('deleted-alert', 'Data sumber risiko INDHAN telah dihapus.');
+      return Redirect::back()->with('deleted-alert', 'Data sumber risiko KORPORASI telah dihapus.');
     }
 
     public function searchRisiko(Request $request)
@@ -113,7 +113,7 @@ class SumberRisikoIndhanController extends Controller
         $risiko = Risk::join('konteks', 'risk.id_risk', 'konteks.id_risk')
         ->orderBy('risk.id_risk')
         ->get();
-        return view('admin.sumber-risiko-indhan', compact('divisi','sumber_risiko', 'divisi_filter', 'risiko', 'tahun_filter'));
+        return view('admin.sumber-risiko-korporasi', compact('divisi','sumber_risiko', 'divisi_filter', 'risiko', 'tahun_filter'));
     }
 
     /**
@@ -132,7 +132,7 @@ class SumberRisikoIndhanController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        // return redirect()->route('admin.sumber-risiko-indhan')->with('updated-alert', 'Status verifikasi sumber risiko berhasil diubah.');
+        // return redirect()->route('admin.sumber-risiko-korporasi')->with('updated-alert', 'Status verifikasi sumber risiko berhasil diubah.');
 
         return Redirect::back()->with('updated-alert', 'Status verifikasi sumber risiko berhasil diubah.');
 

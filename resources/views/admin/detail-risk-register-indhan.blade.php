@@ -7,12 +7,12 @@
 @endsection
 
 @section('page-title')
-<h3>Detail Risk Register INDHAN</h3>
+<h3>Detail Risk Register KORPORASI</h3>
 @endsection
 
 @section('breadcrumb')
-<li class="breadcrumb-item">Risk Register INDHAN</li>
-<li class="breadcrumb-item active">Detail Risk Register INDHAN</li>
+<li class="breadcrumb-item">Risk Register KORPORASI</li>
+<li class="breadcrumb-item active">Detail Risk Register KORPORASI</li>
 @endsection
 
 @section('content')
@@ -82,7 +82,7 @@
           <div class="card-header d-flex">
             <button class="btn btn-lg btn-primary d-flex btn-add mr-4" style="margin-right: 10px;" data-bs-toggle="modal" data-bs-target="#create-risk">
               <i data-feather="plus" class="me-2"></i>
-              Tambah Risiko INDHAN
+              Tambah Risiko KORPORASI
             </button>
             <button type="button" class="btn btn-warning" data-bs-target="#import" data-bs-toggle="modal">Import</button>
           </div>
@@ -153,8 +153,8 @@
                   @endforeach
                 @endif
 
-                @if($detail_risk_indhan != null )
-                  @foreach($detail_risk_indhan as $d2)
+                @if($detail_risk_korporasi != null )
+                  @foreach($detail_risk_korporasi as $d2)
                   @if($d2->id_riskd)
                   <tr>
                     <td>{{ $d2->id_risk .'-'. $d2->no_k }}</td>
@@ -219,7 +219,7 @@
           <h5 class="modal-title">Input Lampiran Risiko</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" action="{{ route('admin.upload-lampiran-risk-register-indhan') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.upload-lampiran-risk-register-korporasi') }}" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="id" value="{{ $headers->id_riskh }}">
           <div class="modal-body">
@@ -269,14 +269,14 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Create Risk INDHAN</h5>
+          <h5 class="modal-title">Create Risk KORPORASI</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
           <form action="{{ route('admin.risk-detail.store') }}" method="POST">
             @csrf
             <input type="hidden" name="id_riskh" value="{{ $headers->id_riskh }}">
             <input type="hidden" name="tahun" value="{{ $headers->tahun }}">
-            <input type="hidden" name="status_indhan" value="1">
+            <input type="hidden" name="status_korporasi" value="1">
             <input type="hidden" name="status_mitigasi" value="0">
             <div class="modal-body">
               <div class="row">
@@ -404,7 +404,7 @@
   </div>
 </div>
 
-@foreach($detail_risk_indhan as $data)
+@foreach($detail_risk_korporasi as $data)
 @if($data->id_riskd)
 <div class="modal fade" id="detail-risk-{{ $data->id_riskd }}" tabindex="-1" role="dialog" aria-labelledby="create-header" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -687,7 +687,7 @@
           <h5 class="modal-title">Set Nomor Urut</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" action="{{ route('admin.risk-register-indhan.set-urut-risk') }}">
+        <form method="POST" action="{{ route('admin.risk-register-korporasi.set-urut-risk') }}">
           @csrf
           <div class="modal-body">
           <input type="hidden" name="id_riskh" value="{{ $headers->id_riskh }}">

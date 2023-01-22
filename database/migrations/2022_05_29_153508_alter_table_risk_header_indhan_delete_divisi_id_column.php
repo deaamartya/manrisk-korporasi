@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableRiskHeaderIndhanDeleteDivisiIdColumn extends Migration
+class AlterTableRiskHeaderKorporasiDeleteDivisiIdColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AlterTableRiskHeaderIndhanDeleteDivisiIdColumn extends Migration
      */
     public function up()
     {
-        Schema::table('risk_header_indhan', function (Blueprint $table) {
+        Schema::table('risk_header_korporasi', function (Blueprint $table) {
             $table->dropColumn('id_divisi');
         });
     }

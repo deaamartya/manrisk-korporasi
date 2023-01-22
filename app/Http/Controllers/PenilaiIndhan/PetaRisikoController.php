@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\PenilaiIndhan;
+namespace App\Http\Controllers\PenilaiKorporasi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
@@ -62,6 +62,6 @@ class PetaRisikoController extends Controller
         if (count($val_r) > 1) $r_tertinggi = floatval(max($val_r));
         $tahun_req = $req->tahun_risk;
         $divisi = Divisi::where('divisi_id', $id)->first();
-        return view('penilai-indhan.peta-risiko',  compact("s_risiko", "data_low", "data_med", "data_high", "data_extreme", 'r_total', 'r_tertinggi', 'tahun_req', 'divisi', "data_low_mitigasi", "data_med_mitigasi", "data_high_mitigasi", "data_extreme_mitigasi"));
+        return view('penilai-korporasi.peta-risiko',  compact("s_risiko", "data_low", "data_med", "data_high", "data_extreme", 'r_total', 'r_tertinggi', 'tahun_req', 'divisi', "data_low_mitigasi", "data_med_mitigasi", "data_high_mitigasi", "data_extreme_mitigasi"));
     }
 }

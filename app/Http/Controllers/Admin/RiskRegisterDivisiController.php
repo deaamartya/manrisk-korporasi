@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RiskHeader;
 use App\Models\RiskDetail;
-use App\Models\RiskHeaderIndhan;
+use App\Models\RiskHeaderKorporasi;
 use App\Models\DefendidUser;
 use App\Models\SRisiko;
 use App\Models\PengajuanMitigasi;
@@ -111,7 +111,7 @@ class RiskRegisterDivisiController extends Controller
     {
         $risk_header = RiskHeader::where('id_riskh', '=', $id)->first();
         $risk_header->update([
-            'status_h_indhan' => 1
+            'status_h_korporasi' => 1
         ]);
         // dd($risk_header);
         return Redirect::back()->with(['success-swal' => 'Risk Header berhasil disetujui.']);
@@ -122,28 +122,28 @@ class RiskRegisterDivisiController extends Controller
         $headers = RiskHeader::join('defendid_user', 'risk_header.id_user', 'defendid_user.id_user')
                     ->join('divisi', 'defendid_user.divisi_id', 'divisi.divisi_id')
                     ->where('id_riskh', '=', $id)->first();
-        // dd($headers_indhan);
+        // dd($headers_korporasi);
         return view('admin.detail-risk-register', compact('headers'));
     }
 
-    public function indhan($id, Request $request)
+    public function korporasi($id, Request $request)
     {
         $risk_detail = RiskDetail::where('id_riskd', '=', $id)->first();
         $risk_detail->update([
-            'status_indhan' => 1
+            'status_korporasi' => 1
         ]);
         $id_risk = $request->id_risk;
-        return Redirect::back()->with(['success-swal' => 'Data '.$id_risk.' berhasil diubah menjadi INDHAN.']);
+        return Redirect::back()->with(['success-swal' => 'Data '.$id_risk.' berhasil diubah menjadi KORPORASI.']);
     }
 
-    public function nonIndhan($id, Request $request)
+    public function nonKorporasi($id, Request $request)
     {
         $risk_detail = RiskDetail::where('id_riskd', '=', $id)->first();
         $risk_detail->update([
-            'status_indhan' => 0
+            'status_korporasi' => 0
         ]);
         $id_risk = $request->id_risk;
-        return Redirect::back()->with(['success-swal' => 'Data '.$id_risk.' berhasil diubah menjadi Bukan INDHAN.']);
+        return Redirect::back()->with(['success-swal' => 'Data '.$id_risk.' berhasil diubah menjadi Bukan KORPORASI.']);
     }
 
     public function mitigation($id, Request $request)

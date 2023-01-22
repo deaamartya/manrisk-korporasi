@@ -77,7 +77,7 @@ $(document).ready(function(){
                 data: "",
                 className: "text-center",
                 render: function ( data, type, row ) {
-                    let html = '<span class="badge badge-warning">Bukan Indhan</span>'
+                    let html = '<span class="badge badge-warning">Bukan Korporasi</span>'
 
                     return html
                 }

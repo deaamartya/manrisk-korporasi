@@ -95,7 +95,7 @@
                                     <th>C Awal</th>
                                     <th>R Awal</th>
                                     <th>Status</th>
-                                    <th>Status Indhan</th>
+                                    <th>Status Korporasi</th>
                                 </tr>
                             </thead>
                             <tbody>

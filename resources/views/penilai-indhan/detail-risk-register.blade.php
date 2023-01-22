@@ -54,10 +54,10 @@
                   <span class="badge badge-success"><i class="fa fa-check"></i> Approved Risk Owner</span>
                   @endif
 
-                  @if($headers->status_h_indhan == 0)
-                  <span class="badge badge-warning"><i class="fa fa-warning"></i> Waiting Approval INDHAN</span>
-                  @elseif($headers->status_h_indhan == 1)
-                  <span class="badge badge-success"><i class="fa fa-check"></i> Approved INDHAN</span>
+                  @if($headers->status_h_korporasi == 0)
+                  <span class="badge badge-warning"><i class="fa fa-warning"></i> Waiting Approval KORPORASI</span>
+                  @elseif($headers->status_h_korporasi == 1)
+                  <span class="badge badge-success"><i class="fa fa-check"></i> Approved KORPORASI</span>
                   @endif
                 </div>
               </div>
@@ -92,7 +92,7 @@
                 <thead>
                   <tr>
                     <th>Id Risk</th>
-                    <th>INDHAN</th>
+                    <th>KORPORASI</th>
                     <th>Mitigasi</th>                  
                     <th>Konteks Organisasi</th>
                     <th>Indikator</th>
@@ -121,10 +121,10 @@
                   <tr>
                     <td>{{ $d->sumber_risiko->konteks->id_risk .'-'. $d->no_urut }}</td>
                     <td>
-                        @if($d->status_indhan == 0)
-                          <span class="badge badge-danger me-2">Bukan INDHAN</span>
-                        @elseif($d->status_indhan == 1)
-                          <span class="badge badge-green me-2">INDHAN</span>
+                        @if($d->status_korporasi == 0)
+                          <span class="badge badge-danger me-2">Bukan KORPORASI</span>
+                        @elseif($d->status_korporasi == 1)
+                          <span class="badge badge-green me-2">KORPORASI</span>
                         @endif
                     </td>
                     <td>
@@ -212,7 +212,7 @@
           <h5 class="modal-title">Delete Risk Detail</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="{{ route('penilai-indhan.risk-detail-delete', $data->id_riskd) }}" method="POST">
+        <form action="{{ route('penilai-korporasi.risk-detail-delete', $data->id_riskd) }}" method="POST">
           @method('DELETE')
           @csrf
           <input type="hidden" name="id_risk" value="{{ $data->sumber_risiko->konteks->id_risk .'-'. $data->no_urut  }}">

@@ -59,8 +59,8 @@ $(document).ready(function() {
                 $('#approve_' + id).remove()
                 $('#not_approve_' + id).remove()
                 // if (headers == 0) {
-                //     $('#status_h_indhan_0').remove()
-                //     $('#status_h_indhan').append('<span class="badge badge-success" id="status_h_indhan_1"><i class="fa fa-check"></i> Approved Admin</span>')
+                //     $('#status_h_korporasi_0').remove()
+                //     $('#status_h_korporasi').append('<span class="badge badge-success" id="status_h_korporasi_1"><i class="fa fa-check"></i> Approved Admin</span>')
                 // }
                 $('#realisasi_' + id).remove()
                 $('#data_realisasi').html(total_realisasi)

@@ -93,7 +93,7 @@ class HasilKompilasiRisikoController extends Controller
             ->where('sr.divisi_id', $instansi)
             ->groupBy('k.id_risk', 'k.konteks',  'sr.s_risiko', 'sr.id_s_risiko')
             ->get();
-        $pdf = PDF::loadView('penilai-indhan.form_kompilasi', compact('data'))->setPaper( 'a4','landscape');
+        $pdf = PDF::loadView('penilai-korporasi.form_kompilasi', compact('data'))->setPaper( 'a4','landscape');
         return $pdf->stream('Hasil Kompilasi Risiko'.$instansi.'_'.$tahun.'.pdf');
     }
 }

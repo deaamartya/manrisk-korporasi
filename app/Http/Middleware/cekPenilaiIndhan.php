@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 
-class cekPenilaiIndhan
+class cekPenilaiKorporasi
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class cekPenilaiIndhan
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Session::get('is_bypass') === true || Auth::user()->is_penilai_indhan){
+        if(Session::get('is_bypass') === true || Auth::user()->is_penilai_korporasi){
             return $next($request);
         }
         else {

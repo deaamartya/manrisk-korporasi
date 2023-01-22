@@ -68,7 +68,7 @@ $(document).ready(function() {
         if (user.is_admin === true) {
             $('.is_risk_owner').hide()
             $('.is_penilai').hide()
-            $('.is_penilai_indhan').hide()
+            $('.is_penilai_korporasi').hide()
         } else if (user.is_risk_officer === true) {
             $('.is_admin').hide()
             $('.is_risk_officer').hide()
@@ -101,7 +101,7 @@ $(document).ready(function() {
         if (user.is_admin === true) {
             $('.is_risk_owner').hide()
             $('.is_penilai').hide()
-            $('.is_penilai_indhan').hide()
+            $('.is_penilai_korporasi').hide()
         } else if (user.is_risk_officer === true) {
             $('.is_admin').hide()
         }
@@ -138,11 +138,11 @@ $(document).ready(function() {
                 } else {
                     $('#formIsPenilai').val(0)
                 }
-                if (results.data[0].is_penilai_indhan == 1) {
-                    $('#formIsPenilaiIndhan').val(1)
-                    $('#formIsPenilaiIndhan').prop('checked', true)
+                if (results.data[0].is_penilai_korporasi == 1) {
+                    $('#formIsPenilaiKorporasi').val(1)
+                    $('#formIsPenilaiKorporasi').prop('checked', true)
                 } else {
-                    $('#formIsPenilaiIndhan').val(0)
+                    $('#formIsPenilaiKorporasi').val(0)
                 }
                 if (results.data[0].is_risk_owner == 1) {
                     $('#formIsRiskOwner').val(1)
@@ -198,11 +198,11 @@ $(document).ready(function() {
         }
     })
 
-    $('#formIsPenilaiIndhan').on('click', function() {
-        if ($('#formIsPenilaiIndhan:checked').val() != undefined) {
-            $('#formIsPenilaiIndhan').val(1)
+    $('#formIsPenilaiKorporasi').on('click', function() {
+        if ($('#formIsPenilaiKorporasi:checked').val() != undefined) {
+            $('#formIsPenilaiKorporasi').val(1)
         } else {
-            $('#formIsPenilaiIndhan').val(0)
+            $('#formIsPenilaiKorporasi').val(0)
         }
     })
 

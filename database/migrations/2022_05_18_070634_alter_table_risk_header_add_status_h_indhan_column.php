@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableRiskHeaderAddStatusHIndhanColumn extends Migration
+class AlterTableRiskHeaderAddStatusHKorporasiColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AlterTableRiskHeaderAddStatusHIndhanColumn extends Migration
     public function up()
     {
         Schema::table('risk_header', function (Blueprint $table) {
-            $table->integer('status_h_indhan')->after('status_h')->default(0);
+            $table->integer('status_h_korporasi')->after('status_h')->default(0);
         });
     }
 
@@ -26,7 +26,7 @@ class AlterTableRiskHeaderAddStatusHIndhanColumn extends Migration
     public function down()
     {
         Schema::table('risk_header', function (Blueprint $table) {
-            $table->dropColumn('status_h_indhan');
+            $table->dropColumn('status_h_korporasi');
         });
     }
 }

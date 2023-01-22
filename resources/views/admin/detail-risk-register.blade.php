@@ -55,10 +55,10 @@
                   <span class="badge badge-success"><i class="fa fa-check"></i> Approved Risk Owner</span>
                   @endif
 
-                  @if($headers->status_h_indhan == 0)
-                  <span class="badge badge-warning"><i class="fa fa-warning"></i> Waiting Approval INDHAN</span>
-                  @elseif($headers->status_h_indhan == 1)
-                  <span class="badge badge-success"><i class="fa fa-check"></i> Approved INDHAN</span>
+                  @if($headers->status_h_korporasi == 0)
+                  <span class="badge badge-warning"><i class="fa fa-warning"></i> Waiting Approval KORPORASI</span>
+                  @elseif($headers->status_h_korporasi == 1)
+                  <span class="badge badge-success"><i class="fa fa-check"></i> Approved KORPORASI</span>
                   @endif
                 </div>
               </div>
@@ -93,7 +93,7 @@
                 <thead>
                   <tr>
                     <th>Id Risk</th>
-                    <th>INDHAN</th>
+                    <th>KORPORASI</th>
                     <th>Mitigasi</th>
                     <th>Konteks Organisasi</th>
                     <th>Indikator</th>
@@ -122,13 +122,13 @@
                   <tr>
                     <td>{{ $d->sumber_risiko->konteks->id_risk .'-'. $d->no_urut }}</td>
                     <td>
-                        @if($d->status_indhan == 0)
-                          <button class="btn btn-sm btn-pill btn-green d-flex align-items-center" data-bs-target="#bukan-indhan-{{ $d->id_riskd }}" data-bs-toggle="modal">
-                            <i class="fa fa-times me-2"></i>Bukan INDHAN
+                        @if($d->status_korporasi == 0)
+                          <button class="btn btn-sm btn-pill btn-green d-flex align-items-center" data-bs-target="#bukan-korporasi-{{ $d->id_riskd }}" data-bs-toggle="modal">
+                            <i class="fa fa-times me-2"></i>Bukan KORPORASI
                           </button>
-                        @elseif($d->status_indhan == 1)
-                        <button class="btn btn-sm btn-pill btn-danger d-flex align-items-center" data-bs-target="#indhan-{{ $d->id_riskd }}" data-bs-toggle="modal">
-                            <i class="fa fa-check me-2"></i>INDHAN
+                        @elseif($d->status_korporasi == 1)
+                        <button class="btn btn-sm btn-pill btn-danger d-flex align-items-center" data-bs-target="#korporasi-{{ $d->id_riskd }}" data-bs-toggle="modal">
+                            <i class="fa fa-check me-2"></i>KORPORASI
                           </button>
                         @endif
                     </td>
@@ -218,17 +218,17 @@
 </div>
 
 @foreach($headers->risk_detail as $data)
-<div class="modal fade" id="bukan-indhan-{{ $data->id_riskd }}" tabindex="-1" role="dialog" aria-labelledby="insertResponden" aria-hidden="true">
+<div class="modal fade" id="bukan-korporasi-{{ $data->id_riskd }}" tabindex="-1" role="dialog" aria-labelledby="insertResponden" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Konfirmasi Status INDHAN</h5>
+        <h5 class="modal-title">Konfirmasi Status KORPORASI</h5>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="GET" action="{{ route('admin.risk-register-divisi.indhan', $data->id_riskd) }}">
+      <form method="GET" action="{{ route('admin.risk-register-divisi.korporasi', $data->id_riskd) }}">
         <div class="modal-body">
         <input type="hidden" name="id_risk" value="{{ $data->sumber_risiko->konteks->id_risk .'-'. $data->no_urut }}">
-          Apakah Anda yakin menyimpan risiko ini sebagai risiko INDHAN?
+          Apakah Anda yakin menyimpan risiko ini sebagai risiko KORPORASI?
         </div>
         <div class="modal-footer">
           <button class="btn btn-light" type="button" data-bs-dismiss="modal">Tidak</button>
@@ -239,17 +239,17 @@
   </div>
 </div>
 
-<div class="modal fade" id="indhan-{{ $data->id_riskd }}" tabindex="-1" role="dialog" aria-labelledby="insertResponden" aria-hidden="true">
+<div class="modal fade" id="korporasi-{{ $data->id_riskd }}" tabindex="-1" role="dialog" aria-labelledby="insertResponden" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Konfirmasi Status INDHAN</h5>
+        <h5 class="modal-title">Konfirmasi Status KORPORASI</h5>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="GET" action="{{ route('admin.risk-register-divisi.non-indhan', $data->id_riskd) }}">
+      <form method="GET" action="{{ route('admin.risk-register-divisi.non-korporasi', $data->id_riskd) }}">
         <div class="modal-body">
         <input type="hidden" name="id_risk" value="{{ $data->sumber_risiko->konteks->id_risk .'-'. $data->no_urut }}">
-          Apakah Anda yakin menyimpan risiko ini sebagai risiko BUKAN INDHAN?
+          Apakah Anda yakin menyimpan risiko ini sebagai risiko BUKAN KORPORASI?
         </div>
         <div class="modal-footer">
           <button class="btn btn-light" type="button" data-bs-dismiss="modal">Tidak</button>

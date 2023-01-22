@@ -6,11 +6,11 @@
 @endsection
 
 @section('page-title')
-<h3>Risk Register INDHAN</h3>
+<h3>Risk Register KORPORASI</h3>
 @endsection
 
 @section('breadcrumb')
-<li class="breadcrumb-item">Risk Register INDHAN</li>
+<li class="breadcrumb-item">Risk Register KORPORASI</li>
 @endsection
 
 @section('content')
@@ -55,13 +55,13 @@
                       </button>
                     </td>
                     <td>
-                      <a href="{{ route('admin.risk-register-indhan.show', $d->id_riskh) }}" class="btn btn-sm btn-primary d-flex align-items-center">
+                      <a href="{{ route('admin.risk-register-korporasi.show', $d->id_riskh) }}" class="btn btn-sm btn-primary d-flex align-items-center">
                       <i data-feather="eye" class="me-2 small-icon"></i>
                         Detail
                       </a>
                     </td>
                     <td>
-                      <a href="{{ route('admin.print-risk-register-indhan', $d->id_riskh) }}" target="_blank" class="btn btn-sm btn-success" title="Print">
+                      <a href="{{ route('admin.print-risk-register-korporasi', $d->id_riskh) }}" target="_blank" class="btn btn-sm btn-success" title="Print">
                         <i data-feather="printer" class="small-icon"></i>
                       </a>
                       <button class="btn btn-sm btn-warning btn-edit" data-id="{{ $d->id_riskh }}" data-bs-toggle="modal" data-bs-target="#edit-header-{{ $d->id_riskh }}" title="Edit">
@@ -87,10 +87,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Input Risk Header INDHAN</h5>
+          <h5 class="modal-title">Input Risk Header KORPORASI</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" action="{{ route('admin.risk-register-indhan.store') }}">
+        <form method="POST" action="{{ route('admin.risk-register-korporasi.store') }}">
           @csrf
           <div class="modal-body">
             <div class="row">
@@ -148,10 +148,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Edit Risk Header INDHAN</h5>
+          <h5 class="modal-title">Edit Risk Header KORPORASI</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="{{ route('admin.risk-register-indhan.update', $data->id_riskh) }}" method="POST">
+        <form action="{{ route('admin.risk-register-korporasi.update', $data->id_riskh) }}" method="POST">
           @method('PUT')
           @csrf
           <div class="modal-body">
@@ -209,10 +209,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Delete Risk Header INDHAN</h5>
+          <h5 class="modal-title">Delete Risk Header KORPORASI</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="{{ route('admin.risk-register-indhan.destroy',  $data->id_riskh) }}" method="POST">
+        <form action="{{ route('admin.risk-register-korporasi.destroy',  $data->id_riskh) }}" method="POST">
           @method('DELETE')
           @csrf
           <div class="modal-body">

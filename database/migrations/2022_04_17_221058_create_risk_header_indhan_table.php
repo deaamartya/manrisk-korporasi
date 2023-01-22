@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRiskHeaderIndhanTable extends Migration
+class CreateRiskHeaderKorporasiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRiskHeaderIndhanTable extends Migration
      */
     public function up()
     {
-        Schema::create('risk_header_indhan', function (Blueprint $table) {
+        Schema::create('risk_header_korporasi', function (Blueprint $table) {
             $table->integer('id_riskh', true);
             $table->integer('id_divisi');
             $table->string('tahun', 5);
@@ -36,6 +36,6 @@ class CreateRiskHeaderIndhanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('risk_header_indhan');
+        Schema::dropIfExists('risk_header_korporasi');
     }
 }

@@ -29,7 +29,7 @@ class AbsDataMaster
             //     (CASE
             //         WHEN is_risk_officer = 1 THEN 'Risk Officer'
             //         WHEN is_penilai = 1 THEN 'Penilai'
-            //         WHEN is_penilai_indhan = 1 THEN 'Penilai Indhan'
+            //         WHEN is_penilai_korporasi = 1 THEN 'Penilai Korporasi'
             //         WHEN is_risk_owner = 1 THEN 'Risk Owner'
             //         WHEN is_admin = 1 THEN 'Admin'
             //     END
@@ -53,7 +53,7 @@ class AbsDataMaster
             'is_risk_officer' => $request->is_risk_officer ?? 0,
             'is_admin' => $request->is_admin ?? 0,
             'is_penilai' => $request->is_penilai ?? 0,
-            'is_penilai_indhan' => $request->is_penilai_indhan ?? 0,
+            'is_penilai_korporasi' => $request->is_penilai_korporasi ?? 0,
             'is_risk_owner' => $request->is_risk_owner ?? 0,
             'is_assessment' => $request->melakukan_penilaian ?? 0,
             'created_at' => Carbon::now(),
@@ -74,7 +74,7 @@ class AbsDataMaster
                     'jabatan' => $request->jabatan,
                     'nip' => $request->nip,
                     'nama' => $request->name,
-                    'jenis' => $request->is_penilai_indhan ? 1 : 0,
+                    'jenis' => $request->is_penilai_korporasi ? 1 : 0,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
@@ -91,7 +91,7 @@ class AbsDataMaster
                         'id_user' => $id,
                         'jabatan' => $request->jabatan,
                         'nip' => $request->nip,
-                        'jenis' => $request->is_penilai_indhan ? 1 : 0,
+                        'jenis' => $request->is_penilai_korporasi ? 1 : 0,
                         'nama' => $request->name,
                         'updated_at' => Carbon::now()
                     ]);
@@ -103,7 +103,7 @@ class AbsDataMaster
                         'jabatan' => $request->jabatan,
                         'nip' => $request->nip,
                         'nama' => $request->name,
-                        'jenis' => $request->is_penilai_indhan ? 1 : 0,
+                        'jenis' => $request->is_penilai_korporasi ? 1 : 0,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);

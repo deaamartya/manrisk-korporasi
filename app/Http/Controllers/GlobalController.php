@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Divisi;
 use App\Models\SRisiko;
 use App\Models\Pengukuran;
-use App\Models\PengukuranIndhan;
+use App\Models\PengukuranKorporasi;
 use App\Models\RiskHeader;
-use App\Models\RiskHeaderIndhan;
+use App\Models\RiskHeaderKorporasi;
 use App\Models\RiskDetail;
 use App\Models\PengajuanMitigasi;
 use App\Models\Mitigasi;
@@ -150,7 +150,7 @@ class GlobalController extends Controller
         // init
         $data_risk_officer = [];
         $data_penilai = [];
-        $data_penilai_indhan = [];
+        $data_penilai_korporasi = [];
         $data_risk_owner = [];
         $data_admin = [];
 
@@ -161,8 +161,8 @@ class GlobalController extends Controller
         if(Auth::user()->is_penilai){
             $data_penilai = $this->notif_penilai();
         }
-        if(Auth::user()->is_penilai_indhan){
-            $data_penilai_indhan = $this->notif_penilai_indhan();
+        if(Auth::user()->is_penilai_korporasi){
+            $data_penilai_korporasi = $this->notif_penilai_korporasi();
         }
         if(Auth::user()->is_risk_owner){
             $data_risk_owner = $this->notif_risk_owner();
@@ -183,8 +183,8 @@ class GlobalController extends Controller
                 $data[] = $dp;
             }
         }
-        if(count($data_penilai_indhan) > 0){
-            foreach($data_penilai_indhan as $dpi){
+        if(count($data_penilai_korporasi) > 0){
+            foreach($data_penilai_korporasi as $dpi){
                 $data[] = $dpi;
             }
         }
@@ -209,8 +209,8 @@ class GlobalController extends Controller
             //     if(Auth::user()->is_penilai){
             //         $segment = '/penilai/pengukuran-risiko';
             //     }
-            //     else if(Auth::user()->is_penilai_indhan){
-            //         $segment = '/penilai-indhan/pengukuran-risiko-indhan';
+            //     else if(Auth::user()->is_penilai_korporasi){
+            //         $segment = '/penilai-korporasi/pengukuran-risiko-korporasi';
             //     }
             //     else if(Auth::user()->is_risk_owner){
             //         $segment = '/risk-owner/pengukuran-risiko';
@@ -385,25 +385,25 @@ class GlobalController extends Controller
         return $data;
     }
 
-    public function notif_penilai_indhan()
+    public function notif_penilai_korporasi()
     {
         $s_risk_divisi = SRisiko::join('risk_detail', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
-            ->where('risk_detail.status_indhan', 1)
+            ->where('risk_detail.status_korporasi', 1)
             ->where('risk_detail.divisi_id', '!=', 6)
             ->whereNull('s_risiko.deleted_at')
             ->whereNull('risk_detail.deleted_at')
             ->groupBy('s_risiko.id_s_risiko')
             ->pluck('s_risiko.id_s_risiko')->toArray();
 
-        // get all id_s_risiko indhan
-        $s_risk_indhan = SRisiko::where('divisi_id', 6)
+        // get all id_s_risiko korporasi
+        $s_risk_korporasi = SRisiko::where('divisi_id', 6)
             ->whereNull('deleted_at')
             ->pluck('id_s_risiko')->toArray();
 
-        $s_risk_all = array_merge($s_risk_divisi, $s_risk_indhan);
+        $s_risk_all = array_merge($s_risk_divisi, $s_risk_korporasi);
 
         // get all id_s_risiko divisi yang sudah dinilai
-        $s_risk_dinilai_divisi = SRisiko::join('pengukuran_indhan as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
+        $s_risk_dinilai_divisi = SRisiko::join('pengukuran_korporasi as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
             ->join('defendid_pengukur as dp', 'p.id_pengukur', 'dp.id_pengukur')
             ->where('dp.id_user', Auth::user()->id_user)
             ->whereIn('s_risiko.id_s_risiko', $s_risk_divisi)
@@ -412,17 +412,17 @@ class GlobalController extends Controller
             ->groupBy('s_risiko.id_s_risiko')
             ->pluck('s_risiko.id_s_risiko')->toArray();
 
-        // get all id_s_risiko indhan yang sudah dinilai
-        $s_risk_dinilai_indhan = SRisiko::join('pengukuran_indhan as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
+        // get all id_s_risiko korporasi yang sudah dinilai
+        $s_risk_dinilai_korporasi = SRisiko::join('pengukuran_korporasi as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
             ->join('defendid_pengukur as dp', 'p.id_pengukur', 'dp.id_pengukur')
             ->where('dp.id_user', Auth::user()->id_user)
-            ->whereIn('s_risiko.id_s_risiko', $s_risk_indhan)
+            ->whereIn('s_risiko.id_s_risiko', $s_risk_korporasi)
             ->selectRaw('s_risiko.*, p.*')
             ->whereNull('p.deleted_at')
             ->groupBy('s_risiko.id_s_risiko')
             ->pluck('s_risiko.id_s_risiko')->toArray();
 
-        $s_risk_dinilai = array_merge($s_risk_dinilai_divisi, $s_risk_dinilai_indhan);
+        $s_risk_dinilai = array_merge($s_risk_dinilai_divisi, $s_risk_dinilai_korporasi);
 
         $jml_risk = SRisiko::whereIn('id_s_risiko', $s_risk_all)
             ->whereNotIn('id_s_risiko', $s_risk_dinilai)
@@ -430,9 +430,9 @@ class GlobalController extends Controller
             ->count('id_s_risiko');
 
         $data = [[
-            'title' => 'Terdapat pengukuran risiko indhan sebanyak ',
+            'title' => 'Terdapat pengukuran risiko korporasi sebanyak ',
             'jumlah' => $jml_risk,
-            'link' => url('/')."/penilai-indhan/pengukuran-risiko-indhan"
+            'link' => url('/')."/penilai-korporasi/pengukuran-risiko-korporasi"
         ]];
         if($jml_risk == 0){
             $data = [];
@@ -443,15 +443,15 @@ class GlobalController extends Controller
 
     public function notif_admin()
     {
-        $approval_srisiko_indhan = SRisiko::
+        $approval_srisiko_korporasi = SRisiko::
         //join('risk_detail', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
                                     // where('s_risiko.tahun', date('Y'))
                                     where('s_risiko.status_s_risiko', 0)
-                                    // ->where('risk_detail.status_indhan', 1)
+                                    // ->where('risk_detail.status_korporasi', 1)
                                     // ->whereNull('risk_detail.deleted_at')
                                     ->count('s_risiko.id_s_risiko');
-        $approval_pengajuan_mitigasi_indhan = PengajuanMitigasi::where('is_approved', 0)->count();
-        $approval_risk_register_divisi = RiskHeader::where('status_h_indhan', 0)
+        $approval_pengajuan_mitigasi_korporasi = PengajuanMitigasi::where('is_approved', 0)->count();
+        $approval_risk_register_divisi = RiskHeader::where('status_h_korporasi', 0)
                                     ->where('status_h', 1)->count();
         $risk_detail = DB::raw("(
             SELECT id_riskd, id_riskh FROM risk_detail WHERE deleted_at IS NULL AND status_mitigasi = 1
@@ -467,24 +467,24 @@ class GlobalController extends Controller
         // $mitigasi_logs = DB::raw("(
         //     SELECT id_riskd FROM mitigasi_logs WHERE is_approved != 2 AND realisasi < 100
         // ) as mitigasi_logs");
-        // $hasil_mitigasi_indhan = DB::table('risk_detail')
+        // $hasil_mitigasi_korporasi = DB::table('risk_detail')
         //                                 ->leftJoin($mitigasi_logs, 'mitigasi_logs.id_riskd', 'risk_detail.id_riskd')
-        //                                 ->where(['status_indhan' => 1, 'divisi_id' => 6])
+        //                                 ->where(['status_korporasi' => 1, 'divisi_id' => 6])
         //                                 ->groupBy('risk_detail.id_riskd')
         //                                 ->count();
 
         $data = [];
-        if($approval_srisiko_indhan > 0){
+        if($approval_srisiko_korporasi > 0){
             $data[] = [
                 'title' => 'Terdapat sumber risiko yang belum disetujui sebanyak ',
-                'jumlah' => $approval_srisiko_indhan,
-                'link' => url('/')."/admin/sumber-risiko-indhan"
+                'jumlah' => $approval_srisiko_korporasi,
+                'link' => url('/')."/admin/sumber-risiko-korporasi"
             ];
         }
-        if($approval_pengajuan_mitigasi_indhan > 0){
+        if($approval_pengajuan_mitigasi_korporasi > 0){
             $data[] = [
                 'title' => 'Terdapat pengajuan mitigasi yang belum disetujui sebanyak ',
-                'jumlah' => $approval_pengajuan_mitigasi_indhan,
+                'jumlah' => $approval_pengajuan_mitigasi_korporasi,
                 'link' => url('/')."/admin/mitigasi-plan"
             ];
         }
@@ -502,11 +502,11 @@ class GlobalController extends Controller
                 'link' => url('/')."/admin/approval-hasil-mitigasi"
             ];
         }
-        // if($hasil_mitigasi_indhan > 0){
+        // if($hasil_mitigasi_korporasi > 0){
         //     $data[] = [
-        //         'title' => 'Terdapat mitigasi indhan yang kurang dari 100% sebanyak ',
-        //         'jumlah' => $hasil_mitigasi_indhan,
-        //         'link' => url('/')."admin/mitigasi-plan-indhan/index"
+        //         'title' => 'Terdapat mitigasi korporasi yang kurang dari 100% sebanyak ',
+        //         'jumlah' => $hasil_mitigasi_korporasi,
+        //         'link' => url('/')."admin/mitigasi-plan-korporasi/index"
         //     ];
         // }
 

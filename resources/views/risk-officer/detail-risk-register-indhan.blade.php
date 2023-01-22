@@ -6,12 +6,12 @@
 @endsection
 
 @section('page-title')
-<h3>Detail Risk Register INDHAN</h3>
+<h3>Detail Risk Register KORPORASI</h3>
 @endsection
 
 @section('breadcrumb')
-<li class="breadcrumb-item">Risk Register INDHAN</li>
-<li class="breadcrumb-item active">Detail Risk Register INDHAN</li>
+<li class="breadcrumb-item">Risk Register KORPORASI</li>
+<li class="breadcrumb-item active">Detail Risk Register KORPORASI</li>
 @endsection
 
 @section('content')
@@ -137,8 +137,8 @@
                   @endforeach
                 @endif
 
-                @if($detail_risk_indhan != null )
-                  @foreach($detail_risk_indhan as $d2)
+                @if($detail_risk_korporasi != null )
+                  @foreach($detail_risk_korporasi as $d2)
                   @if($d2->id_riskd)
                   <tr>
                     <td>{{ $d2->id_risk .'-'. $d2->no_k }}</td>
@@ -191,7 +191,7 @@
           <h5 class="modal-title">Input Lampiran Risiko</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" action="{{ route('admin.upload-lampiran-risk-register-indhan') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.upload-lampiran-risk-register-korporasi') }}" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="id" value="{{ $headers->id_riskh }}">
           <div class="modal-body">

@@ -10,7 +10,7 @@ use \App\Http\Controllers\RiskOfficer\{
   PengajuanMitigasiController,
   RiskDetailController,
   MitigasiPlanController,
-  RiskRegisterIndhanController,
+  RiskRegisterKorporasiController,
   PetaRisikoController,
   PengajuanAdminController,
 };
@@ -32,7 +32,7 @@ Route::middleware(['auth', 'cekRiskOfficer'])->name('risk-officer.')->group(func
   Route::post('penilaian-risiko-store', [PengukuranRisikoController::class, 'penilaianRisikoStore'])->name('penilaian-risiko-store');
   Route::resource('risiko', RisikoController::class);
   Route::post('risiko/upload-lampiran', [RisikoController::class, 'uploadLampiran'])->name('risiko.upload-lampiran');
-  Route::resource('risiko-indhan', RiskRegisterIndhanController::class);
+  Route::resource('risiko-korporasi', RiskRegisterKorporasiController::class);
   Route::resource('pengajuan-mitigasi', PengajuanMitigasiController::class);
   Route::resource('pengajuan-mitigasi-admin', PengajuanAdminController::class);
   Route::resource('risk-detail', RiskDetailController::class);
@@ -47,10 +47,10 @@ Route::middleware(['auth', 'cekRiskOfficer'])->name('risk-officer.')->group(func
   Route::get('peta-risiko/{id}', [PetaRisikoController::class, 'show'])->name('peta-risiko');
   Route::post('getRisikoSelected', [RisikoController::class, 'getRisikoSelected']);
 
-  Route::resource('risk-register-indhan', RiskRegisterIndhanController::class);
-  Route::post('risk-register-indhan/import', [RiskRegisterIndhanController::class, 'import'])->name('risk-detail.import');
-  Route::post('upload-lampiran-risk-register-indhan', [RiskRegisterIndhanController::class, 'uploadLampiran'])->name('upload-lampiran-risk-register-indhan');
-  Route::get('print-risk-register-indhan/{id}', [RiskRegisterIndhanController::class, 'print'])->name('print-risk-register-indhan');
+  Route::resource('risk-register-korporasi', RiskRegisterKorporasiController::class);
+  Route::post('risk-register-korporasi/import', [RiskRegisterKorporasiController::class, 'import'])->name('risk-detail.import');
+  Route::post('upload-lampiran-risk-register-korporasi', [RiskRegisterKorporasiController::class, 'uploadLampiran'])->name('upload-lampiran-risk-register-korporasi');
+  Route::get('print-risk-register-korporasi/{id}', [RiskRegisterKorporasiController::class, 'print'])->name('print-risk-register-korporasi');
 });
 
 Route::middleware(['cekRiskOfficer'])->name('risk-officer.')->group(function () {

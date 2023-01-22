@@ -70,10 +70,10 @@
                   @elseif($headers->status_h == 1)
                   <span class="badge badge-success"><i class="fa fa-check"></i> Approved Risk Owner</span>
                   @endif
-                  @if($headers->status_h_indhan == 0)
-                  <span class="badge badge-warning"><i class="fa fa-warning"></i> Waiting Approval INDHAN</span>
-                  @elseif($headers->status_h_indhan == 1)
-                  <span class="badge badge-success"><i class="fa fa-check"></i> Approved INDHAN</span>
+                  @if($headers->status_h_korporasi == 0)
+                  <span class="badge badge-warning"><i class="fa fa-warning"></i> Waiting Approval KORPORASI</span>
+                  @elseif($headers->status_h_korporasi == 1)
+                  <span class="badge badge-success"><i class="fa fa-check"></i> Approved KORPORASI</span>
                   @endif
                 </div>
               </div>

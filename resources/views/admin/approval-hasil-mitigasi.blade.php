@@ -92,18 +92,18 @@
                       </div>
                       @endif
                       <div class="col-md-5"><h6>Status</h6><hr class="hr-custom"></div>
-                      <div class="col-md-12 mb-2" id="status_h_indhan">
+                      <div class="col-md-12 mb-2" id="status_h_korporasi">
                         @if($data['headers']->status_h == 0)
                         <span class="badge badge-warning"><i class="fa fa-warning"></i> Waiting Approval Risk Owner</span>
                         @elseif($data['headers']->status_h == 1)
                         <span class="badge badge-success"><i class="fa fa-check"></i> Approved Risk Owner</span>
                         @endif
-                        @if($data['headers']->status_h_indhan == 0)
-                        <span class="badge badge-warning" id="status_h_indhan_0"><i class="fa fa-warning"></i> Waiting Approval Admin</span>
-                        @elseif($data['headers']->status_h_indhan == 1)
-                        <span class="badge badge-success" id="status_h_indhan_1"><i class="fa fa-check"></i> Approved Admin</span>
-                        @elseif($data['headers']->status_h_indhan == 2)
-                        <span class="badge badge-danger" id="status_h_indhan_2"><i class="fa fa-close"></i> Not Approved Admin</span>
+                        @if($data['headers']->status_h_korporasi == 0)
+                        <span class="badge badge-warning" id="status_h_korporasi_0"><i class="fa fa-warning"></i> Waiting Approval Admin</span>
+                        @elseif($data['headers']->status_h_korporasi == 1)
+                        <span class="badge badge-success" id="status_h_korporasi_1"><i class="fa fa-check"></i> Approved Admin</span>
+                        @elseif($data['headers']->status_h_korporasi == 2)
+                        <span class="badge badge-danger" id="status_h_korporasi_2"><i class="fa fa-close"></i> Not Approved Admin</span>
                         @endif
                       </div>
                     </div>
@@ -206,7 +206,7 @@
 @section('custom-script')
     <script>
         const user = {!! auth()->user()->toJson() !!}
-        const headers = {!! json_encode($data['headers']->status_h_indhan) !!}
+        const headers = {!! json_encode($data['headers']->status_h_korporasi) !!}
     </script>
     <script type="text/javascript" src="{{asset('assets/js/custom/approval_hasil_mitigasi.js')}}"></script>
 @endsection

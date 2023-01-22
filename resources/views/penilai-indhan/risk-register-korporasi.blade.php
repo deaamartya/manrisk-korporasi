@@ -21,7 +21,7 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-header">
-            <form action="{{ route('penilai-indhan.search-risk-header') }}" method="GET">
+            <form action="{{ route('penilai-korporasi.search-risk-header') }}" method="GET">
               @csrf
                 <div class="row">
                   <div class="col-md-3">
@@ -42,7 +42,7 @@
                     </button>
                   </div>
                   <div class="col-md-3 text-center">
-                    <a href="{{ route('penilai-indhan.all-risk-header') }}" class="col-md-6 btn btn-sm btn-success" style="width: 100%;">
+                    <a href="{{ route('penilai-korporasi.all-risk-header') }}" class="col-md-6 btn btn-sm btn-success" style="width: 100%;">
                       <i class="fa fa-list"></i>
                       Semua data
                     </a>
@@ -79,15 +79,15 @@
                     <td>{{ ($d->pemeriksa ? $d->pemeriksa->name : '-') }}</td>
                     <td>{{ count($d->risk_detail) }}</td>
                     <td>
-                      <a href="{{ route('penilai-indhan.detail-risk-register', $d->id_riskh) }}" class="btn btn-sm btn-primary d-flex align-items-center">
+                      <a href="{{ route('penilai-korporasi.detail-risk-register', $d->id_riskh) }}" class="btn btn-sm btn-primary d-flex align-items-center">
                         <i data-feather="eye" class="me-2 small-icon"></i> Detail
                       </a>
-                      <a href="{{ route('penilai-indhan.print-risk-register', $d->id_riskh) }}" target="_blank" class="btn btn-sm btn-success d-flex align-items-center">
+                      <a href="{{ route('penilai-korporasi.print-risk-register', $d->id_riskh) }}" target="_blank" class="btn btn-sm btn-success d-flex align-items-center">
                         <i data-feather="printer" class="me-2 small-icon"></i> Print
                       </a>
                       {{--
-                      @if($d->status_h_indhan == 0)
-                      <form action="{{ route('penilai-indhan.approval-risk-register', $d->id_riskh) }}" method="POST">
+                      @if($d->status_h_korporasi == 0)
+                      <form action="{{ route('penilai-korporasi.approval-risk-register', $d->id_riskh) }}" method="POST">
                           @csrf
                           <button type="submit" class="btn btn-sm btn-warning d-flex align-items-center">
                         <i data-feather="check-circle" class="me-2 small-icon"></i> Approval </button>

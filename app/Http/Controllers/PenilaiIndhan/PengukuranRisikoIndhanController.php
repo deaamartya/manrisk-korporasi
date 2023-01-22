@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\PenilaiIndhan;
+namespace App\Http\Controllers\PenilaiKorporasi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\DefendidPengukur;
 use App\Abstracts\AbsPengukuran;
-use App\Models\PengukuranIndhan;
+use App\Models\PengukuranKorporasi;
 use App\Models\SRisiko;
 use App\Models\RiskDetail;
 use PDF;
 use DB;
 use Auth;
 
-class PengukuranRisikoIndhanController extends Controller
+class PengukuranRisikoKorporasiController extends Controller
 {
     public function index()
     {
-       $results = AbsPengukuran::index('penilai_indhan');
-       return view('penilai-indhan.pengukuran-risiko-indhan',  $results);
+       $results = AbsPengukuran::index('penilai_korporasi');
+       return view('penilai-korporasi.pengukuran-risiko-korporasi',  $results);
     }
 
     public function penilaianRisiko(Request $request) {
@@ -32,7 +32,7 @@ class PengukuranRisikoIndhanController extends Controller
         $nama_responden = $request->nama_responden;
 
         $s_risk_divisi = SRisiko::join('risk_detail', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
-            ->where('risk_detail.status_indhan', 1)
+            ->where('risk_detail.status_korporasi', 1)
             ->where('risk_detail.divisi_id', '!=', 6)
             ->where('s_risiko.tahun', $tahun)
             ->whereNull('s_risiko.deleted_at')
@@ -40,16 +40,16 @@ class PengukuranRisikoIndhanController extends Controller
             ->groupBy('s_risiko.id_s_risiko')
             ->pluck('s_risiko.id_s_risiko')->toArray();
         
-        // get all id_s_risiko indhan
-        $s_risk_indhan = SRisiko::where('divisi_id', 6)
+        // get all id_s_risiko korporasi
+        $s_risk_korporasi = SRisiko::where('divisi_id', 6)
             ->where('tahun', $tahun)
             ->whereNull('deleted_at')
             ->pluck('id_s_risiko')->toArray();
 
-        $s_risk_all = array_merge($s_risk_divisi, $s_risk_indhan);
+        $s_risk_all = array_merge($s_risk_divisi, $s_risk_korporasi);
 
         // get all id_s_risiko divisi yang sudah dinilai
-        $s_risk_dinilai_divisi = SRisiko::join('pengukuran_indhan as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
+        $s_risk_dinilai_divisi = SRisiko::join('pengukuran_korporasi as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
             ->where('p.id_pengukur', '=', $id_responden)
             ->whereIn('s_risiko.id_s_risiko', $s_risk_divisi)
             ->selectRaw('s_risiko.*, p.*')
@@ -57,16 +57,16 @@ class PengukuranRisikoIndhanController extends Controller
             ->groupBy('s_risiko.id_s_risiko')
             ->pluck('s_risiko.id_s_risiko')->toArray();
         
-        // get all id_s_risiko indhan yang sudah dinilai
-        $s_risk_dinilai_indhan = SRisiko::join('pengukuran_indhan as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
+        // get all id_s_risiko korporasi yang sudah dinilai
+        $s_risk_dinilai_korporasi = SRisiko::join('pengukuran_korporasi as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
             ->where('p.id_pengukur', '=', $id_responden)
-            ->whereIn('s_risiko.id_s_risiko', $s_risk_indhan)
+            ->whereIn('s_risiko.id_s_risiko', $s_risk_korporasi)
             ->selectRaw('s_risiko.*, p.*')
             ->whereNull('p.deleted_at')
             ->groupBy('s_risiko.id_s_risiko')
             ->pluck('s_risiko.id_s_risiko')->toArray();
 
-        $s_risk_dinilai = array_merge($s_risk_dinilai_divisi, $s_risk_dinilai_indhan);
+        $s_risk_dinilai = array_merge($s_risk_dinilai_divisi, $s_risk_dinilai_korporasi);
 
         $sumber_risiko = SRisiko::select('*')
             ->join('konteks as k', 's_risiko.id_konteks', 'k.id_konteks')
@@ -78,7 +78,7 @@ class PengukuranRisikoIndhanController extends Controller
             ->whereNull('s_risiko.deleted_at')
             ->get();
 
-        return view('penilai-indhan.penilaian-risiko-indhan', compact('tahun','id_responden','nama_responden', 'sumber_risiko'));
+        return view('penilai-korporasi.penilaian-risiko-korporasi', compact('tahun','id_responden','nama_responden', 'sumber_risiko'));
     }
 
     
@@ -95,7 +95,7 @@ class PengukuranRisikoIndhanController extends Controller
         $id_s_risiko = $request->id_s_risk;
         
         for ($i=0; $i < count($id_s_risiko); $i++) { 
-            PengukuranIndhan::insert([
+            PengukuranKorporasi::insert([
                 'tahun_p' => $request->tahun,
                 'id_s_risiko' => $request->id_s_risk[$i],
                 'id_pengukur' => $request->id_responden,
@@ -104,7 +104,7 @@ class PengukuranRisikoIndhanController extends Controller
                 'nilai_C' => $request->nilai_C[$i],
             ]);
             if (RiskDetail::where('id_s_risiko', '=', $request->id_s_risk[$i])->where('divisi_id', '=', 6)->exists()) {
-                $nilai_pengukuran = PengukuranIndhan::select(DB::raw('AVG(nilai_L) as L'), DB::raw('AVG(nilai_C) as C'))->where('id_s_risiko', '=', $request->id_s_risk[$i])->first();
+                $nilai_pengukuran = PengukuranKorporasi::select(DB::raw('AVG(nilai_L) as L'), DB::raw('AVG(nilai_C) as C'))->where('id_s_risiko', '=', $request->id_s_risk[$i])->first();
                 $status_mitigasi = ($nilai_pengukuran->L * $nilai_pengukuran->C >= 12);
                 RiskDetail::where('id_s_risiko', '=', $request->id_s_risk[$i])->where('divisi_id', '=', 6)->update([
                     'l_awal' => number_format($nilai_pengukuran->L, 2) + 0,
@@ -115,23 +115,23 @@ class PengukuranRisikoIndhanController extends Controller
             }
         }
 
-        return redirect()->route('penilai-indhan.pengukuran-risiko-indhan')->with('created-alert', 'Data penilaian risiko berhasil disimpan.');
+        return redirect()->route('penilai-korporasi.pengukuran-risiko-korporasi')->with('created-alert', 'Data penilaian risiko berhasil disimpan.');
     }
 
     public function generatePDF()
     {   
-        $data = PengukuranIndhan::select('k.id_risk', 'k.konteks', 'sr.s_risiko','p.*', 'pengukuran.tahun_p', DB::raw('AVG(pengukuran_indhan.nilai_L) as L'), DB::raw('AVG(pengukuran_indhan.nilai_C) as C'), DB::raw('AVG(pengukuran.nilai_L) * AVG(pengukuran_indhan.nilai_C) as R'), DB::raw('count(pengukuran_indhan.nama_responden)'))
-                ->join('s_risiko as sr', 'pengukuran_indhan.id_s_risiko', 'sr.id_s_risiko')
+        $data = PengukuranKorporasi::select('k.id_risk', 'k.konteks', 'sr.s_risiko','p.*', 'pengukuran.tahun_p', DB::raw('AVG(pengukuran_korporasi.nilai_L) as L'), DB::raw('AVG(pengukuran_korporasi.nilai_C) as C'), DB::raw('AVG(pengukuran.nilai_L) * AVG(pengukuran_korporasi.nilai_C) as R'), DB::raw('count(pengukuran_korporasi.nama_responden)'))
+                ->join('s_risiko as sr', 'pengukuran_korporasi.id_s_risiko', 'sr.id_s_risiko')
                 ->join('risk_detail as rd', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
                 ->join('konteks as k', 'sr.id_konteks', 'k.id_konteks')
-                ->join('defendid_pengukur as d', 'pengukuran_indhan.id_pengukur', 'd.id_pengukur')
+                ->join('defendid_pengukur as d', 'pengukuran_korporasi.id_pengukur', 'd.id_pengukur')
                 ->join('divisi as p', 'd.divisi_id', 'p.divisi_id')
-                ->where('pengukuran_indhan.tahun_p', date('Y'))
+                ->where('pengukuran_korporasi.tahun_p', date('Y'))
                 ->whereNull('rd.deleted_at')
-                ->where('rd.status_indhan', '1')
+                ->where('rd.status_korporasi', '1')
                 ->groupBy('k.id_risk', 'k.konteks',  'sr.s_risiko', 'sr.id_s_risiko')
                 ->get();
-        $pdf = PDF::loadView('penilai-indhan.form_kompilasi', compact('data'))->setPaper( 'a4','landscape');
+        $pdf = PDF::loadView('penilai-korporasi.form_kompilasi', compact('data'))->setPaper( 'a4','landscape');
         return $pdf->stream('Hasil Kompilasi Risiko.pdf');
     }
 

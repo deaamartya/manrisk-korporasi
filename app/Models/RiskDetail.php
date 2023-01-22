@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Auth;
  * @property int|null $status
  * @property string|null $u_file
  * @property int|null $status_mitigasi
- * @property int|null $status_indhan
+ * @property int|null $status_korporasi
  *
  * @package App\Models
  */
@@ -64,7 +64,7 @@ class RiskDetail extends Model
 		'r_akhir' => 'float',
 		'status' => 'int',
 		'status_mitigasi' => 'int',
-		'status_indhan' => 'int',
+		'status_korporasi' => 'int',
 		'dampak_kuantitatif' => 'int',
 		'dampak_kuantitatif_residu' => 'int',
 		'biaya_penanganan' => 'int',
@@ -109,7 +109,7 @@ class RiskDetail extends Model
 		'status',
 		'u_file',
 		'status_mitigasi',
-		'status_indhan',
+		'status_korporasi',
 		'no_urut'
 	];
 
@@ -134,7 +134,7 @@ class RiskDetail extends Model
 	}
 
     // Untuk set nomor urut
-    public static function set_no_urut($id_riskh, $status_indhan)
+    public static function set_no_urut($id_riskh, $status_korporasi)
     {
         $result = [];
         $wr = '1=1';
@@ -146,7 +146,7 @@ class RiskDetail extends Model
             $risk_detail = self::leftJoin('s_risiko', 'risk_detail.id_s_risiko', 's_risiko.id_s_risiko')
             ->leftJoin('konteks', 's_risiko.id_konteks', 'konteks.id_konteks')
             ->whereRaw($wr)
-            ->where(['risk_detail.id_riskh' => $id_riskh, 'risk_detail.tahun' => date('Y'), 'risk_detail.status_indhan' => $status_indhan])
+            ->where(['risk_detail.id_riskh' => $id_riskh, 'risk_detail.tahun' => date('Y'), 'risk_detail.status_korporasi' => $status_korporasi])
             // ->orderBy('risk_detail.divisi_id', 'ASC')
             ->orderBy('konteks.id_risk', 'ASC')
             ->orderBy('risk_detail.created_at', 'ASC')

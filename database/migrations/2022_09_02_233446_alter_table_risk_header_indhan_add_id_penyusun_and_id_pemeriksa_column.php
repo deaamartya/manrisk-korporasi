@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableRiskHeaderIndhanAddIdPenyusunAndIdPemeriksaColumn extends Migration
+class AlterTableRiskHeaderKorporasiAddIdPenyusunAndIdPemeriksaColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AlterTableRiskHeaderIndhanAddIdPenyusunAndIdPemeriksaColumn extends Migrat
      */
     public function up()
     {
-        Schema::table('risk_header_indhan', function (Blueprint $table) {
+        Schema::table('risk_header_korporasi', function (Blueprint $table) {
             $table->integer('id_penyusun')->after('penyusun')->nullable();
             $table->integer('id_pemeriksa')->after('pemeriksa')->nullable();
         });
@@ -26,7 +26,7 @@ class AlterTableRiskHeaderIndhanAddIdPenyusunAndIdPemeriksaColumn extends Migrat
      */
     public function down()
     {
-        Schema::table('risk_header_indhan', function (Blueprint $table) {
+        Schema::table('risk_header_korporasi', function (Blueprint $table) {
             $table->dropColumn('id_penyusun');
             $table->dropColumn('id_pemeriksa');
         });

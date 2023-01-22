@@ -1,12 +1,12 @@
 @extends('layouts.user.table')
-@section('title', 'Mitigasi Plan Indhan')
+@section('title', 'Mitigasi Plan Korporasi')
 
 @section('breadcrumb-title')
-<h3>Mitigasi Plan Indhan</h3>
+<h3>Mitigasi Plan Korporasi</h3>
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item active">Mitigasi Plan Indhan</li>
+<li class="breadcrumb-item active">Mitigasi Plan Korporasi</li>
 @endsection
 
 @section('content')
@@ -43,7 +43,7 @@
                     <div class="btn btn-info btn-pill btn-xs status">{{ $h->doneMigrateCount($h->id_riskh) }}</div>
                   </td>
                   <td>
-                    <a href="{{ route('admin.mitigasi-plan-indhan.show', $h->id_riskh) }}" class="btn btn-info">
+                    <a href="{{ route('admin.mitigasi-plan-korporasi.show', $h->id_riskh) }}" class="btn btn-info">
                       <i class="fa fa-eye"></i> View
                     </a>
                   </td>

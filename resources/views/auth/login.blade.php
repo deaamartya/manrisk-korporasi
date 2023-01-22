@@ -26,10 +26,10 @@
 <div class="container-fluid">
    <div class="row">
       {{-- <div class="col-xl-7">
-         <img class="bg-img-cover bg-center" src="{{asset('assets/images/indhan.png')}}" alt="looginpage">
+         <img class="bg-img-cover bg-center" src="{{asset('assets/images/korporasi.png')}}" alt="looginpage">
       </div> --}}
       <div class="col-lg-7 login-image">
-         <img src="{{ asset('assets/images/indhan.png') }}" alt="looginpage">
+         <img src="{{ asset('assets/images/korporasi.png') }}" alt="looginpage">
       </div>
       <div class="col-lg-5 p-0">
          <div class="login-card p-4">
@@ -55,7 +55,7 @@
                         <button class="btn btn-danger btn-block w-100" type="submit">Sign in</button>
                      </div>
                      <div class="social mt-4">
-                        <img class="img-fluid" src="{{ asset('assets/images/aindhan.png') }}" alt="looginpage">
+                        <img class="img-fluid" src="{{ asset('assets/images/akorporasi.png') }}" alt="looginpage">
                      </div>
                   </form>
                </div>

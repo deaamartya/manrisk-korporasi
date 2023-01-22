@@ -89,7 +89,7 @@ class AbsMitigasiPlan
 
         DB::beginTransaction();
         // RiskHeader::where('id_riskh', $rdetail->risk_header->id_riskh)->update([
-        //     'status_h_indhan' => 1,
+        //     'status_h_korporasi' => 1,
         //     'updated_at' => Carbon::now()
         // ]);
         // $query->is_approved = 1;

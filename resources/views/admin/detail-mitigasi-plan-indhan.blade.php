@@ -7,12 +7,12 @@
 @endsection
 
 @section('page-title')
-<h3>Detail Mitigasi Plan Indhan</h3>
+<h3>Detail Mitigasi Plan Korporasi</h3>
 @endsection
 
 @section('breadcrumb')
-<li class="breadcrumb-item">Mitigasi Plan Indhan</li>
-<li class="breadcrumb-item active">Detail Mitigasi Plan Indhan</li>
+<li class="breadcrumb-item">Mitigasi Plan Korporasi</li>
+<li class="breadcrumb-item active">Detail Mitigasi Plan Korporasi</li>
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
           <div class="card-header">
             <div class="d-flex justify-content-between">
               <h5>ID HEADER # {{ $headers->id_riskh }}</h5>
-              <a href="{{ route('admin.mitigasi-plan-indhan.print', $headers->id_riskh) }}" class="btn btn-sm btn-success" target="_blank">
+              <a href="{{ route('admin.mitigasi-plan-korporasi.print', $headers->id_riskh) }}" class="btn btn-sm btn-success" target="_blank">
                 <span class="flex-center">
                   <i data-feather="printer" class="me-2"></i>Cetak
                 </span>
@@ -67,9 +67,9 @@
                   @elseif($headers->status_h == 1)
                   <span class="badge badge-success"><i class="fa fa-check"></i> Approved Risk Owner</span>
                   @endif
-                  @if($headers->status_h_indhan == 0)
+                  @if($headers->status_h_korporasi == 0)
                   <span class="badge badge-warning"><i class="fa fa-warning"></i> Waiting Approval Admin</span>
-                  @elseif($headers->status_h_indhan == 1)
+                  @elseif($headers->status_h_korporasi == 1)
                   <span class="badge badge-success"><i class="fa fa-check"></i> Approved Admin</span>
                   @endif
                 </div>
@@ -182,7 +182,7 @@
                   </tr>
                   @endif
                 @endforeach
-                @foreach($detail_risk_indhan as $d)
+                @foreach($detail_risk_korporasi as $d)
                   @if($d->id_riskd)
                   <tr>
                     <td>{{ $d->id_risk .'-'. $d->no_k }}</td>
@@ -262,7 +262,7 @@
     </div>
   </div>
 </div>
-@foreach($detail_risk_indhan as $data)
+@foreach($detail_risk_korporasi as $data)
 @if($data->id_riskd)
 <div class="modal fade" id="edit-mitigasi-{{ $data->id_riskd }}" tabindex="-1" role="dialog" aria-labelledby="edit-mitigasi" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -271,7 +271,7 @@
           <h5 class="modal-title">Input Data Mitigasi</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="{{ route('admin.mitigasi-plan-indhan.update', $data->id_riskd) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.mitigasi-plan-korporasi.update', $data->id_riskd) }}" method="POST" enctype="multipart/form-data">
           @method('PUT')
           @csrf
           <div class="modal-body">
@@ -366,7 +366,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-12">
-              <form method="POST" action="{{ route('admin.storeProgressIndhan') }}" enctype="multipart/form-data">
+              <form method="POST" action="{{ route('admin.storeProgressKorporasi') }}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id_riskd" value="{{ $data->id_riskd }}"/>
                 <input type="hidden" name="id_user" value="{{ Auth::user()->id_user }}"/>

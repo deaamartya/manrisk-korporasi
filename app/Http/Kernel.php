@@ -66,6 +66,6 @@ class Kernel extends HttpKernel
         'cekRiskOfficer' => \App\Http\Middleware\cekROfficer::class,
         'cekRiskOwner' => \App\Http\Middleware\cekROwner::class,
         'cekPenilai' => \App\Http\Middleware\cekPenilai::class,
-        'cekPenilaiIndhan' => \App\Http\Middleware\cekPenilaiIndhan::class,
+        'cekPenilaiKorporasi' => \App\Http\Middleware\cekPenilaiKorporasi::class,
     ];
 }

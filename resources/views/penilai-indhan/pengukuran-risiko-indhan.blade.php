@@ -2,11 +2,11 @@
 @section('title', 'Sumber Risiko')
 
 @section('breadcrumb-title')
-<h3>Pengukuran Risiko INDHAN</h3>
+<h3>Pengukuran Risiko KORPORASI</h3>
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item active">Pengukuran Risiko INDHAN</li>
+<li class="breadcrumb-item active">Pengukuran Risiko KORPORASI</li>
 @endsection
 
 @section('content')
@@ -55,7 +55,7 @@
                                                 <td class="text-center">
                                                     @if ($p->id_pengukur === Auth::user()->defendid_pengukur->id_pengukur)
                                                     <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#insert_responden{{ count($pengukuran_1) + $loop->iteration }}" class="btn btn-danger btn-sm"> Mulai Penilaian</button> -->
-                                                    <form method="POST" action="{{route('penilai-indhan.penilaian-risiko-indhan') }}">
+                                                    <form method="POST" action="{{route('penilai-korporasi.penilaian-risiko-korporasi') }}">
                                                     @csrf
                                                         <input type="hidden" name="nama_responden" value="{{ Auth::user()->defendid_pengukur->jabatan }}">
                                                         <input type="hidden" name="id_responden" value="{{ Auth::user()->defendid_pengukur->id_pengukur }}">
@@ -80,7 +80,7 @@
                 </div>
             </div>
             @else
-            <div class="alert alert-danger">Belum ada klasifikasi risiko pada tahun ini, silahkan melakukan pemilihan risiko divisi menjadi risiko indhan terlebih dahulu</div>
+            <div class="alert alert-danger">Belum ada klasifikasi risiko pada tahun ini, silahkan melakukan pemilihan risiko divisi menjadi risiko korporasi terlebih dahulu</div>
             @endif
         </div>
     </div>

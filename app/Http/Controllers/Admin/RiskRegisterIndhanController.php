@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\RiskHeader;
 use App\Models\DefendidUser;
-use App\Models\PengukuranIndhan;
-use App\Models\RiskHeaderIndhan;
+use App\Models\PengukuranKorporasi;
+use App\Models\RiskHeaderKorporasi;
 use App\Models\RiskDetail;
 use App\Models\SRisiko;
 use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
@@ -29,24 +29,24 @@ use Illuminate\Support\Facades\Route;
 use App\Models\ShortUrl;
 use Illuminate\Support\Str;
 
-class RiskRegisterIndhanController extends Controller
+class RiskRegisterKorporasiController extends Controller
 {
     public function index()
     {
-        $headers = RiskHeaderIndhan::all();
+        $headers = RiskHeaderKorporasi::all();
         // $jml_risk = RiskDetail::join('risk_header', 'risk_header.id_riskh', 'risk_detail.id_riskh')
         // ->where('risk_header.tahun', '=', date('Y'))
-        // ->where('status_indhan', '=', 1)
+        // ->where('status_korporasi', '=', 1)
         // ->count();
 
         $jml_risk = [];
         foreach($headers as $h) {
             $jml_risk[] = RiskDetail::where('tahun', '=', $h->tahun)
-                ->where('status_indhan', '=', 1)
+                ->where('status_korporasi', '=', 1)
                 ->count();
         }
         // dd($jml_risk);
-        return view('admin.risk-register-indhan', compact('headers', 'jml_risk'));
+        return view('admin.risk-register-korporasi', compact('headers', 'jml_risk'));
     }
 
     /**
@@ -57,13 +57,13 @@ class RiskRegisterIndhanController extends Controller
      */
     public function store(Request $request)
     {
-        RiskHeaderIndhan::insert([
+        RiskHeaderKorporasi::insert([
             'tahun' => $request->tahun,
             'target' => $request->target,
             'penyusun' => $request->penyusun,
             'pemeriksa' => $request->pemeriksa,
         ]);
-        return redirect()->route('admin.risk-register-indhan.index')->with(['success-swal' => 'Risk Header INDHAN berhasil disimpan!']);
+        return redirect()->route('admin.risk-register-korporasi.index')->with(['success-swal' => 'Risk Header KORPORASI berhasil disimpan!']);
     }
 
     /**
@@ -83,14 +83,14 @@ class RiskRegisterIndhanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $riskheader = RiskHeaderIndhan::where('id_riskh', '=', $id)->first();
+        $riskheader = RiskHeaderKorporasi::where('id_riskh', '=', $id)->first();
         $riskheader->update([
             'tahun' => $request->tahun,
             'target' => $request->target,
             'penyusun' => $request->penyusun,
             'pemeriksa' => $request->pemeriksa,
         ]);
-        return redirect()->route('admin.risk-register-indhan.index')->with(['success-swal' => 'Risk Header INDHAN berhasil diubah!']);
+        return redirect()->route('admin.risk-register-korporasi.index')->with(['success-swal' => 'Risk Header KORPORASI berhasil diubah!']);
     }
 
     /**
@@ -101,33 +101,33 @@ class RiskRegisterIndhanController extends Controller
      */
     public function destroy($id)
     {
-        RiskHeaderIndhan::destroy($id);
-        return redirect()->route('admin.risk-register-indhan.index')->with(['success-swal' => 'Risk Header INDHAN berhasil dihapus!']);
+        RiskHeaderKorporasi::destroy($id);
+        return redirect()->route('admin.risk-register-korporasi.index')->with(['success-swal' => 'Risk Header KORPORASI berhasil dihapus!']);
     }
 
 
     public function show($id)
     {
-        $headers = RiskHeaderIndhan::where('id_riskh', '=', $id)->first();
+        $headers = RiskHeaderKorporasi::where('id_riskh', '=', $id)->first();
         $detail_risk = RiskHeader::selectRaw('*,avg(pi.nilai_L) as avg_nilai_l, avg(pi.nilai_C) as avg_nilai_c')
                 ->join('divisi', 'risk_header.divisi_id', 'divisi.divisi_id')
                 ->join('risk_detail', 'risk_header.id_riskh', 'risk_detail.id_riskh' )
                 ->join('s_risiko', 'risk_detail.id_s_risiko', 's_risiko.id_s_risiko' )
                 ->join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks')
-                ->leftJoin('pengukuran_indhan as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
-                ->where('risk_detail.status_indhan', '=', 1)
+                ->leftJoin('pengukuran_korporasi as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
+                ->where('risk_detail.status_korporasi', '=', 1)
                 ->where('risk_detail.divisi_id', '!=', 6)
                 ->whereNull('risk_detail.deleted_at')
                 ->where('risk_header.tahun', '=', $headers->tahun)
                 ->whereNull('risk_header.deleted_at')
                 ->groupBy('id_riskd')
                 ->get();
-        $detail_risk_indhan = RiskDetail::selectRaw('*,avg(pi.nilai_L) as avg_nilai_l, avg(pi.nilai_C) as avg_nilai_c')
+        $detail_risk_korporasi = RiskDetail::selectRaw('*,avg(pi.nilai_L) as avg_nilai_l, avg(pi.nilai_C) as avg_nilai_c')
                 ->join('divisi as p', 'p.divisi_id', '=', 'risk_detail.divisi_id')
                 ->join('s_risiko', 'risk_detail.id_s_risiko', 's_risiko.id_s_risiko' )
                 ->join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks' )
-                ->leftJoin('pengukuran_indhan as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
-                ->where('risk_detail.status_indhan', '=', 1)
+                ->leftJoin('pengukuran_korporasi as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
+                ->where('risk_detail.status_korporasi', '=', 1)
                 ->where('risk_detail.divisi_id', '=', 6)
                 ->whereNull('risk_detail.deleted_at')
                 ->where('risk_detail.tahun', '=', $headers->tahun)
@@ -145,11 +145,11 @@ class RiskRegisterIndhanController extends Controller
 
         $s_risiko = SRisiko::join('risk_detail', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
                 ->where('s_risiko.tahun', '=', $headers->tahun)
-                ->where('risk_detail.status_indhan', '=', 0)
+                ->where('risk_detail.status_korporasi', '=', 0)
                 ->orderBy('s_risiko.id_s_risiko')
                 ->limit(1)->first();
 
-        $target = RiskHeaderIndhan::where('id_riskh', '=', $id)->pluck('target')->first();
+        $target = RiskHeaderKorporasi::where('id_riskh', '=', $id)->pluck('target')->first();
         $sasaran = explode("\r\n", $target);
 
         if($s_risiko != null){
@@ -160,7 +160,7 @@ class RiskRegisterIndhanController extends Controller
             $nilai_l = null;
             $nilai_c = null;
         }
-        return view('admin.detail-risk-register-indhan', compact('headers', 'detail_risk', 'detail_risk_indhan','pilihan_s_risiko', 'nilai_l', 'nilai_c', 'sasaran'));
+        return view('admin.detail-risk-register-korporasi', compact('headers', 'detail_risk', 'detail_risk_korporasi','pilihan_s_risiko', 'nilai_l', 'nilai_c', 'sasaran'));
     }
 
     public function storeDetail(Request $request)
@@ -175,26 +175,26 @@ class RiskRegisterIndhanController extends Controller
         $inputan_idr_residu = preg_replace("/[^0-9]/", "", $request->dampak_kuantitatif_residu);
         $data['dampak_kuantitatif_residu'] = (int) $inputan_idr_residu;
         RiskDetail::insert($data);
-        return Redirect::back()->with(['success-swal' => 'Risk INDHAN berhasil dibuat!']);
+        return Redirect::back()->with(['success-swal' => 'Risk KORPORASI berhasil dibuat!']);
     }
 
     public function uploadLampiran(Request $request) {
         $id = $request->id;
-        $riskheader = RiskHeaderIndhan::where('id_riskh', '=', $id)->first();
+        $riskheader = RiskHeaderKorporasi::where('id_riskh', '=', $id)->first();
         $filename = $request->file('lampiran')->getClientOriginalName();
         $folder = '/document/lampiran/';
         $request->file('lampiran')->storeAs($folder, $filename, 'public');
         $riskheader->update([
             'lampiran' => $filename,
         ]);
-        return redirect()->route('admin.risk-register-indhan.show', $id)->with(['success-swal' => 'Lampiran berhasil diupload!']);
+        return redirect()->route('admin.risk-register-korporasi.show', $id)->with(['success-swal' => 'Lampiran berhasil diupload!']);
     }
 
 
     public function print($id) {
-        $header = RiskHeaderIndhan::where('id_riskh', '=', $id)->first();
-        $document_type = 'risk_register_indhan_admin';
-        $url = "url='admin/print-risk-register-indhan/".$header->id_riskh."';".
+        $header = RiskHeaderKorporasi::where('id_riskh', '=', $id)->first();
+        $document_type = 'risk_register_korporasi_admin';
+        $url = "url='admin/print-risk-register-korporasi/".$header->id_riskh."';".
             "signed_by=".$header->pemeriksa.";".
             "instansi=".'Industri Pertahanan'.";".
             "tahun=".$header->tahun.";".
@@ -227,7 +227,7 @@ class RiskRegisterIndhanController extends Controller
                 ->join('s_risiko', 'risk_detail.id_s_risiko', 's_risiko.id_s_risiko' )
                 ->join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks' )
                 ->join('risk', 'konteks.id_risk', 'risk.id_risk' )
-                ->where('risk_detail.status_indhan', '=', 1)
+                ->where('risk_detail.status_korporasi', '=', 1)
                 ->whereNull('risk_detail.deleted_at')
                 ->where('risk_detail.tahun', '=', $header->tahun)
                 ->orderBy('konteks.id_risk', 'ASC')
@@ -238,27 +238,27 @@ class RiskRegisterIndhanController extends Controller
                 $detail_risk[$key]->avg_nilai_l = $detail_risk[$key]->l_awal;
                 $detail_risk[$key]->avg_nilai_c = $detail_risk[$key]->c_awal;
             } else {
-                $temp_pi = PengukuranIndhan::where('id_s_risiko', '=', $value->id_s_risiko)->selectRaw('avg(nilai_L) as avg_nilai_l, avg(nilai_C) as avg_nilai_c')->first();
+                $temp_pi = PengukuranKorporasi::where('id_s_risiko', '=', $value->id_s_risiko)->selectRaw('avg(nilai_L) as avg_nilai_l, avg(nilai_C) as avg_nilai_c')->first();
                 $detail_risk[$key]->avg_nilai_l = number_format($temp_pi->avg_nilai_l, 2) + 0;
                 $detail_risk[$key]->avg_nilai_c = number_format($temp_pi->avg_nilai_c, 2) + 0;
             }
         }
         $encrypted = url('document/verify/').'/'.$short_url->short_code;
         $qrcode = DNS2D::getBarcodePNG($encrypted, 'QRCODE');
-        $pdf = PDF::loadView('admin.pdf-risk-register-indhan', compact('header', 'detail_risk', 'qrcode'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('admin.pdf-risk-register-korporasi', compact('header', 'detail_risk', 'qrcode'))->setPaper('a4', 'landscape');
         Session::forget('is_bypass');
-        return $pdf->stream('Laporan Manajemen Risiko INDHAN Tahun '.$header->tahun.'.pdf');
+        return $pdf->stream('Laporan Manajemen Risiko KORPORASI Tahun '.$header->tahun.'.pdf');
 
     }
 
     // public function approval($id)
     // {
-    //     $risk_header = RiskHeaderIndhan::where('id_riskh', '=', $id)->first();
+    //     $risk_header = RiskHeaderKorporasi::where('id_riskh', '=', $id)->first();
     //     $risk_header->update([
     //         'status_h' => 1
     //     ]);
     //     // dd($risk_header);
-    //     return Redirect::back()->with(['success-swal' => 'Risk Header INDHAN berhasil disetujui.']);
+    //     return Redirect::back()->with(['success-swal' => 'Risk Header KORPORASI berhasil disetujui.']);
     // }
 
     public function import(Request $request)
@@ -267,7 +267,7 @@ class RiskRegisterIndhanController extends Controller
         $risk_detail = Excel::toArray(new RiskDetailImport, $request->file('file'));
         for ($i=0; $i < count($risk_detail[0]); $i++) {
             $risiko = SRisiko::selectRaw('*,avg(pi.nilai_L) as avg_nilai_l, avg(pi.nilai_C) as avg_nilai_c')
-                ->leftJoin('pengukuran_indhan as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
+                ->leftJoin('pengukuran_korporasi as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
                 ->where('s_risiko.id_s_risiko', '=', $risk_detail[0][$i]['id_s_risiko'])
                 ->first();
             $nilai_l = floatval($risiko->avg_nilai_l);
@@ -297,7 +297,7 @@ class RiskRegisterIndhanController extends Controller
                 'dampak_residu' => $risk_detail[0][$i]['dampak_residu'],
                 'pic' => $risk_detail[0][$i]['pic'],
                 'dokumen' => $risk_detail[0][$i]['dokumen'],
-                'status_indhan' => 1,
+                'status_korporasi' => 1,
                 'status_mitigasi' => ($nilai_r >= 12 ? 1 : 0),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -327,7 +327,7 @@ class RiskRegisterIndhanController extends Controller
         ->whereNull('s_risiko.deleted_at')
         ->where([
             ['status_s_risiko', '=', 1],
-            ['status_indhan', '=', 0],
+            ['status_korporasi', '=', 0],
         ])
         ->orderBy('s_risiko.id_s_risiko')->get();
 
@@ -336,7 +336,7 @@ class RiskRegisterIndhanController extends Controller
         ->whereNull('s_risiko.deleted_at')
         ->where([
             ['status_s_risiko', '=', 1],
-            ['status_indhan', '=', 0],
+            ['status_korporasi', '=', 0],
             ['risk_detail.divisi_id', '=', 6],
         ])
         ->orderBy('s_risiko.id_s_risiko')->pluck('s_risiko.id_s_risiko');

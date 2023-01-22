@@ -307,8 +307,8 @@
 								<h6 class="font-primary" id="divisi_name">{{ Auth::user()->divisi->instansi }}</h6>
 							</li>
 							<li>
-								<h6 class="mb-2 f-w-400">Total IDR Kuantitatif INDHAN</h6>
-								<h5 class="mb-0" id="idr_kuantitatif_indhan">Rp</h5>
+								<h6 class="mb-2 f-w-400">Total IDR Kuantitatif KORPORASI</h6>
+								<h5 class="mb-0" id="idr_kuantitatif_korporasi">Rp</h5>
 							</li>
 							</ul>
 						</div>
@@ -697,14 +697,14 @@
 			const url = "{{ url('dashboard/data-biaya-risiko-divisi') }}"
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-biaya-risiko').val() })
 				.done(function(result) {
-					// console.log("result : "+result.total_idr_indhan);
+					// console.log("result : "+result.total_idr_korporasi);
 					$('#tahun-biaya-risiko-title').html($('#tahun-biaya-risiko').val());
 					$('#divisi_name').html(result.divisi);
-					if(result.total_idr_indhan != null){
-						var rupiah_indhan = rupiahFormat(result.total_idr_indhan);
-						$('#idr_kuantitatif_indhan').html(rupiah_indhan);
+					if(result.total_idr_korporasi != null){
+						var rupiah_korporasi = rupiahFormat(result.total_idr_korporasi);
+						$('#idr_kuantitatif_korporasi').html(rupiah_korporasi);
 					}else{
-						$('#idr_kuantitatif_indhan').html('Rp'+0);
+						$('#idr_kuantitatif_korporasi').html('Rp'+0);
 					}
 
 					if(result.total_idr_divisi != null){

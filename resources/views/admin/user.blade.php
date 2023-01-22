@@ -49,8 +49,8 @@
                                     if($u->is_penilai){
                                         $role[] = 'Penilai';
                                     }
-                                    if($u->is_penilai_indhan){
-                                        $role[] = 'Penilai Indhan';
+                                    if($u->is_penilai_korporasi){
+                                        $role[] = 'Penilai Korporasi';
                                     }
                                 @endphp
                                 <tr>
@@ -180,12 +180,12 @@
                         <label for="">Penilai Divisi</label>
                     </div>
                 </div>
-                <div class="row is_penilai_indhan">
+                <div class="row is_penilai_korporasi">
                     <label class="col-md-3 col-sm-3 col-xs-12" for="noarsip"></label>
                     <div class='col-md-9 col-sm-9 col-xs-12'>
-                        <input type="hidden" name="is_penilai_indhan">
-                        <input type="checkbox" name="is_penilai_indhan" value="0" id="formIsPenilaiIndhan">
-                        <label for="">Penilai Indhan</label>
+                        <input type="hidden" name="is_penilai_korporasi">
+                        <input type="checkbox" name="is_penilai_korporasi" value="0" id="formIsPenilaiKorporasi">
+                        <label for="">Penilai Korporasi</label>
                     </div>
                 </div>
                 <div class="row melakukan_penilaian">

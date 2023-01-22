@@ -71,9 +71,9 @@
                   @elseif($headers->status_h == 1)
                   <span class="badge badge-success me-2"><i class="fa fa-check"></i> Approved Risk Owner</span>
                   @endif
-                  @if($headers->status_h_indhan == 0)
+                  @if($headers->status_h_korporasi == 0)
                   <span class="badge badge-warning"><i class="fa fa-warning"></i> Waiting Approval Admin</span>
-                  @elseif($headers->status_h_indhan == 1)
+                  @elseif($headers->status_h_korporasi == 1)
                   <span class="badge badge-success"><i class="fa fa-check"></i> Approved Admin</span>
                   @endif
                 </div>

@@ -42,7 +42,7 @@
 						<div class="col-lg-6 col-12 py-4">
 							<div class="ecommerce-widgets media">
 								<div class="media-body">
-									<p class="f-w-500 font-roboto">Jumlah Sumber Risiko INDHAN</span></p>
+									<p class="f-w-500 font-roboto">Jumlah Sumber Risiko KORPORASI</span></p>
 									<h4 class="f-w-500 mb-0 f-26"><span class="counter" id="jml_sumber_risiko">{{ $counts_risiko }}</span></h4>
 								</div>
 								<div class="ecommerce-box light-bg-primary"><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
@@ -51,8 +51,8 @@
 						<div class="col-lg-6 col-12 py-4">
 							<div class="ecommerce-widgets media">
 								<div class="media-body">
-									<p class="f-w-500 font-roboto">Jumlah Risiko INDHAN</span></p>
-									<h4 class="f-w-500 mb-0 f-26"><span class="counter" id="jml_risiko_indhan">{{ $count_risiko }}</span></h4>
+									<p class="f-w-500 font-roboto">Jumlah Risiko KORPORASI</span></p>
+									<h4 class="f-w-500 mb-0 f-26"><span class="counter" id="jml_risiko_korporasi">{{ $count_risiko }}</span></h4>
 								</div>
 								<div class="ecommerce-box light-bg-primary"><i class="fa fa-file" aria-hidden="true"></i></div>
 							</div>
@@ -113,7 +113,7 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="d-flex justify-content-between">
-						<h6>Kompilasi Risiko Anggota Indhan Tahun <span id="tahun-title">{{ date('Y') }}</span></h6>
+						<h6>Kompilasi Risiko Anggota Korporasi Tahun <span id="tahun-title">{{ date('Y') }}</span></h6>
 						<div>
 							<span class="f-w-500 font-roboto">Tahun : </span>
 							<select class="form-control" id="tahun-risiko">
@@ -319,8 +319,8 @@
 											<ul>
 											<li class="mt-0 pt-0"></li>
 											<li>
-												<h6 class="mb-2 f-w-400">Total IDR Kuantitatif INDHAN</h6>
-												<h5 class="mb-0" id="idr_kuantitatif_indhan_{{ $p->divisi_id }}">Rp</h5>
+												<h6 class="mb-2 f-w-400">Total IDR Kuantitatif KORPORASI</h6>
+												<h5 class="mb-0" id="idr_kuantitatif_korporasi_{{ $p->divisi_id }}">Rp</h5>
 											</li>
 											</ul>
 										</div>
@@ -363,10 +363,10 @@
 			<div class="card total-users">
 				<div class="card-header card-no-border">
 					<div class="d-flex justify-content-between mb-3">
-						<h6>Biaya Kerugian & Mitigasi Risiko INDHAN Tahun <span id="tahun-biaya-risiko-indhan-title">{{ date('Y') }}</span></h6>
+						<h6>Biaya Kerugian & Mitigasi Risiko KORPORASI Tahun <span id="tahun-biaya-risiko-korporasi-title">{{ date('Y') }}</span></h6>
 						<div class="col-lg-2">
 							<span class="f-w-500 font-roboto">Tahun : </span>
-							<select class="form-control" id="tahun-biaya-risiko-indhan">
+							<select class="form-control" id="tahun-biaya-risiko-korporasi">
 								@for($i=0; $i<10; $i++)
 									@php $tahun = intval(2022 + $i); @endphp
 									<option value="{{ $tahun }}">{{ $tahun }}</option>
@@ -387,8 +387,8 @@
 								<h6 class="font-primary" id="divisi_name">INDUSTRI PERTAHANAN</h6>
 							</li>
 							<li>
-								<h6 class="mb-2 f-w-400">Total IDR Kuantitatif INDHAN</h6>
-								<h5 class="mb-0" id="idr_kuantitatif_indhan">Rp</h5>
+								<h6 class="mb-2 f-w-400">Total IDR Kuantitatif KORPORASI</h6>
+								<h5 class="mb-0" id="idr_kuantitatif_korporasi">Rp</h5>
 							</li>
 							</ul>
 						</div>
@@ -696,7 +696,7 @@
 			
 		}
 
-		function initBiayaRisikoIndhanChart(data) {
+		function initBiayaRisikoKorporasiChart(data) {
 			var options5 = {
 				series: [data.percent],
 				chart: {
@@ -776,12 +776,12 @@
 		}
 
 		$('#tahun-jumlah-risiko').change(function(){
-			const url = "{{ url('dashboard/data-jumlah-risiko-indhan') }}"
+			const url = "{{ url('dashboard/data-jumlah-risiko-korporasi') }}"
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-jumlah-risiko').val() })
 				.done(function(result) {
 					$('#tahun-jumlah-risiko-title').html($('#tahun-jumlah-risiko').val());
 					$('#jml_sumber_risiko').html(result.sumber_risiko);
-					$('#jml_risiko_indhan').html(result.risiko_indhan);
+					$('#jml_risiko_korporasi').html(result.risiko_korporasi);
 					$('#jml_risiko_mitigasi').html(result.perlu_mitigasi);
 					$('#jml_risiko_selesai_mitigasi').html(result.selesai_mitigasi);
 			});
@@ -803,7 +803,7 @@
 		});
 
 		$('#tahun-petarisiko').change(function(){
-			const url = "{{ url('dashboard/data-petarisiko-indhan') }}";
+			const url = "{{ url('dashboard/data-petarisiko-korporasi') }}";
 			// console.log($('#tahun-petarisiko').val());
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-petarisiko').val() })
 				.done(function(result) {
@@ -836,7 +836,7 @@
 		$('#tahun-kat-risiko').change(function(){
 			$("#basic-pie").hide();
 			$("#basic-pie-loading").show();
-			const url = "{{ url('dashboard/data-kategori-risiko-indhan') }}"
+			const url = "{{ url('dashboard/data-kategori-risiko-korporasi') }}"
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-kat-risiko').val() })
 				.done(function(result) {
 					$('#tahun-kat-risiko-title').html($('#tahun-kat-risiko').val());
@@ -850,7 +850,7 @@
 		$('#tahun-level-risiko').change(function(){
 			$("#basic-stacked-bar").hide();
 			$("#basic-stacked-bar-loading").show();
-			const url = "{{ url('dashboard/data-level-risiko-indhan') }}"
+			const url = "{{ url('dashboard/data-level-risiko-korporasi') }}"
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-level-risiko').val() })
 				.done(function(result) {
 					$('#tahun-level-risiko-title').html($('#tahun-level-risiko').val());
@@ -863,7 +863,7 @@
 		});
 
 		$('#tahun-biaya-risiko').change(function(){
-			const url = "{{ url('dashboard/data-biaya-risiko-indhan') }}"
+			const url = "{{ url('dashboard/data-biaya-risiko-korporasi') }}"
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-biaya-risiko').val() })
 				.done(function(result) {
 					// console.log("result : "+result.divisi[0]);
@@ -871,11 +871,11 @@
 
 					for(let i = 0; i < result.divisi.length; i++){
 						initBiayaRisikoChart(result, i);
-						if(result.total_idr_indhan != null){
-							var rupiah_indhan = rupiahFormat(result.total_idr_indhan);
-							$('#idr_kuantitatif_indhan_'+ result.divisi[i].divisi_id).html(rupiah_indhan);
+						if(result.total_idr_korporasi != null){
+							var rupiah_korporasi = rupiahFormat(result.total_idr_korporasi);
+							$('#idr_kuantitatif_korporasi_'+ result.divisi[i].divisi_id).html(rupiah_korporasi);
 						}else{
-							$('#idr_kuantitatif_indhan_'+ result.divisi[i].divisi_id).html('Rp'+0);
+							$('#idr_kuantitatif_korporasi_'+ result.divisi[i].divisi_id).html('Rp'+0);
 						}
 						if(result.total_idr_divisi[i] != null){
 							var rupiah_divisi = rupiahFormat(result.total_idr_divisi[i]);
@@ -900,19 +900,19 @@
 			});
 		});
 
-		$('#tahun-biaya-risiko-indhan').change(function(){
+		$('#tahun-biaya-risiko-korporasi').change(function(){
 			// console.log("tahun : "+$('#tahun-biaya-risiko').val());
-			const url = "{{ url('dashboard/data-biaya-risiko-selected-indhan') }}"
-			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-biaya-risiko-indhan').val() })
+			const url = "{{ url('dashboard/data-biaya-risiko-selected-korporasi') }}"
+			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-biaya-risiko-korporasi').val() })
 				.done(function(result) {
-					// console.log("result : "+result.total_idr_indhan);
-					$('#tahun-biaya-risiko-indhan-title').html($('#tahun-biaya-risiko-indhan').val());
+					// console.log("result : "+result.total_idr_korporasi);
+					$('#tahun-biaya-risiko-korporasi-title').html($('#tahun-biaya-risiko-korporasi').val());
 					$('#divisi_name').html(result.divisi);
-					if(result.total_idr_indhan != null){
-						var rupiah_indhan = rupiahFormat(result.total_idr_indhan);
-						$('#idr_kuantitatif_indhan').html(rupiah_indhan);
+					if(result.total_idr_korporasi != null){
+						var rupiah_korporasi = rupiahFormat(result.total_idr_korporasi);
+						$('#idr_kuantitatif_korporasi').html(rupiah_korporasi);
 					}else{
-						$('#idr_kuantitatif_indhan').html('Rp'+0);
+						$('#idr_kuantitatif_korporasi').html('Rp'+0);
 					}
 
 					if(result.total_idr_selected != null){
@@ -936,7 +936,7 @@
 						$('#biaya_mitigasi').html('Rp'+0);
 					}
 					
-					initBiayaRisikoIndhanChart(result);
+					initBiayaRisikoKorporasiChart(result);
 			});
 		});
 
@@ -950,7 +950,7 @@
 		$('#tahun-status-proses').change(function() {
 			$(".status-proses").hide();
 			$("#status-proses-loading").show();
-			const url = "{{ url('dashboard/data-status-proses-indhan') }}"
+			const url = "{{ url('dashboard/data-status-proses-korporasi') }}"
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-status-proses').val() })
 				.done(function(result) {
 					$('#tahun-status-proses-title').html($('#tahun-status-proses').val());
@@ -984,8 +984,8 @@
 		$('#tahun-level-risiko').change();
 		$('#tahun-biaya-risiko').val(date.getUTCFullYear());
 		$('#tahun-biaya-risiko').change();
-		$('#tahun-biaya-risiko-indhan').val(date.getUTCFullYear());
-		$('#tahun-biaya-risiko-indhan').change();
+		$('#tahun-biaya-risiko-korporasi').val(date.getUTCFullYear());
+		$('#tahun-biaya-risiko-korporasi').change();
 		$('#tahun-status-proses').val(date.getUTCFullYear());
 		$('#tahun-status-proses').change();
 	});

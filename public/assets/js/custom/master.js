@@ -11,13 +11,13 @@ $(document).ready(function() {
             // localStorage.setItem('notif', results.data)
             if (results.message == 'ok') {
                 var data = results.data
-                var srisiko_indhan = 0;
+                var srisiko_korporasi = 0;
                 var pengukuran_risiko = 0;
-                var pengukuran_risiko_indhan = 0;
-                var mitigasi_indhan = 0;
+                var pengukuran_risiko_korporasi = 0;
+                var mitigasi_korporasi = 0;
                 var riskregister_divisi = 0;
                 var hasil_mitigasi = 0;
-                // var hasil_mitigasi_indhan = 0;
+                // var hasil_mitigasi_korporasi = 0;
                 var deadline_mitigasi = 0;
                 var mitigasi_risiko = 0;
                 let element = '';
@@ -26,10 +26,10 @@ $(document).ready(function() {
                         `<a href='` + data[i].link + `'><p><i class="fa fa-circle-o me-3 font-info"></i>` + data[i].title + data[i].jumlah + `</p></a>` +
                         `</li>`;
                     if (data[i].title == 'Terdapat sumber risiko yang belum disetujui sebanyak ') {
-                        srisiko_indhan += data[i].jumlah;
+                        srisiko_korporasi += data[i].jumlah;
                     }
                     if (data[i].title == 'Terdapat pengajuan mitigasi yang belum disetujui sebanyak ') {
-                        mitigasi_indhan += data[i].jumlah;
+                        mitigasi_korporasi += data[i].jumlah;
                     }
                     if (data[i].title == 'Terdapat risk register divisi yang belum disetujui sebanyak ') {
                         riskregister_divisi += data[i].jumlah;
@@ -37,8 +37,8 @@ $(document).ready(function() {
                     if (data[i].title == 'Terdapat hasil mitigasi yang belum disetujui sebanyak ') {
                         hasil_mitigasi += data[i].jumlah;
                     }
-                    // if (data[i].title == 'Terdapat mitigasi indhan yang kurang dari 100% sebanyak ') {
-                        // hasil_mitigasi_indhan += data[i].jumlah;
+                    // if (data[i].title == 'Terdapat mitigasi korporasi yang kurang dari 100% sebanyak ') {
+                        // hasil_mitigasi_korporasi += data[i].jumlah;
                     // }
                     if (data[i].title == 'Terdapat risiko telah melewati tanggal jatuh tempo sebanyak ') {
                         deadline_mitigasi += data[i].jumlah;
@@ -46,8 +46,8 @@ $(document).ready(function() {
                     if (data[i].title == 'Terdapat pengukuran risiko divisi sebanyak ') {
                         pengukuran_risiko += data[i].jumlah;
                     }
-                    if (data[i].title == 'Terdapat pengukuran risiko indhan sebanyak ') {
-                        pengukuran_risiko_indhan += data[i].jumlah;
+                    if (data[i].title == 'Terdapat pengukuran risiko korporasi sebanyak ') {
+                        pengukuran_risiko_korporasi += data[i].jumlah;
                     }
                     if (data[i].title == 'Terdapat detail risiko yang belum dimitigasi sebanyak ') {
                         mitigasi_risiko += data[i].jumlah;
@@ -55,10 +55,10 @@ $(document).ready(function() {
 
                 }
 
-                if (srisiko_indhan > 0) {
-                    $('.srisiko-indhan-notif').html(srisiko_indhan)
-                } if (mitigasi_indhan > 0) {
-                    $('.mitigasi-indhan-notif').html(mitigasi_indhan)
+                if (srisiko_korporasi > 0) {
+                    $('.srisiko-korporasi-notif').html(srisiko_korporasi)
+                } if (mitigasi_korporasi > 0) {
+                    $('.mitigasi-korporasi-notif').html(mitigasi_korporasi)
                 } if (riskregister_divisi > 0) {
                     $('.riskregister-divisi-notif').html(riskregister_divisi)
                 } if (hasil_mitigasi > 0) {
@@ -67,12 +67,12 @@ $(document).ready(function() {
                     $('.deadline-mitigasi-notif').html(deadline_mitigasi)
                 } if (pengukuran_risiko > 0) {
                     $('.pengukuran-risiko-notif').html(pengukuran_risiko)
-                } if (pengukuran_risiko_indhan > 0) {
-                    $('.pengukuran-risiko-indhan-notif').html(pengukuran_risiko_indhan)
+                } if (pengukuran_risiko_korporasi > 0) {
+                    $('.pengukuran-risiko-korporasi-notif').html(pengukuran_risiko_korporasi)
                 } if (mitigasi_risiko > 0) {
                     $('.mitigasi-risiko-notif').html(mitigasi_risiko)
-                // } if (hasil_mitigasi_indhan> 0) {
-                    // $('.hasil-mitigasi-indhan-notif').html(hasil_mitigasi_indhan)
+                // } if (hasil_mitigasi_korporasi> 0) {
+                    // $('.hasil-mitigasi-korporasi-notif').html(hasil_mitigasi_korporasi)
                 }
 
                 if (data.length > 0) {

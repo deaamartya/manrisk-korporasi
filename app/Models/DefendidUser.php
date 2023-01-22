@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int|null $status_user
  * @property bool $is_risk_officer
  * @property bool $is_penilai
- * @property bool $is_penilai_indhan
+ * @property bool $is_penilai_korporasi
  * @property bool $is_risk_owner
  * @property bool $is_admin
  * 
@@ -44,7 +44,7 @@ class DefendidUser extends Authenticatable
 		'status_user' => 'int',
 		'is_risk_officer' => 'bool',
 		'is_penilai' => 'bool',
-		'is_penilai_indhan' => 'bool',
+		'is_penilai_korporasi' => 'bool',
 		'is_risk_owner' => 'bool',
 		'is_admin' => 'bool'
 	];
@@ -60,7 +60,7 @@ class DefendidUser extends Authenticatable
 		'status_user',
 		'is_risk_officer',
 		'is_penilai',
-		'is_penilai_indhan',
+		'is_penilai_korporasi',
 		'is_risk_owner',
 		'is_admin'
 	];

@@ -1,5 +1,5 @@
 @extends('layouts.user.table')
-@section('title', 'Sumber Risiko INDHAN')
+@section('title', 'Sumber Risiko KORPORASI')
 
 @section('breadcrumb-title')
 <h3>Lihat Sumber Risiko</h3>
@@ -17,7 +17,7 @@
     <div class="col-sm-12">
         <div class="card">
         <div class="card-header">
-        <button class="btn btn-primary mb-5" type="button" data-bs-toggle="modal" data-bs-target="#tambahSumberRisiko"><i class="fa fa-plus"></i> Tambah Sumber Risiko INDHAN</button>
+        <button class="btn btn-primary mb-5" type="button" data-bs-toggle="modal" data-bs-target="#tambahSumberRisiko"><i class="fa fa-plus"></i> Tambah Sumber Risiko KORPORASI</button>
             <form method="GET" action="{{route('admin.search-risiko') }}">
                 {{--@csrf--}}
                 <div class="row">
@@ -96,11 +96,11 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title">Input Sumber Risiko INDHAN</h5>
+            <h5 class="modal-title">Input Sumber Risiko KORPORASI</h5>
             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="{{route('admin.sumber-risiko-indhan.store')}}">
+            <form method="POST" action="{{route('admin.sumber-risiko-korporasi.store')}}">
                 @csrf 
                 <div class="row mb-3">
                     <label class="col-md-3 col-sm-3 col-xs-12" for="noarsip">Tahun <span class="required"></span></label>
@@ -185,7 +185,7 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <form method="POST" action="{{route('admin.sumber-risiko-indhan.update', $s->id_s_risiko) }}">
+                    <form method="POST" action="{{route('admin.sumber-risiko-korporasi.update', $s->id_s_risiko) }}">
                         @method('PUT')
                         @csrf    
                         <div class="row mb-3">
@@ -224,7 +224,7 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <form method="POST" action="{{route('admin.sumber-risiko-indhan.destroy', $s->id_s_risiko) }}">
+                    <form method="POST" action="{{route('admin.sumber-risiko-korporasi.destroy', $s->id_s_risiko) }}">
                         @method('DELETE')
                         @csrf    
                         Apakah Anda yakin ingin menghapus data Sumber Risiko <b>{{ $s->s_risiko}}</b> ?

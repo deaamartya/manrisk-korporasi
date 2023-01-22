@@ -133,7 +133,7 @@ $bulan = array (
 				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_bumn.png' }}" style="max-width:120px;max-height:35px" />
 			</td>
 			<td width="70%" height="40">
-				<b>RENCANA PENGELOLAAN RISIKO (MITIGASI PLAN INDHAN)</b>
+				<b>RENCANA PENGELOLAAN RISIKO (MITIGASI PLAN KORPORASI)</b>
 			</td>
 			<td width="171">
 				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_INHAN.png' }}" style="max-width:120px;max-height:35px" />
@@ -146,7 +146,7 @@ $bulan = array (
 				Instansi
 			</td>
 			<td class="left pl-10p">
-				INDHAN
+				KORPORASI
 			</td> 
 			<td width="15%" class="left pl-10p">
 				Diperiksa &  Disetujui  Oleh

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
 
 /**
- * Class RiskHeaderIndhan
+ * Class RiskHeaderKorporasi
  * 
  * @property int $id_riskh
  * @property int $divisi_id
@@ -27,11 +27,11 @@ use DB;
  *
  * @package App\Models
  */
-class RiskHeaderIndhan extends Model
+class RiskHeaderKorporasi extends Model
 {
 	use SoftDeletes;
 
-	protected $table = 'risk_header_indhan';
+	protected $table = 'risk_header_korporasi';
 	protected $primaryKey = 'id_riskh';
 
 	protected $casts = [
@@ -64,7 +64,7 @@ class RiskHeaderIndhan extends Model
 	{
 		$details = RiskDetail::where('status_mitigasi', '=', 1)
 			->where('tahun', '=', $this->tahun)
-			->where('status_indhan', '=', 1)
+			->where('status_korporasi', '=', 1)
 			->whereNull('deleted_at')
 			->get();
 		return $details;
@@ -90,7 +90,7 @@ class RiskHeaderIndhan extends Model
 			// ->leftJoin($mitigasi_logs, 'mitigasi_logs.id_riskd', 'risk_detail.id_riskd')
 			->where('status_mitigasi', '=', 1)
 			->where('risk_detail.tahun', '=', $this->tahun)
-			->where('status_indhan', '=', 1)
+			->where('status_korporasi', '=', 1)
 			->whereNull('risk_detail.deleted_at')
 			->get();
 		// dd($details);
@@ -108,7 +108,7 @@ class RiskHeaderIndhan extends Model
 	{
 		$jml = RiskDetail::where('status_mitigasi', '=', 1)
 			->where('risk_detail.tahun', '=', $this->tahun)
-			->where('status_indhan', '=', 1)
+			->where('status_korporasi', '=', 1)
 			->whereNull('deleted_at')
 			->count('id_riskd');
 		return $jml;
@@ -119,7 +119,7 @@ class RiskHeaderIndhan extends Model
 		$jml = RiskDetail::join('mitigasi_logs as l', 'l.id_riskd', '=', 'risk_detail.id_riskd')
 			->where('status_mitigasi', '=', 1)
 			->where('tahun', '=', $this->tahun)
-			->where('status_indhan', '=', 1)
+			->where('status_korporasi', '=', 1)
 			->where('l.realisasi', '=', 100)
 			->where('l.is_approved', '=', 1)
 			->whereNull('risk_detail.deleted_at')

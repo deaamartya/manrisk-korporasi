@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\PenilaiIndhan\{
-  PengukuranRisikoIndhanController,
+use \App\Http\Controllers\PenilaiKorporasi\{
+  PengukuranRisikoKorporasiController,
   RiskRegisterDivisiController,
-  RiskRegisterIndhanController,
+  RiskRegisterKorporasiController,
   PetaRisikoController,
 };
 
@@ -12,11 +12,11 @@ use \App\Http\Controllers\{
   HomeController
 };
 
-Route::name('penilai-indhan.')->group(function () {
+Route::name('penilai-korporasi.')->group(function () {
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
-    Route::get('pengukuran-risiko-indhan', [PengukuranRisikoIndhanController::class, 'index'])->name('pengukuran-risiko-indhan');
-    Route::post('penilaian-risiko-indhan', [PengukuranRisikoindhanController::class, 'penilaianRisiko'])->name('penilaian-risiko-indhan');
-    Route::post('penilaian-risiko-indhan-store', [PengukuranRisikoIndhanController::class, 'penilaianRisikoStore'])->name('penilaian-risiko-indhan-store');
+    Route::get('pengukuran-risiko-korporasi', [PengukuranRisikoKorporasiController::class, 'index'])->name('pengukuran-risiko-korporasi');
+    Route::post('penilaian-risiko-korporasi', [PengukuranRisikokorporasiController::class, 'penilaianRisiko'])->name('penilaian-risiko-korporasi');
+    Route::post('penilaian-risiko-korporasi-store', [PengukuranRisikoKorporasiController::class, 'penilaianRisikoStore'])->name('penilaian-risiko-korporasi-store');
 
     Route::get('risk-register-divisi', [RiskRegisterDivisiController::class, 'index'])->name('risk-register-divisi');
     Route::get('search-risk-header', [RiskRegisterDivisiController::class, 'searchRiskHeader'])->name('search-risk-header');
@@ -32,8 +32,8 @@ Route::name('penilai-indhan.')->group(function () {
 
     Route::get('peta-risiko/{id}', [PetaRisikoController::class, 'show'])->name('peta-risiko');
 
-    Route::resource('risk-register-indhan', RiskRegisterIndhanController::class);
-    Route::post('risk-register-indhan/import', [RiskRegisterIndhanController::class, 'import'])->name('risk-detail.import');
-    Route::post('upload-lampiran-risk-register-indhan', [RiskRegisterIndhanController::class, 'uploadLampiran'])->name('upload-lampiran-risk-register-indhan');
-    Route::get('print-risk-register-indhan/{id}', [RiskRegisterIndhanController::class, 'print'])->name('print-risk-register-indhan');
+    Route::resource('risk-register-korporasi', RiskRegisterKorporasiController::class);
+    Route::post('risk-register-korporasi/import', [RiskRegisterKorporasiController::class, 'import'])->name('risk-detail.import');
+    Route::post('upload-lampiran-risk-register-korporasi', [RiskRegisterKorporasiController::class, 'uploadLampiran'])->name('upload-lampiran-risk-register-korporasi');
+    Route::get('print-risk-register-korporasi/{id}', [RiskRegisterKorporasiController::class, 'print'])->name('print-risk-register-korporasi');
 });
