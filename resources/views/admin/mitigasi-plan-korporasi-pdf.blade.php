@@ -136,14 +136,14 @@ $bulan = array (
 				<b>RENCANA PENGELOLAAN RISIKO (MITIGASI PLAN KORPORASI)</b>
 			</td>
 			<td width="171">
-				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_INHAN.png' }}" style="max-width:120px;max-height:35px" />
+				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_KORPORASI.png' }}" style="max-width:120px;max-height:35px" />
 			</td>
 		</tr>
 	</table>
 	<table class="table-2" cellpadding="0" cellspacing="0" width="100%" height="128">
 		<tr style="min-height:12px;" height="12">
 			<td width="15%" class="left pl-10p">
-				Instansi
+				Divisi
 			</td>
 			<td class="left pl-10p">
 				KORPORASI

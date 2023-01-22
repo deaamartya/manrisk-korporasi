@@ -57,7 +57,7 @@
                   <tr>
                     <th>No</th>
                     <th>Tahun</th>
-                    <th>Instansi</th>
+                    <th>Divisi</th>
                     <th>Tanggal</th>
                     <th>Target</th>
                     <th>Penyusun</th>
@@ -72,7 +72,7 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $d->tahun }}</td>
-                    <td>{{ $d->instansi }}</td>
+                    <td>{{ $d->divisi }}</td>
                     <td>{{ date('d M Y', strtotime($d->tanggal)) }}</td>
                     <td>{!! nl2br($d->target) !!}</td>
                     <td>{{ ($d->penyusun ? $d->penyusun->name : '-') }}</td>

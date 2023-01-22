@@ -98,7 +98,7 @@
                   @foreach($detail_risk as $d)
                   <tr>
                     <td>{{ $d->id_risk .'-'. $d->no_k }}</td>
-                    <td>{{ $d->instansi }}</td>
+                    <td>{{ $d->divisi }}</td>
                     <td>{{ $d->konteks }}</td>
                     <td>{{ $d->s_risiko }}</td>
                     <td>{{ $d->sebab }}</td>
@@ -142,7 +142,7 @@
                   @if($d2->id_riskd)
                   <tr>
                     <td>{{ $d2->id_risk .'-'. $d2->no_k }}</td>
-                    <td>{{ $d2->instansi }}</td>
+                    <td>{{ $d2->divisi }}</td>
                     <td>{{ $d2->konteks }}</td>
                     <td>{{ $d2->s_risiko }}</td>
                     <td>{{ $d2->sebab }}</td>

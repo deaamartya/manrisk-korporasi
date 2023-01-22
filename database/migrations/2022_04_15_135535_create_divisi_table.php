@@ -16,7 +16,7 @@ class CreateDivisiTable extends Migration
         Schema::create('divisi', function (Blueprint $table) {
             $table->increments('divisi_id');
             $table->string('divisi_code');
-            $table->string('instansi');
+            $table->string('divisi');
             $table->timestamps();
             $table->softDeletes();
         });

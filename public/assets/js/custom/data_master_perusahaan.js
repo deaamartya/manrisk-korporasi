@@ -29,7 +29,7 @@ $(document).ready(function(){
             data: {},
             success: function (results) {
                 $('#formDivisiCode').val(results.divisi_code)
-                $('#formInstansi').val(results.instansi)
+                $('#formDivisi').val(results.divisi)
 
             },
             error:function(results){
@@ -50,7 +50,7 @@ $(document).ready(function(){
             data: {},
             success: function (results) {
                 $('#id_divisi').val(results.divisi_id)
-                $('#nama_divisi').html(results.instansi)
+                $('#nama_divisi').html(results.divisi)
 
                 $('#deleteDivisi').modal('show')
             },

@@ -186,13 +186,13 @@ class HomeController extends Controller
     }
 
     public function dataRisiko(Request $req) {
-        $divisi = Divisi::where('divisi_code', '!=', 'INHAN')->get();
+        $divisi = Divisi::where('divisi_code', '!=', 'PI')->get();
         $labels = [];
         $total_risk = [];
         $mitigasi = [];
         $selesai_mitigasi = [];
         foreach ($divisi as $c) {
-            array_push($labels, $c->instansi);
+            array_push($labels, $c->divisi);
             $count_risk = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
                 ->where('rd.divisi_id', $c->divisi_id)
                 ->where('rd.tahun', '=', $req->tahun)
@@ -228,7 +228,7 @@ class HomeController extends Controller
         $mitigasi = [];
         $selesai_mitigasi = [];
         foreach ($divisi as $c) {
-            array_push($labels, $c->instansi);
+            array_push($labels, $c->divisi);
             $count_risk = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
                 ->where('rd.divisi_id', $c->divisi_id)
                 ->where('rd.tahun', '=', $req->tahun)
@@ -330,7 +330,7 @@ class HomeController extends Controller
         $selesai_mitigasi = [];
         $progress_mitigasi = [];
         foreach ($divisi as $c) {
-            if ($c->divisi_code != 'INHAN') {
+            if ($c->divisi_code != 'PI') {
                 $count_risiko_rendah = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
                     ->where('d.divisi_id', $c->divisi_id)
                     ->where('r_awal', '>=', 1)
@@ -525,7 +525,7 @@ class HomeController extends Controller
     }
 
     public function dataLevelRisikoKorporasi(Request $req) {
-        $divisi = Divisi::where('divisi_code', '!=', 'INHAN')->get();
+        $divisi = Divisi::where('divisi_code', '!=', 'PI')->get();
         $labels = [];
         $dataExtreme = [];
         $dataHigh = [];
@@ -538,7 +538,7 @@ class HomeController extends Controller
                 ->where('rd.tahun', '=', $req->tahun)
                 ->where('risk_header.divisi_id', $c->divisi_id)
                 ->get();
-            array_push($labels, $c->instansi);
+            array_push($labels, $c->divisi);
             $countExtreme = 0;
             $countHigh = 0;
             $countMed = 0;
@@ -599,13 +599,13 @@ class HomeController extends Controller
             $percent =  0;
         }
 
-        $divisi = Divisi::where('divisi_id', Auth::user()->divisi_id)->pluck('instansi')->first();
+        $divisi = Divisi::where('divisi_id', Auth::user()->divisi_id)->pluck('divisi')->first();
 
         return response()->json([ "success" => true, "total_idr_korporasi" => $total_idr_korporasi, "total_idr_divisi" => $total_idr_divisi , "total_idr_residu" => $total_idr_residu , "total_biaya_mitigasi" => $total_biaya_mitigasi , "percent" => $percent, "divisi" => $divisi ]);
     }
 
     public function dataBiayaRisikoKorporasi(Request $req) {
-        $divisi = Divisi::where('divisi_code', '!=', 'INHAN')->get();
+        $divisi = Divisi::where('divisi_code', '!=', 'PI')->get();
         $total_idr_korporasi = RiskHeader::selectRaw('SUM(dampak_kuantitatif) as idr_kuantitatif')
             ->join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
             ->where('rd.tahun','=', $req->tahun)
@@ -701,7 +701,7 @@ class HomeController extends Controller
             $percent =  0;
         }
 
-        $divisi = Divisi::where('divisi_id', 6)->pluck('instansi')->first();
+        $divisi = Divisi::where('divisi_id', 6)->pluck('divisi')->first();
 
         return response()->json([ "success" => true, "total_idr_korporasi" => $total_idr_korporasi, "total_idr_selected" => $total_idr_selected , "total_idr_residu" => $total_idr_residu , "total_biaya_mitigasi" => $total_biaya_mitigasi , "percent" => $percent, "divisi" => $divisi ]);
     }
@@ -717,7 +717,7 @@ class HomeController extends Controller
     }
 
     public function dataStatusProsesKorporasi(Request $request) {
-        $divisi = Divisi::where('divisi_code', '!=', 'INHAN')->get();
+        $divisi = Divisi::where('divisi_code', '!=', 'PI')->get();
         $proses_list = ProsesManrisk::all();
         $i = 0;
         $data = [];

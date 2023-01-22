@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
  * 
  * @property int $divisi_id
  * @property string $divisi_code
- * @property string $instansi
+ * @property string $divisi
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
@@ -31,7 +31,7 @@ class Divisi extends Model
 
 	protected $fillable = [
 		'divisi_code',
-		'instansi'
+		'divisi'
 	];
 
 	public function getCountMitigasi() {

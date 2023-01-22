@@ -25,7 +25,7 @@
                     <div class="col-md-5 col-sm-5 col-xs-12 select2-normal">
                         <select class="js-example-basic-single col-sm-12" name="divisi_id" >
                             @foreach($divisi as $p)
-                            <option value="{{ $p->divisi_id }}"  @if($p->divisi_id == $divisi_filter) selected @endif>{{ $p->divisi_code }} - {{ $p->instansi }}</option>
+                            <option value="{{ $p->divisi_id }}"  @if($p->divisi_id == $divisi_filter) selected @endif>{{ $p->divisi_code }} - {{ $p->divisi }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -44,7 +44,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Instansi</th>
+                            <th>Divisi</th>
                             <th>Risiko</th>
                             <th>Konteks</th>
                             <th>Tahun</th>
@@ -59,7 +59,7 @@
                     @foreach($sumber_risiko as $s)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $s->instansi }}</td>
+                            <td>{{ $s->divisi }}</td>
                             <td>{{ $s->s_risiko }}</td>
                             <td>{{ $s->konteks}}</td>
                             <td class="text-center">{{ $s->tahun}}</td>
@@ -72,7 +72,7 @@
                                 <button class="btn btn-danger btn-xs" type="button" title="Tidak Disetujui" data-bs-toggle="modal" data-bs-target="#edit_{{ $s->id_s_risiko }}"><i class="fa fa-close"></i></button>
                             @endif
                             </td>
-                            @if($s->divisi->divisi_code == 'INHAN')
+                            @if($s->divisi->divisi_code == 'KORPORASI')
                             <td>
                                 <div class="flex" style="justify-content: center;">
                                     <button class="btn btn-warning btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#edit_s_risiko_{{ $s->id_s_risiko }}"><i class="fa fa-pencil"></i></button>

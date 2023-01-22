@@ -68,7 +68,7 @@ class DefendidPengukurTableSeeder extends Seeder
                 'id_user' => 10,
                 'jabatan' => 'Kepala Departemen B',
                 'nip' => '151811513049',
-                'nama' => 'Penilai Inhan',
+                'nama' => 'Penilai Korporasi',
                 'status_pengukur' => 0,
                 'jenis' => 1,
                 'created_at' => '2022-05-29 04:07:07',

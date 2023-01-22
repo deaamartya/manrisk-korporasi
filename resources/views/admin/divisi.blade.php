@@ -34,7 +34,7 @@
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $c->divisi_code }}</td>
-                                    <td>{{ $c->instansi }}</td>
+                                    <td>{{ $c->divisi }}</td>
                                     <td>
                                         <div class="text-center">
                                             <button class="btn btn-warning btn-xs edit" type="button" id="edit_{{ $c->divisi_id }}"><i class="fa fa-pencil"></i></button>
@@ -71,7 +71,7 @@
                 <div class="row mb-3">
                     <label class="col-md-3 col-sm-3 col-xs-12" for="noarsip">Nama <span class="required"></span></label>
                     <div class='col-md-9 col-sm-9 col-xs-12'>
-                        <input type="text" name="instansi" required="required" class="form-control" id="formInstansi">
+                        <input type="text" name="divisi" required="required" class="form-control" id="formDivisi">
                     </div>
                 </div>
             </div>

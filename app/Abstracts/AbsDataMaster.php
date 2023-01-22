@@ -24,7 +24,7 @@ class AbsDataMaster
         ->leftJoin('divisi', 'divisi.divisi_id', 'defendid_user.divisi_id')
         ->select(
             'defendid_user.*',
-            'divisi.instansi',
+            'divisi.divisi',
             // DB::raw("
             //     (CASE
             //         WHEN is_risk_officer = 1 THEN 'Risk Officer'

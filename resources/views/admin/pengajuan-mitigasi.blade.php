@@ -47,7 +47,7 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Instansi</th>
+                    <th>Divisi</th>
                     <th>Risiko</th>
                     <th>R Awal</th>
                     <th>Pemohon</th>
@@ -60,7 +60,7 @@
                   @foreach($pengajuan as $d)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $d->pemohon->divisi->instansi }}</td>
+                    <td>{{ $d->pemohon->divisi->divisi }}</td>
                     <td>{{ $d->risk_detail->sumber_risiko->s_risiko }}</td>
                     <td>
                       @if($d->risk_detail->r_awal < 6)

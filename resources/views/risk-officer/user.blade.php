@@ -55,7 +55,7 @@
                                 @endphp
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $u->instansi }}</td>
+                                    <td>{{ $u->divisi }}</td>
                                     <td>{{ $u->name }}</td>
                                     <td>{{ $u->jabatan }}</td>
                                     <td>{{ $u->username }}</td>
@@ -124,7 +124,7 @@
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <select class="js-example-basic-single col-sm-12" name="divisi_id" id="formDivisi">
                             {{-- @foreach($divisi as $p)
-                                <option value="{{ $p->divisi_id }}">{{ $p->divisi_code }} - {{ $p->instansi }}</option>
+                                <option value="{{ $p->divisi_id }}">{{ $p->divisi_code }} - {{ $p->divisi }}</option>
                             @endforeach --}}
                         </select>
                     </div>

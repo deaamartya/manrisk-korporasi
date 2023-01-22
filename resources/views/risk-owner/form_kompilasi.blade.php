@@ -33,7 +33,7 @@
                     <td>
                         <b>Hasil Kompilasi Risiko</b>
                         <br>
-                        {{ $data[0]->divisi_code }} - {{ $data[0]->instansi }} Tahun {{ $data[0]->tahun_p }}
+                        {{ $data[0]->divisi_code }} - {{ $data[0]->divisi }} Tahun {{ $data[0]->tahun_p }}
                     </td>
                     <td colspan="3">
                         <img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_'.$data[0]->divisi_code.'.png' }}" style="max-width:120px;max-height:35px" />

@@ -15,7 +15,7 @@ class HasilKompilasiRisikoController extends Controller
 {
     public function index()
     {
-        $divisi = Divisi::where('divisi_code', '!=', 'INHAN')->get();
+        $divisi = Divisi::where('divisi_code', '!=', 'PI')->get();
 
         return view('admin.hasil_kompilasi_risiko', compact('divisi'));
     }
@@ -49,7 +49,7 @@ class HasilKompilasiRisikoController extends Controller
             $wr .= " AND C.tahun = ".$request->tahun;
         }
         $data = DB::table('pengukuran as A')
-        ->selectRaw('p.divisi_id, D.id_risk, D.konteks, B.s_risiko, B.status_s_risiko, ROUND(AVG(A.nilai_L),2) AS l, ROUND(AVG(A.nilai_C),2) AS c, ROUND((AVG(A.nilai_L)*AVG(A.nilai_C)),2) AS r, count(A.nama_responden), p.instansi, C.tahun')
+        ->selectRaw('p.divisi_id, D.id_risk, D.konteks, B.s_risiko, B.status_s_risiko, ROUND(AVG(A.nilai_L),2) AS l, ROUND(AVG(A.nilai_C),2) AS c, ROUND((AVG(A.nilai_L)*AVG(A.nilai_C)),2) AS r, count(A.nama_responden), p.divisi, C.tahun')
         ->rightJoin('s_risiko as B', 'A.id_s_risiko', 'B.id_s_risiko')
         ->join('risk_detail as rd', 'rd.id_s_risiko', 'B.id_s_risiko')
         ->join('risk_header as C', 'rd.id_riskh', 'C.id_riskh')
@@ -73,12 +73,12 @@ class HasilKompilasiRisikoController extends Controller
         return back()->with(['success-swal' => 'Responden berhasil dihapus!']);
     }
 
-    public function print_kompilasi_hasil_mitigasi($instansi = null, $tahun = null)
+    public function print_kompilasi_hasil_mitigasi($divisi = null, $tahun = null)
     {
         $wr = "1=1";
-        if($instansi){
-            $wr .= " AND du.divisi_id = ".$instansi;
-            // $instansi = Divisi::select('instansi')->where('divisi_id', $instansi)->first();
+        if($divisi){
+            $wr .= " AND du.divisi_id = ".$divisi;
+            // $divisi = Divisi::select('divisi')->where('divisi_id', $divisi)->first();
         }
         if($tahun){
             $wr .= " AND B.tahun = ".$tahun;
@@ -90,10 +90,10 @@ class HasilKompilasiRisikoController extends Controller
             ->join('divisi as p', 'd.divisi_id', 'p.divisi_id')
             ->where('pengukuran.tahun_p', $tahun)
             ->where('sr.status_s_risiko', '1')
-            ->where('sr.divisi_id', $instansi)
+            ->where('sr.divisi_id', $divisi)
             ->groupBy('k.id_risk', 'k.konteks',  'sr.s_risiko', 'sr.id_s_risiko')
             ->get();
         $pdf = PDF::loadView('penilai-korporasi.form_kompilasi', compact('data'))->setPaper( 'a4','landscape');
-        return $pdf->stream('Hasil Kompilasi Risiko'.$instansi.'_'.$tahun.'.pdf');
+        return $pdf->stream('Hasil Kompilasi Risiko'.$divisi.'_'.$tahun.'.pdf');
     }
 }

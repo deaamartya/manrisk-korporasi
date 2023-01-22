@@ -143,7 +143,7 @@ class RiskRegisterKorporasiController extends Controller
         $document_type = 'risk_register_korporasi_penilai_korporasi';
         $url = "url='penilai-korporasi/print-risk-register-korporasi/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa : '-').";".
-            "instansi=".'Industri Pertahanan'.";".
+            "divisi=".'Industri Pertahanan'.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun : '-').";";

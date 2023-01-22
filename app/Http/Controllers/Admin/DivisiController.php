@@ -26,19 +26,19 @@ class DivisiController extends Controller
     {
         $req = [
             'divisi_code' => 'required',
-            'instansi' => 'required',
+            'divisi' => 'required',
         ];
 
         $msg = [
             'divisi_code.required' => 'Kode divisi tidak boleh kosong',
-            'instansi.required' => 'Nama divisi tidak boleh kosong'
+            'divisi.required' => 'Nama divisi tidak boleh kosong'
         ];
 
         $request->validate($req, $msg);
 
         $params = [
             'divisi_code' => $request->divisi_code,
-            'instansi' => $request->instansi,
+            'divisi' => $request->divisi,
             'updated_at' => Carbon::now()
         ];
 

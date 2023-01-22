@@ -2,7 +2,7 @@
 	<div>
 		<div class="logo-wrapper">
 			<a href="{{ url('/') }}">
-				<img class="img-fluid for-light logo-header" src="{{asset('assets/images/logo/logo_divisi/logo_INHAN.png')}}" alt="">
+				<img class="img-fluid for-light logo-header" src="{{asset('assets/images/logo/logo_divisi/logo_KORPORASI.png')}}" alt="">
 			</a>
 			<div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
 		</div>
@@ -19,7 +19,7 @@
 						<div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
 					</li>
 					<li class="sidebar-main-title">
-						<div class="welcome-card @if(Auth::user()->divisi_id === 'LN' || Auth::user()->divisi_id === 'DI' || Auth::user()->divisi_id === 'INHAN') flex @endif">
+						<div class="welcome-card @if(Auth::user()->divisi_id === 'LN' || Auth::user()->divisi_id === 'DI' || Auth::user()->divisi_id === 'KORPORASI') flex @endif">
 							<div class="logo-circle text-center">
 								<img src="{{ asset('assets/images/logo/logo_divisi/logo_'.Auth::user()->divisi->divisi_code.'.png') }}" height="48" />
 							</div>
@@ -40,7 +40,7 @@
 									@endforeach
 								</p>
 								<p class="lan-2">
-									{{ Auth::user()->divisi->instansi }}
+									{{ Auth::user()->divisi->divisi }}
 								</p>
 							</div>
 						</div>

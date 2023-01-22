@@ -159,7 +159,7 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="d-flex justify-content-between mb-3">
-						<h6>Status Proses Anggota Inhan Tahun <span id="tahun-status-proses-title">{{ date('Y') }}</span></h6>
+						<h6>Status Proses Anggota Korporasi Tahun <span id="tahun-status-proses-title">{{ date('Y') }}</span></h6>
 						<div class="col-lg-3">
 							<span class="f-w-500 font-roboto">Tahun : </span>
 							<select class="form-control" id="tahun-status-proses">
@@ -176,7 +176,7 @@
 						<div class="card status-proses">
 							<div class="card-body row">
 								<div class="col-12 col-lg-2">
-									<p>Status Proses - <strong>{{ $p->instansi }}</strong></p>
+									<p>Status Proses - <strong>{{ $p->divisi }}</strong></p>
 									<img class="me-1 rounded"
 										src="{{ asset('assets/images/logo/logo_divisi/logo_'.$p->divisi_code.'.png') }}"
 										style="max-height: 30px; margin-bottom: 15px;">
@@ -232,7 +232,7 @@
 											src="{{ asset('assets/images/logo/logo_divisi/logo_'.$p->divisi_code.'.png') }}"
 											style="max-height: 30px">
 								</div>
-								<p>{{ $p->instansi }}</p>
+								<p>{{ $p->divisi }}</p>
 								<div class="row details">
 										<div class="col-6"><span>Risiko Rendah</span></div>
 										<div class="col-6">
@@ -309,7 +309,7 @@
 										src="{{ asset('assets/images/logo/logo_divisi/logo_'.$p->divisi_code.'.png') }}"
 										style="max-height: 30px;">
 								</div>
-								<p class="mb-4 text-center">{{ $p->instansi }}</p>
+								<p class="mb-4 text-center">{{ $p->divisi }}</p>
 								<div class="apex-chart-container goal-status text-center">
 									<div class="rate-card">
 										<div class="goal-chart">

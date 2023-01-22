@@ -136,7 +136,7 @@ class RisikoController extends Controller
         $header = RiskHeader::where('id_riskh', '=', $id)->first();
         $url = "url='risk-officer/risiko/print/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa->name : '-').";".
-            "instansi=".$header->divisi->instansi.";".
+            "divisi=".$header->divisi->divisi.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun->name : '-').";";
@@ -169,7 +169,7 @@ class RisikoController extends Controller
         $pdf = PDF::loadView('risk-officer.risk-header-pdf', compact('header', 'user', 'qrcode'))->setPaper('a4', 'landscape');
         Session::forget('is_bypass');
         // return view('risk-officer.risk-header-pdf', compact('header', 'user', 'qrcode'));
-        return $pdf->stream('Laporan Rencana Pengelolaan Risiko '.$user->instansi.' Tahun '.$header->tahun.'.pdf');
+        return $pdf->stream('Laporan Rencana Pengelolaan Risiko '.$user->divisi.' Tahun '.$header->tahun.'.pdf');
     }
 
     public function uploadLampiran(Request $request) {

@@ -30,7 +30,7 @@
                                     <select class="js-example-basic-single" name="divisi_id" id="formDivisi">
                                         <option selected disabled>Pilih Divisi..</option>
                                         @foreach($divisi as $c)
-                                            <option value="{{ $c->divisi_id }}">{{ $c->divisi_code }} - {{ $c->instansi }}</option>
+                                            <option value="{{ $c->divisi_id }}">{{ $c->divisi_code }} - {{ $c->divisi }}</option>
                                         @endforeach
                                     </select>
                                 </div>

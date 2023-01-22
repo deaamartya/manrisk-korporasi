@@ -27,7 +27,7 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="d-flex justify-content-between mb-3">
-						<h6>Status Proses - {{ Auth::user()->divisi->instansi }} Tahun <span id="tahun-status-proses-title">{{ date('Y') }}</span></h6>
+						<h6>Status Proses - {{ Auth::user()->divisi->divisi }} Tahun <span id="tahun-status-proses-title">{{ date('Y') }}</span></h6>
 						<div class="col-lg-3">
 							<span class="f-w-500 font-roboto">Tahun : </span>
 							<select class="form-control" id="tahun-status-proses">
@@ -138,7 +138,7 @@
 				<div class="card-body">
 					<div class="row d-flex justify-content-between mb-3">
 						<div class="col-lg-9 col-12">
-							<h6>Risiko Divisi - {{ Auth::user()->divisi->instansi }} Tahun <span id="tahun-title">{{ date('Y') }}</span></h6>	
+							<h6>Risiko Divisi - {{ Auth::user()->divisi->divisi }} Tahun <span id="tahun-title">{{ date('Y') }}</span></h6>	
 						</div>
 						<div class="col-lg-3 col-12">
 							<span class="f-w-500 font-roboto">Tahun : </span>
@@ -194,7 +194,7 @@
 											src="{{ asset('assets/images/logo/logo_divisi/logo_'.$p->divisi_code.'.png') }}"
 											style="max-height: 30px">
 								</div>
-								<p>{{ $p->instansi }}</p>
+								<p>{{ $p->divisi }}</p>
 								<div class="row details">
 										<div class="col-6"><span>Risiko Rendah</span></div>
 										<div class="col-6">
@@ -304,7 +304,7 @@
 						<div class="goal-end-point">
 							<ul>
 							<li class="mt-3 pt-0">
-								<h6 class="font-primary" id="divisi_name">{{ Auth::user()->divisi->instansi }}</h6>
+								<h6 class="font-primary" id="divisi_name">{{ Auth::user()->divisi->divisi }}</h6>
 							</li>
 							<li>
 								<h6 class="mb-2 f-w-400">Total IDR Kuantitatif KORPORASI</h6>

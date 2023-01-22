@@ -28,12 +28,12 @@ class VerifyController extends Controller
             $url = explode('=', $data[0])[1];
             $url = str_replace("'", '', $url);
             $signed_by = explode('=', $data[1])[1];
-            $instansi = explode('=', $data[2])[1];
+            $divisi = explode('=', $data[2])[1];
             $tahun = explode('=', $data[3])[1];
             $created_at = explode('=', $data[4])[1];
             $penyusun = explode('=', $data[5])[1];
             Session::put('is_bypass', true);
-            return view('verified', compact("url", "signed_by", "instansi", "tahun", "created_at", "penyusun"));
+            return view('verified', compact("url", "signed_by", "divisi", "tahun", "created_at", "penyusun"));
         } catch (DecryptException $e) {
             abort(403);
         }

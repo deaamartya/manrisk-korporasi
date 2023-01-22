@@ -533,7 +533,7 @@ class GlobalController extends Controller
         //     risk_detail.mitigasi,
         //     risk_detail.jadwal_mitigasi,
         //     mitigasi_logs.final_realisasi,
-        //     divisi.instansi,
+        //     divisi.divisi,
         //     risk_detail.tahun
         // ')
         // ->get();

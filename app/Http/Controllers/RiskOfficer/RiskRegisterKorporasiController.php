@@ -167,7 +167,7 @@ class RiskRegisterKorporasiController extends Controller
         $document_type = 'risk_register_korporasi';
         $url = "url='risk-officer/print-risk-register-korporasi/".$header->id_riskh."';".
             "signed_by=".$header->pemeriksa.";".
-            "instansi=".'Industri Pertahanan'.";".
+            "divisi=".'Industri Pertahanan'.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".$header->penyusun.";";

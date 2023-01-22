@@ -48,7 +48,7 @@ $(document).ready(function(){
         },
         columns:[
             {data:null,name:null},
-            {data:"instansi",name:"instansi"},
+            {data:"divisi",name:"divisi"},
             {data:"konteks",name:"konteks"},
             {data:"s_risiko",name:"s_risiko"},
             {data:"tahun",name:"tahun"},
@@ -105,9 +105,9 @@ $(document).ready(function(){
 
     $('.print').on('click', function(){
         console.log('yess');
-        let instansi = $('#formDivisi').val()
+        let divisi = $('#formDivisi').val()
         let tahun = $('#formTahun').val()
 
-        window.location.assign(APP_URL+"/admin/print-kompilasi-hasil-mitigasi/"+instansi+"/"+tahun)
+        window.location.assign(APP_URL+"/admin/print-kompilasi-hasil-mitigasi/"+divisi+"/"+tahun)
     })
 })

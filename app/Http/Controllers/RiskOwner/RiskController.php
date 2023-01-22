@@ -102,7 +102,7 @@ class RiskController extends Controller
         $document_type = 'risk_register_ro';
         $url = "url='risk-owner/risiko/print/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa->name : '-').";".
-            "instansi=".$header->divisi->instansi.";".
+            "divisi=".$header->divisi->divisi.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun->name : '-').";";
@@ -134,7 +134,7 @@ class RiskController extends Controller
         $pdf = PDF::loadView('risk-owner.risk-header-pdf', compact('header', 'user', 'qrcode'))->setPaper('a4', 'landscape');
         Session::forget('is_bypass');
         // return view('risk-officer.risk-header-pdf', compact('header', 'user'));
-        return $pdf->stream('Laporan Manajemen Risiko '.$header->divisi->instansi.' Tahun '.$header->tahun.'.pdf');
+        return $pdf->stream('Laporan Manajemen Risiko '.$header->divisi->divisi.' Tahun '.$header->tahun.'.pdf');
     }
 
     public function toggleKorporasi($id) {

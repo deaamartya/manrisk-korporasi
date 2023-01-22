@@ -49,7 +49,7 @@
                   <tr>
                     <td>{{ $d->id_risk .'-'. $d->no_k }}</td>
                     <td>{{ $d->s_risiko }}</td>
-                    <td>{{ $d->instansi }}</td>
+                    <td>{{ $d->divisi }}</td>
                     <td>{{ $d->tahun }}</td>
                     {{-- <td>{{ number_format($d->l_awal, 2) + 0 }}</td>
                     <td>{{ number_format($d->c_awal, 2) + 0 }}</td>

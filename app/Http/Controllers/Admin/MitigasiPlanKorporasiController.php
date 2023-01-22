@@ -218,7 +218,7 @@ class MitigasiPlanKorporasiController extends Controller
         }
         $url = "url='admin/mitigasi-plan/print/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa : '-').";".
-            "instansi= Industri Pertahanan ;".
+            "divisi= Industri Pertahanan ;".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun : '-').";";

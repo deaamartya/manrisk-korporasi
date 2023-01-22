@@ -136,7 +136,7 @@ $bulan = array (
 				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_bumn.png' }}" style="max-width:120px;max-height:35px" />
 			</td>
 			<td height="40">
-				<b>RISK REGISTER {{ $user->divisi->instansi }} </b>
+				<b>RISK REGISTER {{ $user->divisi->divisi }} </b>
 			</td>
 			<td width="171">
 				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_'.$header->divisi->divisi_code.'.png' }}" style="max-width:120px;max-height:35px" />
@@ -146,10 +146,10 @@ $bulan = array (
 	<table class="table-2" cellpadding="0" cellspacing="0" width="100%" height="128">
 		<tr style="min-height:12px;" height="12">
 			<td width="15%" class="left pl-10p">
-				Instansi
+				Divisi
 			</td>
 			<td class="left pl-10p">
-				{{ $header->divisi->instansi }}
+				{{ $header->divisi->divisi }}
 			</td>
 			<td width="15%" class="left pl-10p">
 				Diperiksa &  Disetujui  Oleh

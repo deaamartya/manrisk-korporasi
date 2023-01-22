@@ -72,7 +72,7 @@ class RiskRegisterDivisiController extends Controller
         $document_type = 'risk_register_admin';
         $url = "url='admin/print-risk-register-divisi/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa->name : '-').";".
-            "instansi=".$header->divisi->instansi.";".
+            "divisi=".$header->divisi->divisi.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun->name : '-').";";
@@ -104,7 +104,7 @@ class RiskRegisterDivisiController extends Controller
         $qrcode = DNS2D::getBarcodePNG($encrypted, 'QRCODE');
         $pdf = PDF::loadView('admin.pdf-risk-register', compact('header', 'user', 'qrcode'))->setPaper('a4', 'landscape');
         Session::forget('is_bypass');
-        return $pdf->stream('Laporan Manajemen Risiko '.$header->instansi.' Tahun '.$header->tahun.'.pdf');
+        return $pdf->stream('Laporan Manajemen Risiko '.$header->divisi.' Tahun '.$header->tahun.'.pdf');
     }
 
     public function approve($id)

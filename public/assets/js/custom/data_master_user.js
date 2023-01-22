@@ -9,7 +9,7 @@ $(document).ready(function() {
             // $('#formDivisi').append('<option selected disabled>Pilih divisi . . </option>');
             for (let i = 0; i < results.length; i++) {
                 $('#formDivisi').append(
-                    '<option value="' + results[i].divisi_id + '" id="option' + results[i].divisi_id + '">' + results[i].divisi_code + ' - ' + results[i].instansi + '</option>'
+                    '<option value="' + results[i].divisi_id + '" id="option' + results[i].divisi_id + '">' + results[i].divisi_code + ' - ' + results[i].divisi + '</option>'
                 );
             }
         },

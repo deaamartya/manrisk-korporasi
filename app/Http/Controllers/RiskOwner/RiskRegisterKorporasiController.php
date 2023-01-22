@@ -166,7 +166,7 @@ class RiskRegisterKorporasiController extends Controller
         $document_type = 'risk_register_korporasi_ro';
         $url = "url='risk-owner/print-risk-register-korporasi/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa : '-').";".
-            "instansi=".'Industri Pertahanan'.";".
+            "divisi=".'Industri Pertahanan'.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun : '-').";";
@@ -196,7 +196,7 @@ class RiskRegisterKorporasiController extends Controller
         $encrypted = url('document/verify/').'/'.$short_url->short_code;
         $qrcode = DNS2D::getBarcodePNG($encrypted, 'QRCODE');
         $pdf = PDF::loadView('risk-owner.pdf-risk-register-korporasi',  compact('header', 'detail_risk', 'qrcode'))->setPaper('a4', 'landscape');
-        // return $pdf->stream('Laporan Manajemen Risiko '.$user->instansi.' Tahun '.$header->tahun.'.pdf');
+        // return $pdf->stream('Laporan Manajemen Risiko '.$user->divisi.' Tahun '.$header->tahun.'.pdf');
         return $pdf->stream('Laporan Manajemen Risiko KORPORASI Tahun '.$header->tahun.'.pdf');
     }
 }

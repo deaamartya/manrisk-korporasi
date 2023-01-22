@@ -45,7 +45,7 @@
                         <tr>
                             <td>{{ $s->tahun }}</td>
                             @if(Auth::user()->is_admin)
-                            <td>{{ $s->divisi->instansi }}</td>
+                            <td>{{ $s->divisi->divisi }}</td>
                             @endif
                             <td>{{ $s->proses_manrisk->nama_proses }}</td>
                             <td>{{ date('d-m-Y', strtotime($s->created_at)) }}</td>

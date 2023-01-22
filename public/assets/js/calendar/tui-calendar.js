@@ -4154,7 +4154,7 @@
                     _on: function (obj, type, fn, context) {
                         var id,
                             handler,
-                            originHandler;
+                            origkorporasidler;
 
                         id = type + util.stamp(fn) + (context ? '_' + util.stamp(context) : '');
 
@@ -4166,7 +4166,7 @@
                             fn.call(context || obj, e || window.event);
                         };
 
-                        originHandler = handler;
+                        origkorporasidler = handler;
 
                         if ('addEventListener' in obj) {
                             if (type === 'mouseenter' || type === 'mouseleave') {
@@ -4175,7 +4175,7 @@
                                     if (!domevent._checkMouse(obj, e)) {
                                         return;
                                     }
-                                    originHandler(e);
+                                    origkorporasidler(e);
                                 };
                                 obj.addEventListener((type === 'mouseenter') ?
                                     'mouseover' : 'mouseout', handler, false);
