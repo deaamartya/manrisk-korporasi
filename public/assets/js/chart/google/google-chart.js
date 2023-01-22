@@ -13,7 +13,7 @@ function drawBasic() {
       ]),
       b = {
         chart: {
-          title: "Company Performance",
+          title: "Divisi Performance",
           subtitle: "Sales, Expenses, and Profit: 2014-2017"
         },
         bars: "vertical",
@@ -39,7 +39,7 @@ function drawBasic() {
       ]),
       b = {
         chart: {
-          title: "Company Performance",
+          title: "Divisi Performance",
           subtitle: "Sales, Expenses, and Profit: 2014-2017"
         },
         bars: "horizontal",
@@ -214,7 +214,7 @@ function drawBasic() {
         ['2016',  1030,      540]
       ]);
       var options = {
-        title: 'Company Performance',
+        title: 'Divisi Performance',
         hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
         vAxis: {minValue: 0},
         width:'100%',
@@ -233,7 +233,7 @@ function drawBasic() {
       ['2016',  120, 201, 2501, 540]
     ]);
     var options = {
-      title: 'Company Performance',
+      title: 'Divisi Performance',
       hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
       vAxis: {minValue: 0},
       width:'100%',

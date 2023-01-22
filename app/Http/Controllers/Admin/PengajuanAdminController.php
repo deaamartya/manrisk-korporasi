@@ -41,14 +41,14 @@ class PengajuanAdminController extends Controller
         PengajuanMitigasi::insert([
             'id_user' => Auth::user()->id_user,
             'id_riskd' => $request->id_risk_detail,
-            'company_id' => $request->company_id,
+            'divisi_id' => $request->divisi_id,
             'alasan' => $request->alasan,
             'is_approved' => false,
             'tipe_pengajuan' => $request->tipe_pengajuan,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        return redirect('admin/risk-register-korporasi')->with(['success-swal' => 'Pengajuan berhasil diajukan!']);
+        return redirect('admin/risk-register-divisi')->with(['success-swal' => 'Pengajuan berhasil diajukan!']);
     }
 
     /**

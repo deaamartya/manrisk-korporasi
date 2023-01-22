@@ -435,7 +435,7 @@
                         <div class="col-sm-6 col-md-6 col-lg-4"><i class="icofont icofont-chair"></i>chair</div>
                         <div class="col-sm-6 col-md-6 col-lg-4"><i class="icofont icofont-clip"></i>clip</div>
                         <div class="col-sm-6 col-md-6 col-lg-4"><i class="icofont icofont-coins"></i>coins</div>
-                        <div class="col-sm-6 col-md-6 col-lg-4"><i class="icofont icofont-company"></i>company</div>
+                        <div class="col-sm-6 col-md-6 col-lg-4"><i class="icofont icofont-divisi"></i>divisi</div>
                         <div class="col-sm-6 col-md-6 col-lg-4"><i class="icofont icofont-contact-add"></i>contact-add</div>
                         <div class="col-sm-6 col-md-6 col-lg-4"><i class="icofont icofont-deal"></i>deal</div>
                         <div class="col-sm-6 col-md-6 col-lg-4"><i class="icofont icofont-files"></i>files</div>

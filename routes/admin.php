@@ -3,12 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\{
     UserController,
-    CompaniesController,
+    DivisiController,
     HasilKompilasiRisikoController,
     KonteksController,
     RisikoController,
     SumberRisikoIndhanController,
-    RiskRegisterKorporasiController,
+    RiskRegisterDivisiController,
     RiskRegisterIndhanController,
     ApprovalHasilMitigasiController,
     MitigasiPlanController,
@@ -29,10 +29,10 @@ Route::middleware(['auth', 'cekAdmin'])->name('admin.')->group(function () {
   Route::post('/user/store/{id?}', [UserController::class, 'store'])->name('user-store');
   Route::put('/user/update-status/{id}', [UserController::class, 'update_status'])->name('user-update-status');
 
-  Route::get('/perusahaan', [CompaniesController::class, 'index'])->name('perusahaan');
-  Route::get('/perusahaan/get-perusahaan/{id}', [CompaniesController::class, 'get_perusahaan'])->name('perusahaan-get-perusahaan');
-  Route::post('/perusahaan/store/{id?}', [CompaniesController::class, 'store'])->name('perusahaan-store');
-  Route::post('/perusahaan/delete-perusahaan', [CompaniesController::class, 'delete'])->name('perusahaan-delete');
+  Route::get('/divisi', [DivisiController::class, 'index'])->name('divisi');
+  Route::get('/divisi/get-divisi/{id}', [DivisiController::class, 'get_divisi'])->name('divisi-get-divisi');
+  Route::post('/divisi/store/{id?}', [DivisiController::class, 'store'])->name('divisi-store');
+  Route::post('/divisi/delete-divisi', [DivisiController::class, 'delete'])->name('divisi-delete');
 
   Route::get('/risiko', [RisikoController::class, 'index'])->name('risiko');
   Route::get('/risiko/get-risiko/{id?}', [RisikoController::class, 'get_risiko'])->name('risiko-get-risiko');
@@ -56,19 +56,19 @@ Route::middleware(['auth', 'cekAdmin'])->name('admin.')->group(function () {
   Route::get('sumber-risiko-indhan/search', [SumberRisikoIndhanController::class, 'searchRisiko'])->name('search-risiko');
   Route::post('sumber-risiko-indhan/approval/{id}', [SumberRisikoIndhanController::class, 'approvalRisiko'])->name('approval-risiko');
 
-  Route::get('risk-register-korporasi', [RiskRegisterKorporasiController::class, 'index'])->name('risk-register-korporasi');
-  Route::get('search-risk-header', [RiskRegisterKorporasiController::class, 'searchRiskHeader'])->name('search-risk-header');
-  Route::get('all-risk-header', [RiskRegisterKorporasiController::class, 'allRiskHeader'])->name('all-risk-header');
-  Route::get('detail-risk-register-korporasi/{id}', [RiskRegisterKorporasiController::class, 'show'])->name('detail-risk-register');
-  Route::post('risk-register-korporasi/set-urut-risk', [RiskRegisterKorporasiController::class, 'setUrutRisk'])->name('risk-register-korporasi.set-urut-risk');
-  Route::get('print-risk-register-korporasi/{id}', [RiskRegisterKorporasiController::class, 'print'])->name('print-risk-register');
-  Route::post('approval-risk-register-korporasi/{id}', [RiskRegisterKorporasiController::class, 'approval'])->name('approval-risk-register');
-  Route::get('risk-detail-indhan/{id}', [RiskRegisterKorporasiController::class, 'indhan'])->name('risk-register-korporasi.indhan');
-  Route::get('risk-detail-non-indhan/{id}', [RiskRegisterKorporasiController::class, 'nonIndhan'])->name('risk-register-korporasi.non-indhan');
-  Route::post('risk-detail-mitigation/{id}', [RiskRegisterKorporasiController::class, 'mitigation'])->name('mitigation');
-  Route::post('risk-detail-not-mitigation/{id}', [RiskRegisterKorporasiController::class, 'notMitigation'])->name('not-mitigation');
-  Route::delete('risk-detail-delete/{id}', [RiskRegisterKorporasiController::class, 'deleteRiskDetail'])->name('risk-detail-delete');
-  Route::get('risk-register-korporasi/approve/{id}', [RiskRegisterKorporasiController::class, 'approve'])->name('risk-register-korporasi.approve');
+  Route::get('risk-register-divisi', [RiskRegisterDivisiController::class, 'index'])->name('risk-register-divisi');
+  Route::get('search-risk-header', [RiskRegisterDivisiController::class, 'searchRiskHeader'])->name('search-risk-header');
+  Route::get('all-risk-header', [RiskRegisterDivisiController::class, 'allRiskHeader'])->name('all-risk-header');
+  Route::get('detail-risk-register-divisi/{id}', [RiskRegisterDivisiController::class, 'show'])->name('detail-risk-register');
+  Route::post('risk-register-divisi/set-urut-risk', [RiskRegisterDivisiController::class, 'setUrutRisk'])->name('risk-register-divisi.set-urut-risk');
+  Route::get('print-risk-register-divisi/{id}', [RiskRegisterDivisiController::class, 'print'])->name('print-risk-register');
+  Route::post('approval-risk-register-divisi/{id}', [RiskRegisterDivisiController::class, 'approval'])->name('approval-risk-register');
+  Route::get('risk-detail-indhan/{id}', [RiskRegisterDivisiController::class, 'indhan'])->name('risk-register-divisi.indhan');
+  Route::get('risk-detail-non-indhan/{id}', [RiskRegisterDivisiController::class, 'nonIndhan'])->name('risk-register-divisi.non-indhan');
+  Route::post('risk-detail-mitigation/{id}', [RiskRegisterDivisiController::class, 'mitigation'])->name('mitigation');
+  Route::post('risk-detail-not-mitigation/{id}', [RiskRegisterDivisiController::class, 'notMitigation'])->name('not-mitigation');
+  Route::delete('risk-detail-delete/{id}', [RiskRegisterDivisiController::class, 'deleteRiskDetail'])->name('risk-detail-delete');
+  Route::get('risk-register-divisi/approve/{id}', [RiskRegisterDivisiController::class, 'approve'])->name('risk-register-divisi.approve');
 
   Route::resource('risk-register-indhan', RiskRegisterIndhanController::class);
   Route::post('risk-register-indhan/set-urut-risk', [RiskRegisterIndhanController::class, 'setUrutRisk'])->name('risk-register-indhan.set-urut-risk');

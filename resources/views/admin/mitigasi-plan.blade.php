@@ -37,7 +37,7 @@
                 @foreach($headers as $h)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $h->perusahaan->instansi }}</td>
+                  <td>{{ $h->divisi->instansi }}</td>
                   <td>{{ $h->tahun }}</td>
                   <td>{{ date('d M Y', strtotime($h->tanggal)) }}</td>
                   <td>{!! nl2br($h->target) !!}</td>

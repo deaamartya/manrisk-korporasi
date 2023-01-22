@@ -23,7 +23,7 @@ class DefendidUserTableSeeder extends Seeder
             0 =>
             array (
                 'id_user' => 1,
-                'company_id' => 1,
+                'divisi_id' => 1,
                 'name' => 'Risk Officer PT. PAL',
                 'username' => 'ptpal',
                 'password' => '$2y$10$RmXwiUdUwtz337j3Q27kGuHGa0.30PN9N/pZixCe3gqNpyrQDY2c.',
@@ -41,7 +41,7 @@ class DefendidUserTableSeeder extends Seeder
             1 =>
             array (
                 'id_user' => 2,
-                'company_id' => 2,
+                'divisi_id' => 2,
                 'name' => 'ptlen',
                 'username' => 'ptlen',
                 'password' => '$2y$10$7b4Dm1PdbGup4MXr7RmMS.ROTBZ/VoMlUDnsFHMOGG.ekHyAE44lC',
@@ -59,7 +59,7 @@ class DefendidUserTableSeeder extends Seeder
             2 =>
             array (
                 'id_user' => 3,
-                'company_id' => 3,
+                'divisi_id' => 3,
                 'name' => 'ptdi',
                 'username' => 'ptdi',
                 'password' => '$2y$10$1Y90E8oTZwSKTY6Acg3.oewAcShifU3k8QAxryRXMPfe3cWVl1FMG',
@@ -77,7 +77,7 @@ class DefendidUserTableSeeder extends Seeder
             3 =>
             array (
                 'id_user' => 4,
-                'company_id' => 4,
+                'divisi_id' => 4,
                 'name' => 'ptdahana',
                 'username' => 'ptdahana',
                 'password' => '$2y$10$mgywDtCLf.DklOCKYfGTkeWWVX.vmFe6ZFXStUOddqwdQ5XHPBOZq',
@@ -95,7 +95,7 @@ class DefendidUserTableSeeder extends Seeder
             4 =>
             array (
                 'id_user' => 5,
-                'company_id' => 5,
+                'divisi_id' => 5,
                 'name' => 'ptpindad',
                 'username' => 'ptpindad',
                 'password' => '$2y$10$HzMEYbMq5JbIiSufRijmg..6Z7EzyhVC7dnTfhbJ9qrBf.YdBlwc6',
@@ -113,7 +113,7 @@ class DefendidUserTableSeeder extends Seeder
             5 =>
             array (
                 'id_user' => 6,
-                'company_id' => 6,
+                'divisi_id' => 6,
                 'name' => 'Admin Indhan',
                 'username' => 'inhan',
                 'password' => '$2y$10$WWPDEddKmSCMbi4WuXrsB.b6IxOb1lt82ehCeSVJItANQHrGjk7ve',
@@ -131,7 +131,7 @@ class DefendidUserTableSeeder extends Seeder
             6 =>
             array (
                 'id_user' => 7,
-                'company_id' => 1,
+                'divisi_id' => 1,
                 'name' => 'Kepala Divisi TI',
                 'username' => 'robaru',
                 'password' => '$2y$10$PcVUcQTM0hEGDQkC8RYCZ.67naRl/susuAR/eiYOwg2XgDUS3UDd2',
@@ -149,7 +149,7 @@ class DefendidUserTableSeeder extends Seeder
             7 =>
             array (
                 'id_user' => 8,
-                'company_id' => 1,
+                'divisi_id' => 1,
                 'name' => 'Nama Penilai Indhan',
                 'username' => 'rodepartemena',
                 'password' => '$2y$10$Egs4/CY4Ye0QI.89TYae1etXIGauQ7LkzZx7zAhEHdZWQiK4Qlfca',
@@ -167,7 +167,7 @@ class DefendidUserTableSeeder extends Seeder
             8 =>
             array (
                 'id_user' => 9,
-                'company_id' => 1,
+                'divisi_id' => 1,
                 'name' => 'Kepala Departemen A',
                 'username' => 'penilaipal',
                 'password' => '$2y$10$LkSZOuBDzyd9.B/pHbX47Op8aNBmTvsoHPA3YlitWlniiOtZ6OV.m',
@@ -185,7 +185,7 @@ class DefendidUserTableSeeder extends Seeder
             9 =>
             array (
                 'id_user' => 10,
-                'company_id' => 1,
+                'divisi_id' => 1,
                 'name' => 'Kepala Departemen B',
                 'username' => 'penilaiinhan',
                 'password' => Hash::make('penilaiinhan'),

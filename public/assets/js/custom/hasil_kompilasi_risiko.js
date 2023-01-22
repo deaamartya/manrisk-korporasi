@@ -9,7 +9,7 @@ $(document).ready(function(){
         ajax : {
             url : APP_URL+'/admin/responden_datatable',
             data: function(d) {
-                d.company_id = $('#formPerusahaan').val(),
+                d.divisi_id = $('#formDivisi').val(),
                 d.tahun = $('#formTahun').val()
             }
         },
@@ -42,7 +42,7 @@ $(document).ready(function(){
         ajax : {
             url : APP_URL+'/admin/sumber_risiko_datatable',
             data: function(d) {
-                d.company_id = $('#formPerusahaan').val(),
+                d.divisi_id = $('#formDivisi').val(),
                 d.tahun = $('#formTahun').val()
             }
         },
@@ -105,7 +105,7 @@ $(document).ready(function(){
 
     $('.print').on('click', function(){
         console.log('yess');
-        let instansi = $('#formPerusahaan').val()
+        let instansi = $('#formDivisi').val()
         let tahun = $('#formTahun').val()
 
         window.location.assign(APP_URL+"/admin/print-kompilasi-hasil-mitigasi/"+instansi+"/"+tahun)

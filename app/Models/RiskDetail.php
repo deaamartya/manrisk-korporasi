@@ -139,7 +139,7 @@ class RiskDetail extends Model
         $result = [];
         $wr = '1=1';
         // if(!Auth::user()->is_admin){
-        //     $wr .= ' AND risk_detail.company_id = '.Auth::user()->company_id;
+        //     $wr .= ' AND risk_detail.divisi_id = '.Auth::user()->divisi_id;
         // }
 
         try {
@@ -147,7 +147,7 @@ class RiskDetail extends Model
             ->leftJoin('konteks', 's_risiko.id_konteks', 'konteks.id_konteks')
             ->whereRaw($wr)
             ->where(['risk_detail.id_riskh' => $id_riskh, 'risk_detail.tahun' => date('Y'), 'risk_detail.status_indhan' => $status_indhan])
-            // ->orderBy('risk_detail.company_id', 'ASC')
+            // ->orderBy('risk_detail.divisi_id', 'ASC')
             ->orderBy('konteks.id_risk', 'ASC')
             ->orderBy('risk_detail.created_at', 'ASC')
             ->select('risk_detail.*', 'konteks.id_risk')
@@ -156,7 +156,7 @@ class RiskDetail extends Model
             $no = 1;
             foreach ($risk_detail as $key => $value) {
                 // if ($key > 0) {
-                //     if ($risk_detail[$key]->company_id != $risk_detail[$key - 1]->company_id) {
+                //     if ($risk_detail[$key]->divisi_id != $risk_detail[$key - 1]->divisi_id) {
                 //         $no = 1;
                 //     }
                 // }

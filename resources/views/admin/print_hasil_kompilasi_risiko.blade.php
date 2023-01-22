@@ -62,12 +62,12 @@
                     <b>Hasil Kompilasi Risiko</b>
                     <br>
                     @if (count($data) > 0) 
-                    {{ $data[0]->company_code }} - {{ $data[0]->instansi }} Tahun {{ $data[0]->tahun_p }}
+                    {{ $data[0]->divisi_code }} - {{ $data[0]->instansi }} Tahun {{ $data[0]->tahun_p }}
                     @endif
                 </td>
                 <td colspan="3">
                     @if (count($data) > 0) 
-                    <img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_company/logo_'.$data[0]->company_code.'.png' }}" style="max-width:120px;max-height:35px" />
+                    <img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_'.$data[0]->divisi_code.'.png' }}" style="max-width:120px;max-height:35px" />
                     @endif
                 </td>
             </tr>

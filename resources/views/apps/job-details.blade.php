@@ -203,7 +203,7 @@
 						<div class="job-description">
 							<h6>Job Description</h6>
 							<p>Endless is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. Our designers contribute to clients’ projects at all stages of development. We might start from scratch, conducting user and stakeholder interviews, making personas and journey maps, and continue on to iterating on designs and prototypes through delivering final assets for launch. We might come into the middle of an in-flight program-size project and conduct analysis and usability correction or feature enhancement. We might provide research and vision for handoff to an internal development team.</p>
-							<!-- <p>Front-end web designers combine design, programming, writing and organizational skills in their work. They help shape the vision for a company's online content.</p>-->
+							<!-- <p>Front-end web designers combine design, programming, writing and organizational skills in their work. They help shape the vision for a divisi's online content.</p>-->
 						</div>
 						<div class="job-description">
 							<h6>Qualifications </h6>
@@ -238,7 +238,7 @@
 							<ul>
 								<li>Competitive pay</li>
 								<li>Competitive medical, dental, and vision insurance plans</li>
-								<li>Company-provided 401(k) plan</li>
+								<li>Divisi-provided 401(k) plan</li>
 								<li>Paid vacation and sick time</li>
 								<li>Free snacks and beverages</li>
 							</ul>

@@ -1169,7 +1169,7 @@
                           <li><span class="icofont icofont-chair"></span><em>chair</em></li>
                           <li><span class="icofont icofont-clip"></span><em>clip</em></li>
                           <li><span class="icofont icofont-coins"></span><em>coins</em></li>
-                          <li><span class="icofont icofont-company"></span><em>company</em></li>
+                          <li><span class="icofont icofont-divisi"></span><em>divisi</em></li>
                           <li><span class="icofont icofont-contact-add"></span><em>contact-add</em></li>
                           <li><span class="icofont icofont-deal"></span><em>deal</em></li>
                           <li><span class="icofont icofont-files"></span><em>files</em></li>

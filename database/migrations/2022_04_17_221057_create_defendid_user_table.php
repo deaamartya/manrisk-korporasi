@@ -15,7 +15,7 @@ class CreateDefendidUserTable extends Migration
     {
         Schema::create('defendid_user', function (Blueprint $table) {
             $table->integer('id_user', true);
-            $table->unsignedInteger('company_id');
+            $table->unsignedInteger('divisi_id');
             $table->string('username', 100);
             $table->string('password');
             $table->integer('status_user')->nullable();
@@ -24,7 +24,7 @@ class CreateDefendidUserTable extends Migration
             $table->boolean('is_penilai_indhan')->default(0);
             $table->boolean('is_risk_owner')->default(0);
             $table->boolean('is_admin')->default(0);
-            $table->foreign('company_id')->references('company_id')->on('perusahaan');
+            $table->foreign('divisi_id')->references('divisi_id')->on('divisi');
             $table->timestamps();
             $table->softDeletes();
         });

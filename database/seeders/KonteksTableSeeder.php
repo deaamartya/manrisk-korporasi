@@ -352,7 +352,7 @@ class KonteksTableSeeder extends Seeder
                 'id_konteks' => 42,
                 'id_risk' => 'RBS',
                 'no_k' => 0,
-                'konteks' => 'Tata Kelola Perusahaan',
+                'konteks' => 'Tata Kelola Divisi',
                 'tahun_konteks' => '2022',
             ),
             42 => 
@@ -736,7 +736,7 @@ class KonteksTableSeeder extends Seeder
                 'id_konteks' => 90,
                 'id_risk' => 'RHU',
                 'no_k' => 0,
-                'konteks' => 'Tata Kelola Perusahaan',
+                'konteks' => 'Tata Kelola Divisi',
                 'tahun_konteks' => '2022',
             ),
             90 => 

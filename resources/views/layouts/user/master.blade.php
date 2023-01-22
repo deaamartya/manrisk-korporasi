@@ -9,8 +9,8 @@
     <meta name="author" content="pixelstrap">
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{asset('assets/images/logo/logo_company/logo2.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/images/logo/logo_company/logo2.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('assets/images/logo/logo_divisi/logo2.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/logo/logo_divisi/logo2.png')}}" type="image/x-icon">
     <title>Manrisk - Indhan</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">

@@ -434,8 +434,8 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="mb-3">
-											<label for="exampleFormControlInput8">Company Name:<span class="font-danger">*</span></label>
-											<input class="form-control" id="exampleFormControlInput8" type="email" placeholder="Enter Company Name">
+											<label for="exampleFormControlInput8">Divisi Name:<span class="font-danger">*</span></label>
+											<input class="form-control" id="exampleFormControlInput8" type="email" placeholder="Enter Divisi Name">
 										</div>
 									</div>
 								</div>

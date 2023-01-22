@@ -27,7 +27,7 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="d-flex justify-content-between mb-3">
-						<h6>Status Proses - {{ Auth::user()->perusahaan->instansi }} Tahun <span id="tahun-status-proses-title">{{ date('Y') }}</span></h6>
+						<h6>Status Proses - {{ Auth::user()->divisi->instansi }} Tahun <span id="tahun-status-proses-title">{{ date('Y') }}</span></h6>
 						<div class="col-lg-3">
 							<span class="f-w-500 font-roboto">Tahun : </span>
 							<select class="form-control" id="tahun-status-proses">
@@ -66,7 +66,7 @@
 						<div class="col-lg-6 col-12 py-3">
 							<div class="ecommerce-widgets media">
 								<div class="media-body">
-									<p class="f-w-500 font-roboto">Jumlah Sumber Risiko Korporasi</p>
+									<p class="f-w-500 font-roboto">Jumlah Sumber Risiko Divisi</p>
 									<h4 class="f-w-500 mb-0 f-26"><span class="counter" id="jml_sumber_risiko">{{ $counts_risiko }}</span></h4>
 								</div>
 								<div class="ecommerce-box light-bg-primary"><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
@@ -75,8 +75,8 @@
 						<div class="col-lg-6 col-12 py-3">
 							<div class="ecommerce-widgets media">
 								<div class="media-body">
-									<p class="f-w-500 font-roboto">Jumlah Risiko Korporasi</span></p>
-									<h4 class="f-w-500 mb-0 f-26"><span class="counter" id="jml_risiko_korporasi">{{ $count_risiko }}</span></h4>
+									<p class="f-w-500 font-roboto">Jumlah Risiko Divisi</span></p>
+									<h4 class="f-w-500 mb-0 f-26"><span class="counter" id="jml_risiko_divisi">{{ $count_risiko }}</span></h4>
 								</div>
 								<div class="ecommerce-box light-bg-primary"><i class="fa fa-file" aria-hidden="true"></i></div>
 							</div>
@@ -138,7 +138,7 @@
 				<div class="card-body">
 					<div class="row d-flex justify-content-between mb-3">
 						<div class="col-lg-9 col-12">
-							<h6>Risiko Korporasi - {{ Auth::user()->perusahaan->instansi }} Tahun <span id="tahun-title">{{ date('Y') }}</span></h6>	
+							<h6>Risiko Divisi - {{ Auth::user()->divisi->instansi }} Tahun <span id="tahun-title">{{ date('Y') }}</span></h6>	
 						</div>
 						<div class="col-lg-3 col-12">
 							<span class="f-w-500 font-roboto">Tahun : </span>
@@ -174,7 +174,7 @@
 					</div>
 					<div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
 						<div class="row">
-						@foreach($company as $p)
+						@foreach($divisi as $p)
 						<div class="col-xxl-12 col-lg-12">
 							<div class="project-box">
 								@php
@@ -191,7 +191,7 @@
 								</div>
 								<div class="media">
 										<img class="me-1 rounded"
-											src="{{ asset('assets/images/logo/logo_company/logo_'.$p->company_code.'.png') }}"
+											src="{{ asset('assets/images/logo/logo_divisi/logo_'.$p->divisi_code.'.png') }}"
 											style="max-height: 30px">
 								</div>
 								<p>{{ $p->instansi }}</p>
@@ -228,22 +228,22 @@
 								</div>
 								<div class="row mt-3">
 									@if(Auth::user()->is_risk_officer)
-										<form method="get" action="{{ route('risk-officer.peta-risiko', $p->company_id) }}">
+										<form method="get" action="{{ route('risk-officer.peta-risiko', $p->divisi_id) }}">
 									@elseif(Auth::user()->is_risk_owner)
-										<form method="get" action="{{ route('risk-owner.peta-risiko', $p->company_id) }}">
+										<form method="get" action="{{ route('risk-owner.peta-risiko', $p->divisi_id) }}">
 									@elseif(Auth::user()->is_penilai)
-										<form method="get" action="{{ route('penilai.peta-risiko', $p->company_id) }}">
+										<form method="get" action="{{ route('penilai.peta-risiko', $p->divisi_id) }}">
 									@endif
 										<input type="hidden" id="tahun-risk" name="tahun_risk" value="{{ date('Y') }}">
 										<button class="btn btn-success" type="submit" style="width: 100%; margin:auto;">Lihat Peta Risiko</button>
 									</form>
 									{{--
 									@if(Auth::user()->is_risk_officer)
-										<a href="{{ route('risk-officer.peta-risiko', $p->company_id) }}" class="btn btn-success">Lihat Peta Risiko</a>
+										<a href="{{ route('risk-officer.peta-risiko', $p->divisi_id) }}" class="btn btn-success">Lihat Peta Risiko</a>
 									@elseif(Auth::user()->is_risk_owner)
-										<a href="{{ route('risk-owner.peta-risiko', $p->company_id) }}" class="btn btn-success">Lihat Peta Risiko</a>
+										<a href="{{ route('risk-owner.peta-risiko', $p->divisi_id) }}" class="btn btn-success">Lihat Peta Risiko</a>
 									@elseif(Auth::user()->is_penilai)
-										<a href="{{ route('penilai.peta-risiko', $p->company_id) }}" class="btn btn-success">Lihat Peta Risiko</a>
+										<a href="{{ route('penilai.peta-risiko', $p->divisi_id) }}" class="btn btn-success">Lihat Peta Risiko</a>
 									@endif
 									--}}
 								</div>
@@ -304,7 +304,7 @@
 						<div class="goal-end-point">
 							<ul>
 							<li class="mt-3 pt-0">
-								<h6 class="font-primary" id="company_name">{{ Auth::user()->perusahaan->instansi }}</h6>
+								<h6 class="font-primary" id="divisi_name">{{ Auth::user()->divisi->instansi }}</h6>
 							</li>
 							<li>
 								<h6 class="mb-2 f-w-400">Total IDR Kuantitatif INDHAN</h6>
@@ -316,7 +316,7 @@
 						<ul class="col-xl-12">
 						<li>
 							<div class="goal-detail">
-								<h6> <span class="font-primary">Total IDR Kuantitatif : </span><span id="idr_kuantitatif_company">Rp</span></h6>
+								<h6> <span class="font-primary">Total IDR Kuantitatif : </span><span id="idr_kuantitatif_divisi">Rp</span></h6>
 								<div class="progress sm-progress-bar progress-animate">
 									<div class="progress-gradient-primary" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
@@ -616,7 +616,7 @@
 				.done(function(result) {
 					$('#tahun-jumlah-risiko-title').html($('#tahun-jumlah-risiko').val());
 					$('#jml_sumber_risiko').html(result.sumber_risiko);
-					$('#jml_risiko_korporasi').html(result.risiko_korporasi);
+					$('#jml_risiko_divisi').html(result.risiko_divisi);
 					$('#jml_risiko_mitigasi').html(result.perlu_mitigasi);
 					$('#jml_risiko_selesai_mitigasi').html(result.selesai_mitigasi);
 			});
@@ -625,7 +625,7 @@
 		$('#tahun-risiko').change(function(){
 			$("#basic-bar").hide();
 			$("#basic-bar-loading").show();
-			const url = "{{ url('dashboard/data-risiko-korporasi') }}"
+			const url = "{{ url('dashboard/data-risiko-divisi') }}"
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-risiko').val() })
 				.done(function(result) {
 					$('#tahun-title').html($('#tahun-risiko').val());
@@ -638,7 +638,7 @@
 		});
 
 		$('#tahun-petarisiko').change(function(){
-			const url = "{{ url('dashboard/data-petarisiko-korporasi') }}";
+			const url = "{{ url('dashboard/data-petarisiko-divisi') }}";
 			// console.log($('#tahun-petarisiko').val());
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-petarisiko').val() })
 				.done(function(result) {
@@ -694,12 +694,12 @@
 
 		$('#tahun-biaya-risiko').change(function(){
 			// console.log("tahun : "+$('#tahun-biaya-risiko').val());
-			const url = "{{ url('dashboard/data-biaya-risiko-korporasi') }}"
+			const url = "{{ url('dashboard/data-biaya-risiko-divisi') }}"
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-biaya-risiko').val() })
 				.done(function(result) {
 					// console.log("result : "+result.total_idr_indhan);
 					$('#tahun-biaya-risiko-title').html($('#tahun-biaya-risiko').val());
-					$('#company_name').html(result.company);
+					$('#divisi_name').html(result.divisi);
 					if(result.total_idr_indhan != null){
 						var rupiah_indhan = rupiahFormat(result.total_idr_indhan);
 						$('#idr_kuantitatif_indhan').html(rupiah_indhan);
@@ -707,11 +707,11 @@
 						$('#idr_kuantitatif_indhan').html('Rp'+0);
 					}
 
-					if(result.total_idr_company != null){
-						var rupiah_company = rupiahFormat(result.total_idr_company);
-						$('#idr_kuantitatif_company').html(rupiah_company);
+					if(result.total_idr_divisi != null){
+						var rupiah_divisi = rupiahFormat(result.total_idr_divisi);
+						$('#idr_kuantitatif_divisi').html(rupiah_divisi);
 					}else{
-						$('#idr_kuantitatif_company').html('Rp'+0);
+						$('#idr_kuantitatif_divisi').html('Rp'+0);
 					}
 
 					if(result.total_idr_residu != null){

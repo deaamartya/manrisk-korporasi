@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $('#tambah_perusahaan').on('click', function(){
-        $('#judul_modal').html('Tambah Perusahaan')
-        $('#formPerusahaan').attr('action', APP_URL+'/admin/perusahaan/store')
+    $('#tambah_divisi').on('click', function(){
+        $('#judul_modal').html('Tambah Divisi')
+        $('#formDivisi').attr('action', APP_URL+'/admin/divisi/store')
         var elements = document.getElementsByTagName("input");
         for (var i=0; i < elements.length; i++) {
             if (elements[i].type == "text") {
@@ -9,13 +9,13 @@ $(document).ready(function(){
             }
         }
 
-        $('#tambahPerusahaan').modal('show')
+        $('#tambahDivisi').modal('show')
     })
 
     $('#basic-1 tbody').on('click', '.edit', function(){
         let id = $(this).attr('id').slice(5)
-        $('#judul_modal').html('Edit Perusahaan')
-        $('#formPerusahaan').attr('action', APP_URL+'/admin/perusahaan/store/'+id)
+        $('#judul_modal').html('Edit Divisi')
+        $('#formDivisi').attr('action', APP_URL+'/admin/divisi/store/'+id)
         var elements = document.getElementsByTagName("input");
         for (var i=0; i < elements.length; i++) {
             if (elements[i].type == "text") {
@@ -24,11 +24,11 @@ $(document).ready(function(){
         }
         $.ajax({
             type: 'GET',
-            url: APP_URL+'/admin/perusahaan/get-perusahaan/'+id,
+            url: APP_URL+'/admin/divisi/get-divisi/'+id,
             dataType: 'json',
             data: {},
             success: function (results) {
-                $('#formCompanyCode').val(results.company_code)
+                $('#formDivisiCode').val(results.divisi_code)
                 $('#formInstansi').val(results.instansi)
 
             },
@@ -37,7 +37,7 @@ $(document).ready(function(){
             }
         });
 
-        $('#tambahPerusahaan').modal('show')
+        $('#tambahDivisi').modal('show')
     })
 
     $('#basic-1 tbody').on('click', '.delete', function(){
@@ -45,14 +45,14 @@ $(document).ready(function(){
 
         $.ajax({
             type: 'GET',
-            url: APP_URL+'/admin/perusahaan/get-perusahaan/'+id,
+            url: APP_URL+'/admin/divisi/get-divisi/'+id,
             dataType: 'json',
             data: {},
             success: function (results) {
-                $('#id_perusahaan').val(results.company_id)
-                $('#nama_perusahaan').html(results.instansi)
+                $('#id_divisi').val(results.divisi_id)
+                $('#nama_divisi').html(results.instansi)
 
-                $('#deletePerusahaan').modal('show')
+                $('#deleteDivisi').modal('show')
             },
             error:function(results){
                 console.log(results);

@@ -24,7 +24,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Perusahaan</th>
+                                    <th>Divisi</th>
                                     <th>Nama</th>
                                     <th>Jabatan</th>
                                     <th>Username</th>
@@ -120,11 +120,11 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-md-3 col-sm-3 col-xs-12">Perusahaan</label>
+                    <label class="col-md-3 col-sm-3 col-xs-12">Divisi</label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                        <select class="js-example-basic-single col-sm-12" name="company_id" id="formPerusahaan">
-                            {{-- @foreach($perusahaan as $p)
-                                <option value="{{ $p->company_id }}">{{ $p->company_code }} - {{ $p->instansi }}</option>
+                        <select class="js-example-basic-single col-sm-12" name="divisi_id" id="formDivisi">
+                            {{-- @foreach($divisi as $p)
+                                <option value="{{ $p->divisi_id }}">{{ $p->divisi_code }} - {{ $p->instansi }}</option>
                             @endforeach --}}
                         </select>
                     </div>
@@ -177,7 +177,7 @@
                     <div class='col-md-9 col-sm-9 col-xs-12'>
                         <input type="hidden" name="is_penilai">
                         <input type="checkbox" name="is_penilai" value="0" id="formIsPenilai">
-                        <label for="">Penilai Korporasi</label>
+                        <label for="">Penilai Divisi</label>
                     </div>
                 </div>
                 <div class="row is_penilai_indhan">

@@ -15,7 +15,7 @@ class StatusProses extends Model
 	protected $fillable = [
 		'tahun',
 		'id_proses',
-		'company_id'
+		'divisi_id'
 	];
 
 	public function proses_manrisk()
@@ -23,8 +23,8 @@ class StatusProses extends Model
 		return $this->belongsTo(ProsesManrisk::class, 'id_proses');
 	}
 	
-	public function perusahaan()
+	public function divisi()
 	{
-		return $this->belongsTo(Perusahaan::class, 'company_id');
+		return $this->belongsTo(Divisi::class, 'divisi_id');
 	}
 }

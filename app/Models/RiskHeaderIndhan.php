@@ -15,7 +15,7 @@ use DB;
  * Class RiskHeaderIndhan
  * 
  * @property int $id_riskh
- * @property int $company_id
+ * @property int $divisi_id
  * @property string $tahun
  * @property Carbon $tanggal
  * @property string|null $target
@@ -35,7 +35,7 @@ class RiskHeaderIndhan extends Model
 	protected $primaryKey = 'id_riskh';
 
 	protected $casts = [
-		'company_id' => 'int',
+		'divisi_id' => 'int',
 		'status_h' => 'int',
 	];
 
@@ -45,7 +45,7 @@ class RiskHeaderIndhan extends Model
 	];
 
 	protected $fillable = [
-		'company_id',
+		'divisi_id',
 		'tahun',
 		'tanggal',
 		'target',
@@ -55,9 +55,9 @@ class RiskHeaderIndhan extends Model
 		'status_h'
 	];
 
-	public function perusahaan()
+	public function divisi()
 	{
-		return $this->belongsTo(Perusahaan::class, 'company_id');
+		return $this->belongsTo(Divisi::class, 'divisi_id');
 	}
 
 	public function risk_detail()

@@ -123,7 +123,7 @@ class MitigasiPlanController extends Controller
         $user = DefendidUser::where('id_user', '=', $header->id_user)->first();
         $url = "url='admin/mitigasi-plan/print/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa->name : '-').";".
-            "instansi=".$header->perusahaan->instansi.";".
+            "instansi=".$header->divisi->instansi.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun->name : '-').";";

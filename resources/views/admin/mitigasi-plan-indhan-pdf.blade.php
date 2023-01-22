@@ -130,13 +130,13 @@ $bulan = array (
 	<table class="table-header" cellspacing="0" width="100%">
 		<tr>
 			<td width="15%">
-				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_company/logo_bumn.png' }}" style="max-width:120px;max-height:35px" />
+				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_bumn.png' }}" style="max-width:120px;max-height:35px" />
 			</td>
 			<td width="70%" height="40">
 				<b>RENCANA PENGELOLAAN RISIKO (MITIGASI PLAN INDHAN)</b>
 			</td>
 			<td width="171">
-				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_company/logo_INHAN.png' }}" style="max-width:120px;max-height:35px" />
+				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_INHAN.png' }}" style="max-width:120px;max-height:35px" />
 			</td>
 		</tr>
 	</table>

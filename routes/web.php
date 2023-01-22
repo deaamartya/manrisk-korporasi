@@ -19,7 +19,7 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('get_perusahaan', [GlobalController::class, 'get_perusahaan']);
+Route::get('get_divisi', [GlobalController::class, 'get_divisi']);
 Route::get('forum', [GlobalController::class, 'forum'])->name('forum');
 Route::get('get-forum/{id}', [GlobalController::class, 'get_forum'])->name('get_forum');
 Route::get('forum/{id}', [GlobalController::class, 'forum_detail'])->name('forum_detail');
@@ -33,14 +33,14 @@ Route::get('document/verify/{token}', [VerifyController::class, 'getDecrypted'])
 Route::post('dashboard/data-jumlah-risiko', [HomeController::class, 'dataJumlahRisiko']);
 Route::post('dashboard/data-jumlah-risiko-indhan', [HomeController::class, 'dataJumlahRisikoIndhan']);
 Route::post('dashboard/data-risiko', [HomeController::class, 'dataRisiko']);
-Route::post('dashboard/data-risiko-korporasi', [HomeController::class, 'dataRisikoKorporasi']);
+Route::post('dashboard/data-risiko-divisi', [HomeController::class, 'dataRisikoDivisi']);
 Route::post('dashboard/data-kategori-risiko', [HomeController::class, 'dataKategoriRisiko']);
 Route::post('dashboard/data-kategori-risiko-indhan', [HomeController::class, 'dataKategoriRisikoIndhan']);
 Route::post('dashboard/data-level-risiko', [HomeController::class, 'dataLevelRisiko']);
 Route::post('dashboard/data-level-risiko-indhan', [HomeController::class, 'dataLevelRisikoIndhan']);
-Route::post('dashboard/data-petarisiko-korporasi', [HomeController::class, 'dataPetaRisikoKorporasi']);
+Route::post('dashboard/data-petarisiko-divisi', [HomeController::class, 'dataPetaRisikoDivisi']);
 Route::post('dashboard/data-petarisiko-indhan', [HomeController::class, 'dataPetaRisikoIndhan']);
-Route::post('dashboard/data-biaya-risiko-korporasi', [HomeController::class, 'dataBiayaRisikoKorporasi']);
+Route::post('dashboard/data-biaya-risiko-divisi', [HomeController::class, 'dataBiayaRisikoDivisi']);
 Route::post('dashboard/data-biaya-risiko-indhan', [HomeController::class, 'dataBiayaRisikoIndhan']);
 Route::post('dashboard/data-biaya-risiko-selected-indhan', [HomeController::class, 'dataBiayaRisikoSelectedIndhan']);
 Route::post('dashboard/data-status-proses', [HomeController::class, 'dataStatusProses']);

@@ -171,18 +171,18 @@
 						</div>
 					</div>
 					<div class="chart-content">
-						@foreach($company as $p)
-						@if($p->company_id != 6)
+						@foreach($divisi as $p)
+						@if($p->divisi_id != 6)
 						<div class="card status-proses">
 							<div class="card-body row">
 								<div class="col-12 col-lg-2">
 									<p>Status Proses - <strong>{{ $p->instansi }}</strong></p>
 									<img class="me-1 rounded"
-										src="{{ asset('assets/images/logo/logo_company/logo_'.$p->company_code.'.png') }}"
+										src="{{ asset('assets/images/logo/logo_divisi/logo_'.$p->divisi_code.'.png') }}"
 										style="max-height: 30px; margin-bottom: 15px;">
 								</div>
 								<div class="col-12 col-lg-10">
-									<div class="progress-bar-wrapper-{{ $p->company_id }}"></div>
+									<div class="progress-bar-wrapper-{{ $p->divisi_id }}"></div>
 								</div>
 							</div>
 						</div>
@@ -212,14 +212,14 @@
 					</div>
 					<div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
 						<div class="row d-flex justify-content-center">
-						@foreach($company as $p)
+						@foreach($divisi as $p)
 						<div class="col-xxl-4 col-lg-6">
 							<div class="project-box">
 								@php
 									$count_mitigasi_p = $p->getCountMitigasi();
 									$count_done_mitigasi_p = $p->getCountMitigasiDone();
 								@endphp
-								<div id="badge-progress-{{ $p->company_id }}">
+								<div id="badge-progress-{{ $p->divisi_id }}">
 									@if($count_done_mitigasi_p === $count_mitigasi_p)
 									<span class="badge badge-green">Done
 									@else
@@ -229,47 +229,47 @@
 								</div>
 								<div class="media">
 										<img class="me-1 rounded"
-											src="{{ asset('assets/images/logo/logo_company/logo_'.$p->company_code.'.png') }}"
+											src="{{ asset('assets/images/logo/logo_divisi/logo_'.$p->divisi_code.'.png') }}"
 											style="max-height: 30px">
 								</div>
 								<p>{{ $p->instansi }}</p>
 								<div class="row details">
 										<div class="col-6"><span>Risiko Rendah</span></div>
 										<div class="col-6">
-											<div id="risiko-rendah-{{ $p->company_id }}" class="badge badge-green mr-2" style="opacity: 1; position:initial; top:unset; right: unset;">{{ $p->countLow() }}</div>
+											<div id="risiko-rendah-{{ $p->divisi_id }}" class="badge badge-green mr-2" style="opacity: 1; position:initial; top:unset; right: unset;">{{ $p->countLow() }}</div>
 										</div>
 										<div class="col-6"><span>Risiko Sedang</span></div>
 										<div class="col-6">
-											<div id="risiko-sedang-{{ $p->company_id }}" class="badge badge-warning mr-2" style="opacity: 1; position:initial; top:unset; right: unset;">{{ $p->countMed() }}</div>
+											<div id="risiko-sedang-{{ $p->divisi_id }}" class="badge badge-warning mr-2" style="opacity: 1; position:initial; top:unset; right: unset;">{{ $p->countMed() }}</div>
 										</div>
 										<div class="col-6"><span>Risiko Tinggi</span></div>
 										<div class="col-6">
-											<div id="risiko-tinggi-{{ $p->company_id }}" class="badge badge-pink mr-2" style="opacity: 1; position:initial; top:unset; right: unset;">{{ $p->countHigh() }}</div>
+											<div id="risiko-tinggi-{{ $p->divisi_id }}" class="badge badge-pink mr-2" style="opacity: 1; position:initial; top:unset; right: unset;">{{ $p->countHigh() }}</div>
 										</div>
 										<div class="col-6"><span>Risiko Ekstrem</span></div>
 										<div class="col-6">
-											<div id="risiko-ekstrem-{{ $p->company_id }}" class="badge badge-danger" style="opacity: 1; position:initial; top:unset; right: unset;">{{ $p->countExtreme() }}</div>
+											<div id="risiko-ekstrem-{{ $p->divisi_id }}" class="badge badge-danger" style="opacity: 1; position:initial; top:unset; right: unset;">{{ $p->countExtreme() }}</div>
 										</div>
 										<div class="col-6"> <span>Mitigasi</span></div>
-										<div id="mitigasi-{{ $p->company_id }}" class="col-6 text-primary">{{ $p->getCountMitigasi() }}</div>
+										<div id="mitigasi-{{ $p->divisi_id }}" class="col-6 text-primary">{{ $p->getCountMitigasi() }}</div>
 										<div class="col-6"> <span>Selesai Mitigasi</span></div>
-										<div id="selesai-mitigasi-{{ $p->company_id }}" class="col-6 text-primary">{{ $p->getCountMitigasiDone() }}</div>
+										<div id="selesai-mitigasi-{{ $p->divisi_id }}" class="col-6 text-primary">{{ $p->getCountMitigasiDone() }}</div>
 								</div>
 								<div class="project-status mt-4">
 										<div class="media mb-0">
-											<p id="mitigasi-percentage-{{ $p->company_id }}">{{ $p->mitigasiPercentage().'%' }}</p>
+											<p id="mitigasi-percentage-{{ $p->divisi_id }}">{{ $p->mitigasiPercentage().'%' }}</p>
 											<div class="media-body text-end"><span>Done</span></div>
 										</div>
 										<div class="progress" style="height: 5px">
-											<div id="progress-mitigasi-{{ $p->company_id }}" class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ $p->mitigasiPercentage().'%' }}" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+											<div id="progress-mitigasi-{{ $p->divisi_id }}" class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ $p->mitigasiPercentage().'%' }}" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 								</div>
 								<div class="row mt-3">
-									<form method="get" action="{{ route('admin.peta-risiko', $p->company_id) }}">
-										<input type="hidden" id="tahun-risk-{{ $p->company_id }}" name="tahun_risk" value="{{ date('Y') }}">
+									<form method="get" action="{{ route('admin.peta-risiko', $p->divisi_id) }}">
+										<input type="hidden" id="tahun-risk-{{ $p->divisi_id }}" name="tahun_risk" value="{{ date('Y') }}">
 										<button class="btn btn-success" type="submit" style="width: 100%; margin:auto;">Lihat Peta Risiko</button>
 									</form>
-									<!-- <a href="{{ route('admin.peta-risiko', $p->company_id) }}" class="btn btn-success">Lihat Peta Risiko</a> -->
+									<!-- <a href="{{ route('admin.peta-risiko', $p->divisi_id) }}" class="btn btn-success">Lihat Peta Risiko</a> -->
 								</div>
 							</div>
 						</div>
@@ -300,27 +300,27 @@
 				<div class="card-body pt-0">
 					<div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
 						<div class="row d-flex justify-content-center">
-						@foreach($company as $p)
-						@if($p->company_id != 6)
+						@foreach($divisi as $p)
+						@if($p->divisi_id != 6)
 						<div class="col-xxl-4 col-lg-6">
 							<div class="project-box">
 								<div class="media d-flex justify-content-center">
 									<img class="me-1 rounded"
-										src="{{ asset('assets/images/logo/logo_company/logo_'.$p->company_code.'.png') }}"
+										src="{{ asset('assets/images/logo/logo_divisi/logo_'.$p->divisi_code.'.png') }}"
 										style="max-height: 30px;">
 								</div>
 								<p class="mb-4 text-center">{{ $p->instansi }}</p>
 								<div class="apex-chart-container goal-status text-center">
 									<div class="rate-card">
 										<div class="goal-chart">
-											<div id="biayarisikochart_{{ $p->company_id }}"></div>
+											<div id="biayarisikochart_{{ $p->divisi_id }}"></div>
 										</div>
 										<div class="goal-end-point">
 											<ul>
 											<li class="mt-0 pt-0"></li>
 											<li>
 												<h6 class="mb-2 f-w-400">Total IDR Kuantitatif INDHAN</h6>
-												<h5 class="mb-0" id="idr_kuantitatif_indhan_{{ $p->company_id }}">Rp</h5>
+												<h5 class="mb-0" id="idr_kuantitatif_indhan_{{ $p->divisi_id }}">Rp</h5>
 											</li>
 											</ul>
 										</div>
@@ -328,19 +328,19 @@
 									<ul>
 										<li>
 											<div class="goal-detail">
-												<h6> <span class="font-primary">Total IDR Kuantitatif : </span><span id="idr_kuantitatif_company_{{ $p->company_id }}">Rp</span></h6>
+												<h6> <span class="font-primary">Total IDR Kuantitatif : </span><span id="idr_kuantitatif_divisi_{{ $p->divisi_id }}">Rp</span></h6>
 												<div class="progress sm-progress-bar progress-animate">
 													<div class="progress-gradient-primary" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
 											<div class="goal-detail">
-												<h6><span class="font-primary">Total IDR Kuantitatif Residual : </span><span id="idr_kuantitatif_residu_{{ $p->company_id }}">Rp</span></h6>
+												<h6><span class="font-primary">Total IDR Kuantitatif Residual : </span><span id="idr_kuantitatif_residu_{{ $p->divisi_id }}">Rp</span></h6>
 												<div class="progress sm-progress-bar progress-animate">
 													<div class="progress-gradient-primary" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
 											<div class="goal-detail mb-0">
-												<h6><span class="font-primary">Total Biaya Mitigasi : </span><span id="biaya_mitigasi_{{ $p->company_id }}">Rp</span></h6>
+												<h6><span class="font-primary">Total Biaya Mitigasi : </span><span id="biaya_mitigasi_{{ $p->divisi_id }}">Rp</span></h6>
 												<div class="progress sm-progress-bar progress-animate">
 													<div class="progress-gradient-primary" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
@@ -384,7 +384,7 @@
 						<div class="goal-end-point">
 							<ul>
 							<li class="mt-3 pt-0">
-								<h6 class="font-primary" id="company_name">INDUSTRI PERTAHANAN</h6>
+								<h6 class="font-primary" id="divisi_name">INDUSTRI PERTAHANAN</h6>
 							</li>
 							<li>
 								<h6 class="mb-2 f-w-400">Total IDR Kuantitatif INDHAN</h6>
@@ -396,7 +396,7 @@
 						<ul class="col-xl-12">
 						<li>
 							<div class="goal-detail">
-								<h6> <span class="font-primary">Total IDR Kuantitatif : </span><span id="idr_kuantitatif_company">Rp</span></h6>
+								<h6> <span class="font-primary">Total IDR Kuantitatif : </span><span id="idr_kuantitatif_divisi">Rp</span></h6>
 								<div class="progress sm-progress-bar progress-animate">
 									<div class="progress-gradient-primary" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
@@ -685,11 +685,11 @@
 					colors: [CubaAdminConfig.primary],
 				};
 				
-				// console.log('data.companies[index].companyid : '+data.companies[index].company_id);
+				// console.log('data.divisi[index].divisiid : '+data.divisi[index].divisi_id);
 				
 				if (chart4[index]) chart4[index].destroy();
 					chart4[index] = new ApexCharts(
-						document.querySelector("#biayarisikochart_"+data.companies[index].company_id),
+						document.querySelector("#biayarisikochart_"+data.divisi[index].divisi_id),
 						options4
 					);
 					chart4[index].render();
@@ -810,21 +810,21 @@
 					// console.log(result);
 					$('#tahun-title-peta').html($('#tahun-petarisiko').val());
 					// console.log($('#tahun-risk').val());
-					for(var i = 1; i<=result.companies.length; i++){
-						$('#tahun-risk-'+result.companies[i-1].company_id).val($('#tahun-petarisiko').val());
-						$('#risiko-rendah-'+result.companies[i-1].company_id).html(result.risiko_rendah[i-1]);
-						$('#risiko-sedang-'+result.companies[i-1].company_id).html(result.risiko_sedang[i-1]);
-						$('#risiko-tinggi-'+result.companies[i-1].company_id).html(result.risiko_tinggi[i-1]);
-						$('#risiko-ekstrem-'+result.companies[i-1].company_id).html(result.risiko_ekstrem[i-1]);
-						$('#mitigasi-'+result.companies[i-1].company_id).html(result.mitigasi[i-1]);
-						$('#selesai-mitigasi-'+result.companies[i-1].company_id).html(result.selesai_mitigasi[i-1]);
-						$('#mitigasi-percentage-'+result.companies[i-1].company_id).html(result.progress_mitigasi[i-1]);
-						$('#progress-mitigasi-'+result.companies[i-1].company_id).attr('aria-valuenow', result.progress_mitigasi[i-1]).css('width', result.progress_mitigasi[i-1]+'%');
+					for(var i = 1; i<=result.divisi.length; i++){
+						$('#tahun-risk-'+result.divisi[i-1].divisi_id).val($('#tahun-petarisiko').val());
+						$('#risiko-rendah-'+result.divisi[i-1].divisi_id).html(result.risiko_rendah[i-1]);
+						$('#risiko-sedang-'+result.divisi[i-1].divisi_id).html(result.risiko_sedang[i-1]);
+						$('#risiko-tinggi-'+result.divisi[i-1].divisi_id).html(result.risiko_tinggi[i-1]);
+						$('#risiko-ekstrem-'+result.divisi[i-1].divisi_id).html(result.risiko_ekstrem[i-1]);
+						$('#mitigasi-'+result.divisi[i-1].divisi_id).html(result.mitigasi[i-1]);
+						$('#selesai-mitigasi-'+result.divisi[i-1].divisi_id).html(result.selesai_mitigasi[i-1]);
+						$('#mitigasi-percentage-'+result.divisi[i-1].divisi_id).html(result.progress_mitigasi[i-1]);
+						$('#progress-mitigasi-'+result.divisi[i-1].divisi_id).attr('aria-valuenow', result.progress_mitigasi[i-1]).css('width', result.progress_mitigasi[i-1]+'%');
 
 						if(result.selesai_mitigasi[i-1] == result.mitigasi[i-1]){
-							$('#badge-progress-'+result.companies[i-1].company_id).html('<span class="badge badge-green">Done</span>');
+							$('#badge-progress-'+result.divisi[i-1].divisi_id).html('<span class="badge badge-green">Done</span>');
 						}else{
-							$('#badge-progress-'+result.companies[i-1].company_id).html('<span class="badge badge-primary">On Progress</span>');
+							$('#badge-progress-'+result.divisi[i-1].divisi_id).html('<span class="badge badge-primary">On Progress</span>');
 						}
 					}
 
@@ -866,34 +866,34 @@
 			const url = "{{ url('dashboard/data-biaya-risiko-indhan') }}"
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-biaya-risiko').val() })
 				.done(function(result) {
-					// console.log("result : "+result.companies[0]);
+					// console.log("result : "+result.divisi[0]);
 					$('#tahun-biaya-risiko-text').html($('#tahun-biaya-risiko').val());
 
-					for(let i = 0; i < result.companies.length; i++){
+					for(let i = 0; i < result.divisi.length; i++){
 						initBiayaRisikoChart(result, i);
 						if(result.total_idr_indhan != null){
 							var rupiah_indhan = rupiahFormat(result.total_idr_indhan);
-							$('#idr_kuantitatif_indhan_'+ result.companies[i].company_id).html(rupiah_indhan);
+							$('#idr_kuantitatif_indhan_'+ result.divisi[i].divisi_id).html(rupiah_indhan);
 						}else{
-							$('#idr_kuantitatif_indhan_'+ result.companies[i].company_id).html('Rp'+0);
+							$('#idr_kuantitatif_indhan_'+ result.divisi[i].divisi_id).html('Rp'+0);
 						}
-						if(result.total_idr_company[i] != null){
-							var rupiah_company = rupiahFormat(result.total_idr_company[i]);
-							$('#idr_kuantitatif_company_'+ result.companies[i].company_id).html(rupiah_company);
+						if(result.total_idr_divisi[i] != null){
+							var rupiah_divisi = rupiahFormat(result.total_idr_divisi[i]);
+							$('#idr_kuantitatif_divisi_'+ result.divisi[i].divisi_id).html(rupiah_divisi);
 						}else{
-							$('#idr_kuantitatif_company_'+ result.companies[i].company_id).html('Rp'+0);
+							$('#idr_kuantitatif_divisi_'+ result.divisi[i].divisi_id).html('Rp'+0);
 						}
 						if(result.total_idr_residu[i] != null){
 							var rupiah_residu = rupiahFormat(result.total_idr_residu[i]);
-							$('#idr_kuantitatif_residu_'+ result.companies[i].company_id).html(rupiah_residu);
+							$('#idr_kuantitatif_residu_'+ result.divisi[i].divisi_id).html(rupiah_residu);
 						}else{
-							$('#idr_kuantitatif_residu_'+ result.companies[i].company_id).html('Rp'+0);
+							$('#idr_kuantitatif_residu_'+ result.divisi[i].divisi_id).html('Rp'+0);
 						}
 						if(result.total_biaya_mitigasi[i] != null){
 							var rupiah_mitigasi = rupiahFormat(result.total_biaya_mitigasi[i]);
-							$('#biaya_mitigasi_'+ result.companies[i].company_id).html(rupiah_mitigasi);
+							$('#biaya_mitigasi_'+ result.divisi[i].divisi_id).html(rupiah_mitigasi);
 						}else{
-							$('#biaya_mitigasi_'+ result.companies[i].company_id).html('Rp'+0);
+							$('#biaya_mitigasi_'+ result.divisi[i].divisi_id).html('Rp'+0);
 						}
 						
 					}
@@ -907,7 +907,7 @@
 				.done(function(result) {
 					// console.log("result : "+result.total_idr_indhan);
 					$('#tahun-biaya-risiko-indhan-title').html($('#tahun-biaya-risiko-indhan').val());
-					$('#company_name').html(result.company);
+					$('#divisi_name').html(result.divisi);
 					if(result.total_idr_indhan != null){
 						var rupiah_indhan = rupiahFormat(result.total_idr_indhan);
 						$('#idr_kuantitatif_indhan').html(rupiah_indhan);
@@ -916,10 +916,10 @@
 					}
 
 					if(result.total_idr_selected != null){
-						var rupiah_company = rupiahFormat(result.total_idr_selected);
-						$('#idr_kuantitatif_company').html(rupiah_company);
+						var rupiah_divisi = rupiahFormat(result.total_idr_selected);
+						$('#idr_kuantitatif_divisi').html(rupiah_divisi);
 					}else{
-						$('#idr_kuantitatif_company').html('Rp'+0);
+						$('#idr_kuantitatif_divisi').html('Rp'+0);
 					}
 
 					if(result.total_idr_residu != null){
@@ -954,8 +954,8 @@
 			$.post(url, { _token: "{{ csrf_token() }}", tahun: $('#tahun-status-proses').val() })
 				.done(function(result) {
 					$('#tahun-status-proses-title').html($('#tahun-status-proses').val());
-					for(let j=0; j < result.company.length; j++) {
-						$('.progress-bar-wrapper-'+result.company[j].company_id).html("");
+					for(let j=0; j < result.divisi.length; j++) {
+						$('.progress-bar-wrapper-'+result.divisi[j].divisi_id).html("");
 						ProgressBar.singleStepAnimation = 1500;
 						let arr = [];
 						let currentStage = '';
@@ -967,7 +967,7 @@
 						ProgressBar.init(
 							arr,
 							currentStage,
-							'progress-bar-wrapper-'+result.company[j].company_id
+							'progress-bar-wrapper-'+result.divisi[j].divisi_id
 						);
 					}
 					$(".status-proses").show();

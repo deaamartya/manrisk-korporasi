@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\ShortUrl;
 use Illuminate\Support\Str;
 
-class RiskRegisterKorporasiController extends Controller
+class RiskRegisterDivisiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,45 +31,45 @@ class RiskRegisterKorporasiController extends Controller
     public function index()
     {
         $data_headers= RiskHeader::join('defendid_user', 'risk_header.id_user', 'defendid_user.id_user')
-                        ->join('perusahaan', 'defendid_user.company_id', 'perusahaan.company_id')
+                        ->join('divisi', 'defendid_user.divisi_id', 'divisi.divisi_id')
                         ->whereNull('risk_header.deleted_at')
                         ->orderBy('risk_header.id_riskh')
                         ->get();
         $tahun = RiskHeader::select('tahun')->orderBy('tahun')->distinct()->get();
         $tahun_filter = null;
-        return view('penilai-indhan.risk-register-korporasi', compact('data_headers', 'tahun', 'tahun_filter'));
+        return view('penilai-indhan.risk-register-divisi', compact('data_headers', 'tahun', 'tahun_filter'));
     }
 
     public function allRiskHeader()
     {
         $data_headers= RiskHeader::join('defendid_user', 'risk_header.id_user', 'defendid_user.id_user')
-                        ->join('perusahaan', 'defendid_user.company_id', 'perusahaan.company_id')
+                        ->join('divisi', 'defendid_user.divisi_id', 'divisi.divisi_id')
                         ->orderBy('risk_header.id_riskh')
                         ->get();
         $tahun = RiskHeader::select('tahun')->orderBy('tahun')->distinct()->get();
         $tahun_filter = null;
-        return view('penilai-indhan.risk-register-korporasi', compact('data_headers', 'tahun', 'tahun_filter'));
+        return view('penilai-indhan.risk-register-divisi', compact('data_headers', 'tahun', 'tahun_filter'));
     }
 
     public function searchRiskHeader(Request $request)
     {
         $data_headers= RiskHeader::join('defendid_user', 'risk_header.id_user', 'defendid_user.id_user')
-                    ->join('perusahaan', 'defendid_user.company_id', 'perusahaan.company_id')
+                    ->join('divisi', 'defendid_user.divisi_id', 'divisi.divisi_id')
                     ->where('risk_header.tahun', $request->tahun)
                     ->orderBy('risk_header.id_riskh')
                     ->get();
         $tahun = RiskHeader::select('tahun')->orderBy('tahun')->distinct()->get();
         $tahun_filter = $request->tahun;
-        return view('penilai-indhan.risk-register-korporasi', compact('data_headers', 'tahun', 'tahun_filter'));
+        return view('penilai-indhan.risk-register-divisi', compact('data_headers', 'tahun', 'tahun_filter'));
     }
 
     public function print($id) {
         $header = RiskHeader::where('id_riskh', '=', $id)->first();
         $user = DefendidUser::where('id_user', '=', $header->id_user)->first();
         $document_type = 'risk_register_penilai_indhan';
-        $url = "url='penilai-indhan/print-risk-register-korporasi/".$header->id_riskh."';".
+        $url = "url='penilai-indhan/print-risk-register-divisi/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa->name : '-').";".
-            "instansi=".$header->perusahaan->instansi.";".
+            "instansi=".$header->divisi->instansi.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun->name : '-').";";
@@ -122,7 +122,7 @@ class RiskRegisterKorporasiController extends Controller
     public function show($id)
     {
         $headers = RiskHeader::join('defendid_user', 'risk_header.id_user', 'defendid_user.id_user')
-                    ->join('perusahaan', 'defendid_user.company_id', 'perusahaan.company_id')
+                    ->join('divisi', 'defendid_user.divisi_id', 'divisi.divisi_id')
                     ->where('id_riskh', '=', $id)->first();
         // dd($headers_indhan);
         return view('penilai-indhan.detail-risk-register', compact('headers'));

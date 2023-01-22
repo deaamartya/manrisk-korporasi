@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class DefendidPengukur
  * 
  * @property int $id_pengukur
- * @property string|null $company_id
+ * @property string|null $divisi_id
  * @property int|null $jenis
  * @property string|null $jabatan
  * @property string|null $nip
@@ -36,7 +36,7 @@ class DefendidPengukur extends Model
 	];
 
 	protected $fillable = [
-		'company_id',
+		'divisi_id',
 		'jenis',
 		'jabatan',
 		'nip',

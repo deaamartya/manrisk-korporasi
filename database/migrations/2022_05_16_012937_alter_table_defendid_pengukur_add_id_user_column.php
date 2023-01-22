@@ -14,7 +14,7 @@ class AlterTableDefendidPengukurAddIdUserColumn extends Migration
     public function up()
     {
         Schema::table('defendid_pengukur', function (Blueprint $table) {
-            $table->integer('id_user')->after('company_id')->nullable();
+            $table->integer('id_user')->after('divisi_id')->nullable();
             $table->foreign('id_user')->references('id_user')->on('defendid_user');
         });
     }

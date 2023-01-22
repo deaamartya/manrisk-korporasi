@@ -110,34 +110,34 @@ class RiskRegisterIndhanController extends Controller
     {
         $headers = RiskHeaderIndhan::where('id_riskh', '=', $id)->first();
         $detail_risk = RiskHeader::selectRaw('*,avg(pi.nilai_L) as avg_nilai_l, avg(pi.nilai_C) as avg_nilai_c')
-                ->join('perusahaan', 'risk_header.company_id', 'perusahaan.company_id')
+                ->join('divisi', 'risk_header.divisi_id', 'divisi.divisi_id')
                 ->join('risk_detail', 'risk_header.id_riskh', 'risk_detail.id_riskh' )
                 ->join('s_risiko', 'risk_detail.id_s_risiko', 's_risiko.id_s_risiko' )
                 ->join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks')
                 ->leftJoin('pengukuran_indhan as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
                 ->where('risk_detail.status_indhan', '=', 1)
-                ->where('risk_detail.company_id', '!=', 6)
+                ->where('risk_detail.divisi_id', '!=', 6)
                 ->whereNull('risk_detail.deleted_at')
                 ->where('risk_header.tahun', '=', $headers->tahun)
                 ->whereNull('risk_header.deleted_at')
                 ->groupBy('id_riskd')
                 ->get();
         $detail_risk_indhan = RiskDetail::selectRaw('*,avg(pi.nilai_L) as avg_nilai_l, avg(pi.nilai_C) as avg_nilai_c')
-                ->join('perusahaan as p', 'p.company_id', '=', 'risk_detail.company_id')
+                ->join('divisi as p', 'p.divisi_id', '=', 'risk_detail.divisi_id')
                 ->join('s_risiko', 'risk_detail.id_s_risiko', 's_risiko.id_s_risiko' )
                 ->join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks' )
                 ->leftJoin('pengukuran_indhan as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
                 ->where('risk_detail.status_indhan', '=', 1)
-                ->where('risk_detail.company_id', '=', 6)
+                ->where('risk_detail.divisi_id', '=', 6)
                 ->whereNull('risk_detail.deleted_at')
                 ->where('risk_detail.tahun', '=', $headers->tahun)
                 ->groupBy('id_riskd')
                 ->get();
         $s_risk_diinput = RiskDetail::where([
-                ['company_id', '=', 6],
+                ['divisi_id', '=', 6],
             ])->whereNull('deleted_at')->pluck('id_s_risiko');
 
-        $pilihan_s_risiko = SRisiko::where([ ['s_risiko.company_id', '=', 6],
+        $pilihan_s_risiko = SRisiko::where([ ['s_risiko.divisi_id', '=', 6],
         ])->where('s_risiko.tahun', '=', $headers->tahun)
         ->whereNotIn('s_risiko.id_s_risiko', $s_risk_diinput)
         ->whereNull('deleted_at')
@@ -167,7 +167,7 @@ class RiskRegisterIndhanController extends Controller
     {
         $data = $request->except('_token');
         $data['id_riskh'] = null;
-        $data['company_id'] = 6;
+        $data['divisi_id'] = 6;
         $data['created_at'] = now();
         $data['status_mitigasi'] = ($request->r_awal >= 12) ? 1 : 0;
         $inputan_idr = preg_replace("/[^0-9]/", "", $request->dampak_kuantitatif);
@@ -234,7 +234,7 @@ class RiskRegisterIndhanController extends Controller
                 ->orderBy('konteks.no_k', 'ASC')
                 ->get();
         foreach ($detail_risk as $key => $value) {
-            if ($detail_risk[$key]->company_id === 6) {
+            if ($detail_risk[$key]->divisi_id === 6) {
                 $detail_risk[$key]->avg_nilai_l = $detail_risk[$key]->l_awal;
                 $detail_risk[$key]->avg_nilai_c = $detail_risk[$key]->c_awal;
             } else {
@@ -275,7 +275,7 @@ class RiskRegisterIndhanController extends Controller
             $nilai_r = floatval($risiko->avg_nilai_l) * floatval($risiko->avg_nilai_c);
             $params[] = [
                 'id_riskh' => null,
-                'company_id' => 6,
+                'divisi_id' => 6,
                 'id_s_risiko' => $risk_detail[0][$i]['id_s_risiko'],
                 'tahun' => $risk_detail[0][$i]['tahun'],
                 'sasaran_kinerja' => $risk_detail[0][$i]['sasaran_kinerja'],
@@ -337,7 +337,7 @@ class RiskRegisterIndhanController extends Controller
         ->where([
             ['status_s_risiko', '=', 1],
             ['status_indhan', '=', 0],
-            ['risk_detail.company_id', '=', 6],
+            ['risk_detail.divisi_id', '=', 6],
         ])
         ->orderBy('s_risiko.id_s_risiko')->pluck('s_risiko.id_s_risiko');
 

@@ -130,14 +130,14 @@ $bulan = array (
 	<table class="table-header" cellspacing="0" width="100%">
 		<tr>
 			<td width="15%">
-				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_company/logo_bumn.png' }}" style="max-width:120px;max-height:35px" />
+				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_bumn.png' }}" style="max-width:120px;max-height:35px" />
 			</td>
 			<td width="70%" height="40">
 				<b>RENCANA PENGELOLAAN RISIKO (MITIGASI PLAN)</b>
-				{{-- <b>MITIGASI PLAN {{ $user->perusahaan->instansi }} </b> --}}
+				{{-- <b>MITIGASI PLAN {{ $user->divisi->instansi }} </b> --}}
 			</td>
 			<td width="171">
-				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_company/logo_'.$header->perusahaan->company_code.'.png' }}" style="max-width:120px;max-height:35px" />
+				<img src="{{ $_SERVER['DOCUMENT_ROOT'].'/public/assets/images/logo/logo_divisi/logo_'.$header->divisi->divisi_code.'.png' }}" style="max-width:120px;max-height:35px" />
 			</td>
 		</tr>
 	</table>
@@ -147,7 +147,7 @@ $bulan = array (
 				Instansi
 			</td>
 			<td class="left pl-10p">
-				{{ $header->perusahaan->instansi }}
+				{{ $header->divisi->instansi }}
 			</td>
 			<td width="15%" class="left pl-10p">
 				Diperiksa &  Disetujui  Oleh

@@ -28,7 +28,7 @@
                   <tr>
                     <th>Id Risk</th>
                     <th>Risiko</th>
-                    <th>Perusahaan</th>
+                    <th>Divisi</th>
                     <th>Tahun</th>
                     {{-- <th>L Awal</th>
                     <th>C Awal</th>

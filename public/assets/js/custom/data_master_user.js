@@ -1,15 +1,15 @@
 $(document).ready(function() {
     $.ajax({
         type: 'GET',
-        url: APP_URL + '/get_perusahaan',
+        url: APP_URL + '/get_divisi',
         dataType: 'json',
         data: {},
         success: function(results) {
-            $('#formPerusahaan').empty();
-            // $('#formPerusahaan').append('<option selected disabled>Pilih perusahaan . . </option>');
+            $('#formDivisi').empty();
+            // $('#formDivisi').append('<option selected disabled>Pilih divisi . . </option>');
             for (let i = 0; i < results.length; i++) {
-                $('#formPerusahaan').append(
-                    '<option value="' + results[i].company_id + '" id="option' + results[i].company_id + '">' + results[i].company_code + ' - ' + results[i].instansi + '</option>'
+                $('#formDivisi').append(
+                    '<option value="' + results[i].divisi_id + '" id="option' + results[i].divisi_id + '">' + results[i].divisi_code + ' - ' + results[i].instansi + '</option>'
                 );
             }
         },
@@ -54,7 +54,7 @@ $(document).ready(function() {
     $('#tambah_user').on('click', function() {
         $('#judul_modal').html('Tambah User')
         $('#formUser').attr('action', APP_URL + '/' + head_url + '/user/store')
-        $('#formPerusahaan').find('option:selected').removeAttr('selected').trigger('change')
+        $('#formDivisi').find('option:selected').removeAttr('selected').trigger('change')
         var elements = document.getElementsByTagName("input");
         for (var i = 0; i < elements.length; i++) {
             if (elements[i].type == "text" || elements[i].type == "password") {
@@ -115,11 +115,11 @@ $(document).ready(function() {
             dataType: 'json',
             data: {},
             success: function(results) {
-                $('#formPerusahaan').find('option:selected').removeAttr('selected')
+                $('#formDivisi').find('option:selected').removeAttr('selected')
                 $('#formName').val(results.data[0].name)
                 $('#formUsername').val(results.data[0].username)
                 $('#formNip').val(results.data[0].nip)
-                $('#formPerusahaan option#option' + results.data[0].company_id).attr('selected', 'selected').trigger('change')
+                $('#formDivisi option#option' + results.data[0].divisi_id).attr('selected', 'selected').trigger('change')
                 if (results.data[0].is_admin == 1) {
                     $('#formIsAdmin').val(1)
                     $('#formIsRiskOfficer').prop('checked', true)

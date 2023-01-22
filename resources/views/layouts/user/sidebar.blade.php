@@ -2,26 +2,26 @@
 	<div>
 		<div class="logo-wrapper">
 			<a href="{{ url('/') }}">
-				<img class="img-fluid for-light logo-header" src="{{asset('assets/images/logo/logo_company/logo_INHAN.png')}}" alt="">
+				<img class="img-fluid for-light logo-header" src="{{asset('assets/images/logo/logo_divisi/logo_INHAN.png')}}" alt="">
 			</a>
 			<div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
 		</div>
 		<div class="logo-icon-wrapper">
 			<a href="{{ url('/') }}">
-				<img class="img-fluid" src="{{asset('assets/images/logo/logo_company/logo2.png')}}" alt="">
+				<img class="img-fluid" src="{{asset('assets/images/logo/logo_divisi/logo2.png')}}" alt="">
 			</a>
 		</div>
 		<nav class="sidebar-main">
 			<div id="sidebar-menu">
 				<ul class="sidebar-links" id="simple-bar">
 					<li class="back-btn">
-						<a href="{{ url('/') }}"><img class="img-fluid" src="{{asset('assets/images/logo/logo_company/logo2.png')}}" alt=""></a>
+						<a href="{{ url('/') }}"><img class="img-fluid" src="{{asset('assets/images/logo/logo_divisi/logo2.png')}}" alt=""></a>
 						<div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
 					</li>
 					<li class="sidebar-main-title">
-						<div class="welcome-card @if(Auth::user()->company_id === 'LN' || Auth::user()->company_id === 'DI' || Auth::user()->company_id === 'INHAN') flex @endif">
+						<div class="welcome-card @if(Auth::user()->divisi_id === 'LN' || Auth::user()->divisi_id === 'DI' || Auth::user()->divisi_id === 'INHAN') flex @endif">
 							<div class="logo-circle text-center">
-								<img src="{{ asset('assets/images/logo/logo_company/logo_'.Auth::user()->perusahaan->company_code.'.png') }}" height="48" />
+								<img src="{{ asset('assets/images/logo/logo_divisi/logo_'.Auth::user()->divisi->divisi_code.'.png') }}" height="48" />
 							</div>
 							<div class="welcome-text">
 								<h6 class="lan-1">Welcome,</h6>
@@ -40,7 +40,7 @@
 									@endforeach
 								</p>
 								<p class="lan-2">
-									{{ Auth::user()->perusahaan->instansi }}
+									{{ Auth::user()->divisi->instansi }}
 								</p>
 							</div>
 						</div>
@@ -100,9 +100,9 @@
 							</li>
                             @elseif(Auth::user()->is_admin)
                             <li>
-                                <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='admin.perusahaan' ? 'active' : '' }}" href="{{route('admin.perusahaan')}}">
+                                <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='admin.divisi' ? 'active' : '' }}" href="{{route('admin.divisi')}}">
 
-                                    <span>Perusahaan</span>
+                                    <span>Divisi</span>
                                 </a>
                             </li>
                             <li>
@@ -161,7 +161,7 @@
 					<li class="sidebar-list">
 						<a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='risk-officer.risiko.index' ? 'active' : '' }}" href="{{route('risk-officer.risiko.index')}}">
 							<i data-feather="list"></i>
-							<span>Risk Register Korporasi</span>
+							<span>Risk Register Divisi</span>
 							{{-- <label class="badge badge-secondary pengukuran-risiko-indhan-notif blink_badge" style="float: right;"></label> --}}
 						</a>
 					</li>
@@ -175,8 +175,8 @@
 					<li class="sidebar-list">
 						<a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='risk-owner.risiko.index' ? 'active' : '' }}" href="{{route('risk-owner.risiko.index')}}">
 							<i data-feather="list"></i>
-							<span>Risk Register Korporasi</span>
-							<label class="badge badge-secondary riskregister-korporasi-notif blink_badge" style="float: right;"></label>
+							<span>Risk Register Divisi</span>
+							<label class="badge badge-secondary riskregister-divisi-notif blink_badge" style="float: right;"></label>
 						</a>
 					</li>
 					<li class="sidebar-list">
@@ -187,10 +187,10 @@
 					</li>
 					@elseif(Auth::user()->is_admin)
 					<li class="sidebar-list">
-						<a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='admin.risk-register-korporasi' ? 'active' : '' }}" href="{{route('admin.risk-register-korporasi')}}">
+						<a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='admin.risk-register-divisi' ? 'active' : '' }}" href="{{route('admin.risk-register-divisi')}}">
 							<i data-feather="sidebar"></i>
 							<span>Risk Register Korp. </span>
-							<label class="badge badge-secondary riskregister-korporasi-notif blink_badge" style="float: right;"></label>
+							<label class="badge badge-secondary riskregister-divisi-notif blink_badge" style="float: right;"></label>
 						</a>
 					</li>
 					<li class="sidebar-list">
@@ -201,9 +201,9 @@
 					</li>
 					@elseif(Auth::user()->is_penilai_indhan)
 					<li class="sidebar-list">
-						<a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='penilai-indhan.risk-register-korporasi' ? 'active' : '' }}" href="{{route('penilai-indhan.risk-register-korporasi')}}">
+						<a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='penilai-indhan.risk-register-divisi' ? 'active' : '' }}" href="{{route('penilai-indhan.risk-register-divisi')}}">
 							<i data-feather="sidebar"></i>
-							<span>Risk Register Korporasi</span>
+							<span>Risk Register Divisi</span>
 						</a>
 					</li>
 					<li class="sidebar-list">

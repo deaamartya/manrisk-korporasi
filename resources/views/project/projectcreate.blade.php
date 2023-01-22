@@ -38,7 +38,7 @@
               <div class="col">
                 <div class="mb-3">
                   <label>Client name</label>
-                  <input class="form-control" type="text" placeholder="Name client or company name">
+                  <input class="form-control" type="text" placeholder="Name client or divisi name">
                 </div>
               </div>
             </div>

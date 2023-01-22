@@ -10,7 +10,7 @@ use App\Models\Risk;
 use App\Models\PengukuranIndhan;
 use App\Models\Pengukuran;
 use App\Models\RiskDetail;
-use App\Models\Perusahaan;
+use App\Models\Divisi;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -18,21 +18,21 @@ class SumberRisikoIndhanController extends Controller
 {
     public function index()
     {
-    //   $perusahaan = DefendidUser::join('perusahaan', 'defendid_user.company_id', 'perusahaan.company_id')->where('is_admin', 0)->groupBy('defendid_user.company_id')->orderBy('company_code')->get();
-        $perusahaan = Perusahaan::orderBy('company_id')->get();
+    //   $divisi = DefendidUser::join('divisi', 'defendid_user.divisi_id', 'divisi.divisi_id')->where('is_admin', 0)->groupBy('defendid_user.divisi_id')->orderBy('divisi_code')->get();
+        $divisi = Divisi::orderBy('divisi_id')->get();
         $sumber_risiko = SRisiko::join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks')
                     ->join('defendid_user', 's_risiko.id_user', 'defendid_user.id_user')
-                    ->join('perusahaan', 'defendid_user.company_id', 'perusahaan.company_id')
+                    ->join('divisi', 'defendid_user.divisi_id', 'divisi.divisi_id')
                     ->where('s_risiko.status_s_risiko', 0)
                     ->whereNull('s_risiko.deleted_at')
                     ->orderBy('s_risiko.id_s_risiko')
                     ->get();
-        $perusahaan_filter = null;
+        $divisi_filter = null;
         $tahun_filter = null;
         $risiko = Risk::join('konteks', 'risk.id_risk', 'konteks.id_risk')
         ->orderBy('risk.id_risk')
         ->get();
-        return view('admin.sumber-risiko-indhan', compact('perusahaan','sumber_risiko', 'perusahaan_filter', 'risiko', 'tahun_filter'));
+        return view('admin.sumber-risiko-indhan', compact('divisi','sumber_risiko', 'divisi_filter', 'risiko', 'tahun_filter'));
     }
     
     public function store(Request $request) {
@@ -44,7 +44,7 @@ class SumberRisikoIndhanController extends Controller
   
         SRisiko::insert([
           's_risiko' => $request->s_risiko,
-          'company_id' => Auth::user()->company_id,
+          'divisi_id' => Auth::user()->divisi_id,
           'id_konteks' => $request->id_konteks,
           'id_user' => Auth::user()->id_user,
           'tahun' => $request->tahun,
@@ -94,26 +94,26 @@ class SumberRisikoIndhanController extends Controller
     public function searchRisiko(Request $request)
     {
         $request->validate([
-        'company_id' => 'required',
+        'divisi_id' => 'required',
         'tahun' => 'required',
         ]);
         $sumber_risiko = SRisiko::join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks')
                     ->join('defendid_user', 's_risiko.id_user', 'defendid_user.id_user')
-                    ->join('perusahaan', 'defendid_user.company_id', 'perusahaan.company_id')
-                    ->where('s_risiko.company_id',  $request->company_id) // perusahaan yg dipilih
+                    ->join('divisi', 'defendid_user.divisi_id', 'divisi.divisi_id')
+                    ->where('s_risiko.divisi_id',  $request->divisi_id) // divisi yg dipilih
                     ->where('s_risiko.tahun', $request->tahun)
                     ->whereNull('s_risiko.deleted_at')
                     ->orderBy('s_risiko.id_s_risiko')
                     ->get();
         // dd($sumber_risiko);
-        $perusahaan_filter = $request->company_id;
+        $divisi_filter = $request->divisi_id;
         $tahun_filter = $request->tahun;
-        // $perusahaan = DefendidUser::join('perusahaan', 'defendid_user.company_id', 'perusahaan.company_id')->where('is_admin', 0)->groupBy('defendid_user.company_id')->orderBy('company_code')->get();
-        $perusahaan = Perusahaan::orderBy('company_id')->get();
+        // $divisi = DefendidUser::join('divisi', 'defendid_user.divisi_id', 'divisi.divisi_id')->where('is_admin', 0)->groupBy('defendid_user.divisi_id')->orderBy('divisi_code')->get();
+        $divisi = Divisi::orderBy('divisi_id')->get();
         $risiko = Risk::join('konteks', 'risk.id_risk', 'konteks.id_risk')
         ->orderBy('risk.id_risk')
         ->get();
-        return view('admin.sumber-risiko-indhan', compact('perusahaan','sumber_risiko', 'perusahaan_filter', 'risiko', 'tahun_filter'));
+        return view('admin.sumber-risiko-indhan', compact('divisi','sumber_risiko', 'divisi_filter', 'risiko', 'tahun_filter'));
     }
 
     /**

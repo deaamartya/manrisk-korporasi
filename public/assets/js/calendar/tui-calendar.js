@@ -8902,7 +8902,7 @@
                  *     },
                  *     {
                  *       id: '2',
-                 *       name: 'Company',
+                 *       name: 'Divisi',
                  *       color: '#00a9ff',
                  *       bgColor: '#00a9ff',
                  *       dragBgColor: '#00a9ff',

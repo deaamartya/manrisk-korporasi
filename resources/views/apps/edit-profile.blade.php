@@ -72,8 +72,8 @@
 						<div class="row">
 							<div class="col-md-5">
 								<div class="mb-3">
-									<label class="form-label">Company</label>
-									<input class="form-control" type="text" placeholder="Company">
+									<label class="form-label">Divisi</label>
+									<input class="form-control" type="text" placeholder="Divisi">
 								</div>
 							</div>
 							<div class="col-sm-6 col-md-3">
@@ -91,7 +91,7 @@
 							<div class="col-sm-6 col-md-6">
 								<div class="mb-3">
 									<label class="form-label">First Name</label>
-									<input class="form-control" type="text" placeholder="Company">
+									<input class="form-control" type="text" placeholder="Divisi">
 								</div>
 							</div>
 							<div class="col-sm-6 col-md-6">

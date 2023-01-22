@@ -21,11 +21,11 @@
             <form method="GET" action="{{route('admin.search-risiko') }}">
                 {{--@csrf--}}
                 <div class="row">
-                    <label class="col-md-3 col-sm-3 col-xs-12" for="noarsip">Pilih Perusahaan<span class="required"></span></label>
+                    <label class="col-md-3 col-sm-3 col-xs-12" for="noarsip">Pilih Divisi<span class="required"></span></label>
                     <div class="col-md-5 col-sm-5 col-xs-12 select2-normal">
-                        <select class="js-example-basic-single col-sm-12" name="company_id" >
-                            @foreach($perusahaan as $p)
-                            <option value="{{ $p->company_id }}"  @if($p->company_id == $perusahaan_filter) selected @endif>{{ $p->company_code }} - {{ $p->instansi }}</option>
+                        <select class="js-example-basic-single col-sm-12" name="divisi_id" >
+                            @foreach($divisi as $p)
+                            <option value="{{ $p->divisi_id }}"  @if($p->divisi_id == $divisi_filter) selected @endif>{{ $p->divisi_code }} - {{ $p->instansi }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -49,7 +49,7 @@
                             <th>Konteks</th>
                             <th>Tahun</th>
                             <th>Status</th>
-                            @if($perusahaan_filter == 6)
+                            @if($divisi_filter == 6)
                             <th>Aksi</th>
                             @endif
                         </tr>
@@ -72,7 +72,7 @@
                                 <button class="btn btn-danger btn-xs" type="button" title="Tidak Disetujui" data-bs-toggle="modal" data-bs-target="#edit_{{ $s->id_s_risiko }}"><i class="fa fa-close"></i></button>
                             @endif
                             </td>
-                            @if($s->perusahaan->company_code == 'INHAN')
+                            @if($s->divisi->divisi_code == 'INHAN')
                             <td>
                                 <div class="flex" style="justify-content: center;">
                                     <button class="btn btn-warning btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#edit_s_risiko_{{ $s->id_s_risiko }}"><i class="fa fa-pencil"></i></button>

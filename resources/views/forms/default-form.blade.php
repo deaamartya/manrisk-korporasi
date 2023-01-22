@@ -76,9 +76,9 @@
 									</div>
 								</div>
 								<div class="mb-3 row">
-									<label class="col-sm-3 col-form-label" for="inputPassword3">Company name</label>
+									<label class="col-sm-3 col-form-label" for="inputPassword3">Divisi name</label>
 									<div class="col-sm-9">
-										<input class="form-control" id="url" type="text" placeholder="Company name">
+										<input class="form-control" id="url" type="text" placeholder="Divisi name">
 									</div>
 								</div>
 								<div class="mb-3 row">
@@ -162,10 +162,10 @@
 									<input class="form-control" type="Number" placeholder="Enter contact number">
 								</div>
 								<hr class="mt-4 mb-4">
-								<h6>Company Information</h6>
+								<h6>Divisi Information</h6>
 								<div class="mb-3">
-									<label class="col-form-label">Company Name</label>
-									<input class="form-control" type="text" placeholder="Company Name">
+									<label class="col-form-label">Divisi Name</label>
+									<input class="form-control" type="text" placeholder="Divisi Name">
 								</div>
 								<div class="mb-3">
 									<label class="col-form-label">Website</label>

@@ -14,7 +14,7 @@ class AlterTableDefendidUserAddNameColumn extends Migration
     public function up()
     {
         Schema::table('defendid_user', function (Blueprint $table) {
-            $table->string('name')->after('company_id');
+            $table->string('name')->after('divisi_id');
         });
     }
 

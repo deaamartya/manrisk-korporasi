@@ -6,11 +6,11 @@
 @endsection
 
 @section('page-title')
-<h3>Risk Register Korporasi</h3>
+<h3>Risk Register Divisi</h3>
 @endsection
 
 @section('breadcrumb')
-<li class="breadcrumb-item">Risk Register Korporasi</li>
+<li class="breadcrumb-item">Risk Register Divisi</li>
 @endsection
 
 @section('content')

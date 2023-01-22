@@ -28,8 +28,8 @@ class RisikoController extends Controller
      */
     public function index()
     {
-        $headers = RiskHeader::where('id_user', '=', Auth::user()->id_user)->where('company_id', '=', Auth::user()->company_id)->whereNull('deleted_at')->get();
-        $risk_owner = DefendidUser::where('company_id', Auth::user()->company_id)->where('is_risk_owner', '=', TRUE)->first();
+        $headers = RiskHeader::where('id_user', '=', Auth::user()->id_user)->where('divisi_id', '=', Auth::user()->divisi_id)->whereNull('deleted_at')->get();
+        $risk_owner = DefendidUser::where('divisi_id', Auth::user()->divisi_id)->where('is_risk_owner', '=', TRUE)->first();
         return view('risk-officer.risiko', compact("headers", "risk_owner"));
     }
 
@@ -44,7 +44,7 @@ class RisikoController extends Controller
         // dd($request);
         RiskHeader::insert([
             'id_user' => Auth::user()->id_user,
-            'company_id' => Auth::user()->company_id,
+            'divisi_id' => Auth::user()->divisi_id,
             'tahun' => $request->tahun,
             'target' => $request->target,
             // 'penyusun' => Auth::user()->name,
@@ -69,12 +69,12 @@ class RisikoController extends Controller
     {
         $headers = RiskHeader::where('id_riskh', '=', $id)->first();
         $s_risk_diinput = RiskDetail::where([
-            ['company_id', '=', Auth::user()->company_id],
+            ['divisi_id', '=', Auth::user()->divisi_id],
             ['deleted_at', '=', null],
         ])->pluck('id_s_risiko');
         $pilihan_s_risiko = SRisiko::where([
             ['status_s_risiko', '=', 1],
-            ['company_id', '=', Auth::user()->company_id],
+            ['divisi_id', '=', Auth::user()->divisi_id],
             ['deleted_at', '=', null],
         ]
         )
@@ -136,7 +136,7 @@ class RisikoController extends Controller
         $header = RiskHeader::where('id_riskh', '=', $id)->first();
         $url = "url='risk-officer/risiko/print/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa->name : '-').";".
-            "instansi=".$header->perusahaan->instansi.";".
+            "instansi=".$header->divisi->instansi.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun->name : '-').";";
@@ -198,18 +198,18 @@ class RisikoController extends Controller
 
         $all_s_risiko = SRisiko::where([
             ['status_s_risiko', '=', 1],
-            ['company_id', '=', Auth::user()->company_id],
+            ['divisi_id', '=', Auth::user()->divisi_id],
         ]
         )
         ->orderBy('id_s_risiko')->get();
 
         $s_risk_diinput = RiskDetail::where([
-            ['company_id', '=', Auth::user()->company_id],
+            ['divisi_id', '=', Auth::user()->divisi_id],
         ])->pluck('id_s_risiko');
 
         $pilihan_s_risiko = SRisiko::where([
             ['status_s_risiko', '=', 1],
-            ['company_id', '=', Auth::user()->company_id],
+            ['divisi_id', '=', Auth::user()->divisi_id],
         ]
         )
         ->whereIn('id_s_risiko', $s_risk_diinput)

@@ -23,7 +23,7 @@ class SumberRisikoController extends Controller
       $sumber_risiko = SRisiko::join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks')
                       ->join('defendid_user', 's_risiko.id_user', 'defendid_user.id_user')
                       ->join('risk','konteks.id_risk', 'risk.id_risk')
-                      ->where('s_risiko.company_id',  Auth::user()->company_id) // user yg login
+                      ->where('s_risiko.divisi_id',  Auth::user()->divisi_id) // user yg login
                       ->orderByDesc('s_risiko.tahun')
                       ->orderBy('s_risiko.id_s_risiko')
                       ->get();
@@ -49,7 +49,7 @@ class SumberRisikoController extends Controller
 
       SRisiko::insert([
         's_risiko' => $request->s_risiko,
-        'company_id' => Auth::user()->company_id,
+        'divisi_id' => Auth::user()->divisi_id,
         'id_konteks' => $request->id_konteks,
         'id_user' => Auth::user()->id_user,
         'tahun' => $request->tahun,

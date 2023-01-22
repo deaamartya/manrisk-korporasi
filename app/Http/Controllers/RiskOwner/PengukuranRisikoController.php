@@ -45,7 +45,7 @@ class PengukuranRisikoController extends Controller
         $sumber_risiko = SRisiko::select('*')->join('konteks as k', 's_risiko.id_konteks', 'k.id_konteks')
             ->join('defendid_user as d', 'd.id_user','s_risiko.id_user')
             ->join('risk as r', 'r.id_risk', 'k.id_risk')
-            ->where('s_risiko.company_id',  Auth::user()->company_id)
+            ->where('s_risiko.divisi_id',  Auth::user()->divisi_id)
             ->where('s_risiko.tahun', $tahun)
             ->where('s_risiko.status_s_risiko', 1)
             ->whereNull('s_risiko.deleted_at')

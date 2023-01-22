@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\RiskHeader;
-use App\Models\Perusahaan;
+use App\Models\Divisi;
 use App\Models\SRisiko;
 use DB;
 use App\Models\RiskDetail;
@@ -33,16 +33,16 @@ class HomeController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->is_risk_officer || Auth::user()->is_risk_owner || Auth::user()->is_penilai) {
-                $counts_risiko = SRisiko::where('company_id', '=', Auth::user()->company_id)->where('status_s_risiko', 1)->where('tahun','=' ,date('Y'))->whereNull('deleted_at')->count('id_s_risiko');
+                $counts_risiko = SRisiko::where('divisi_id', '=', Auth::user()->divisi_id)->where('status_s_risiko', 1)->where('tahun','=' ,date('Y'))->whereNull('deleted_at')->count('id_s_risiko');
                 $count_risiko = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-                    ->where('rd.company_id', Auth::user()->company_id)
+                    ->where('rd.divisi_id', Auth::user()->divisi_id)
                     ->where('rd.tahun','=' , date('Y'))
                     ->whereNull('rd.deleted_at')
                     ->whereNull('risk_header.deleted_at')
                     ->count('rd.id_riskd');
                 $count_mitigasi = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
                     ->where('d.tahun', '=' ,date('Y'))
-                    ->where('d.company_id', Auth::user()->company_id)
+                    ->where('d.divisi_id', Auth::user()->divisi_id)
                     ->where('status_mitigasi', '=', 1)
                     ->whereNull('d.deleted_at')
                     ->whereNull('risk_header.deleted_at')
@@ -50,18 +50,18 @@ class HomeController extends Controller
                 $count_done_mitigasi = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
                     ->join('mitigasi_logs as m', 'm.id_riskd', 'd.id_riskd')
                     ->where('d.tahun','=' , date('Y'))
-                    ->where('d.company_id', Auth::user()->company_id)
+                    ->where('d.divisi_id', Auth::user()->divisi_id)
                     ->where('status_mitigasi', '=', 1)
                     ->where('m.realisasi', '=', 100)
                     ->where('m.is_approved', '=', 1)
                     ->whereNull('d.deleted_at')
                     ->whereNull('risk_header.deleted_at')
                     ->count('d.id_riskd');
-                $company = Perusahaan::where('company_id', Auth::user()->company_id)->get();
+                $divisi = Divisi::where('divisi_id', Auth::user()->divisi_id)->get();
             
-                $company_code = Perusahaan::where('company_id', Auth::user()->company_id)->pluck('company_code')->first();
+                $divisi_code = Divisi::where('divisi_id', Auth::user()->divisi_id)->pluck('divisi_code')->first();
 
-                return view('risk-officer.index', compact("counts_risiko", "count_risiko", "count_mitigasi", "count_done_mitigasi", "company", "company_code"));
+                return view('risk-officer.index', compact("counts_risiko", "count_risiko", "count_mitigasi", "count_done_mitigasi", "divisi", "divisi_code"));
             }
             if (Auth::user()->is_penilai_indhan) {
                 $counts_risiko = SRisiko::where('status_s_risiko', 1)
@@ -89,8 +89,8 @@ class HomeController extends Controller
                     ->whereNull('d.deleted_at')
                     ->whereNull('risk_header.deleted_at')
                     ->count('d.id_riskd');
-                $company = Perusahaan::get();
-                return view('penilai-indhan.index', compact("counts_risiko", "count_risiko", "count_mitigasi", "count_done_mitigasi", "company"));
+                $divisi = Divisi::get();
+                return view('penilai-indhan.index', compact("counts_risiko", "count_risiko", "count_mitigasi", "count_done_mitigasi", "divisi"));
             }
             if (Auth::user()->is_admin) {
                 $counts_risiko = SRisiko::where('status_s_risiko', 1)
@@ -118,8 +118,8 @@ class HomeController extends Controller
                     ->whereNull('d.deleted_at')
                     ->whereNull('risk_header.deleted_at')
                     ->count('d.id_riskd');
-                $company = Perusahaan::get();
-                return view('admin.index', compact("counts_risiko", "count_risiko", "count_mitigasi", "count_done_mitigasi", "company"));
+                $divisi = Divisi::get();
+                return view('admin.index', compact("counts_risiko", "count_risiko", "count_mitigasi", "count_done_mitigasi", "divisi"));
             }
         } else {
             return redirect()->route('login');
@@ -127,16 +127,16 @@ class HomeController extends Controller
     }
 
     public function dataJumlahRisiko(Request $req) {
-        $counts_risiko = SRisiko::where('company_id', '=', Auth::user()->company_id)->where('status_s_risiko', 1)->where('tahun', $req->tahun)->whereNull('deleted_at')->count('id_s_risiko');
+        $counts_risiko = SRisiko::where('divisi_id', '=', Auth::user()->divisi_id)->where('status_s_risiko', 1)->where('tahun', $req->tahun)->whereNull('deleted_at')->count('id_s_risiko');
         $count_risiko = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-            ->where('rd.company_id', Auth::user()->company_id)
+            ->where('rd.divisi_id', Auth::user()->divisi_id)
             ->where('rd.tahun', '=', $req->tahun)
             ->whereNull('rd.deleted_at')
             ->whereNull('risk_header.deleted_at')
             ->count('rd.id_riskd');
         $count_mitigasi = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
             ->where('d.tahun', date('Y'))
-            ->where('d.company_id', Auth::user()->company_id)
+            ->where('d.divisi_id', Auth::user()->divisi_id)
             ->where('d.tahun', '=', $req->tahun)
             ->where('status_mitigasi', '=', 1)
             ->whereNull('d.deleted_at')
@@ -145,14 +145,14 @@ class HomeController extends Controller
         $count_done_mitigasi = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
             ->join('mitigasi_logs as m', 'm.id_riskd', 'd.id_riskd')
             ->where('d.tahun', '=', $req->tahun)
-            ->where('d.company_id', Auth::user()->company_id)
+            ->where('d.divisi_id', Auth::user()->divisi_id)
             ->where('status_mitigasi', '=', 1)
             ->where('m.realisasi', '=', 100)
             ->where('m.is_approved', '=', 1)
             ->whereNull('d.deleted_at')
             ->whereNull('risk_header.deleted_at')
             ->count('d.id_riskd');
-        return response()->json([ "success" => true, "sumber_risiko" => $counts_risiko, "risiko_korporasi" => $count_risiko, "perlu_mitigasi" => $count_mitigasi, "selesai_mitigasi" => $count_done_mitigasi, ]);
+        return response()->json([ "success" => true, "sumber_risiko" => $counts_risiko, "risiko_divisi" => $count_risiko, "perlu_mitigasi" => $count_mitigasi, "selesai_mitigasi" => $count_done_mitigasi, ]);
     }
 
     public function dataJumlahRisikoIndhan(Request $req) {
@@ -186,22 +186,22 @@ class HomeController extends Controller
     }
 
     public function dataRisiko(Request $req) {
-        $companies = Perusahaan::where('company_code', '!=', 'INHAN')->get();
+        $divisi = Divisi::where('divisi_code', '!=', 'INHAN')->get();
         $labels = [];
         $total_risk = [];
         $mitigasi = [];
         $selesai_mitigasi = [];
-        foreach ($companies as $c) {
+        foreach ($divisi as $c) {
             array_push($labels, $c->instansi);
             $count_risk = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-                ->where('rd.company_id', $c->company_id)
+                ->where('rd.divisi_id', $c->divisi_id)
                 ->where('rd.tahun', '=', $req->tahun)
                 ->whereNull('rd.deleted_at')
                 ->count('rd.id_riskd');
             array_push($total_risk, $count_risk);
 
             $count_mitigasi = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-                ->where('d.company_id', $c->company_id)
+                ->where('d.divisi_id', $c->divisi_id)
                 ->where('status_mitigasi', '=', 1)
                 ->where('d.tahun', '=', $req->tahun)
                 ->whereNull('d.deleted_at')
@@ -210,7 +210,7 @@ class HomeController extends Controller
 
             $done_mitigasi = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
                 ->join('mitigasi_logs as m', 'm.id_riskd', 'rd.id_riskd')
-                ->where('rd.company_id', $c->company_id)
+                ->where('rd.divisi_id', $c->divisi_id)
                 ->where('m.realisasi', '=', 100)
                 ->where('m.is_approved', '=', 1)
                 ->where('rd.tahun', '=', $req->tahun)
@@ -221,23 +221,23 @@ class HomeController extends Controller
         return response()->json([ "success" => true, "labels" => $labels, "total_risk" => $total_risk, "mitigasi" => $mitigasi, "selesai_mitigasi" => $selesai_mitigasi, ]);
     }
 
-    public function dataRisikoKorporasi(Request $req) {
-        $companies = Perusahaan::where('company_id', Auth::user()->company_id)->limit(1)->get();
+    public function dataRisikoDivisi(Request $req) {
+        $divisi = Divisi::where('divisi_id', Auth::user()->divisi_id)->limit(1)->get();
         $labels = [];
         $total_risk = [];
         $mitigasi = [];
         $selesai_mitigasi = [];
-        foreach ($companies as $c) {
+        foreach ($divisi as $c) {
             array_push($labels, $c->instansi);
             $count_risk = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-                ->where('rd.company_id', $c->company_id)
+                ->where('rd.divisi_id', $c->divisi_id)
                 ->where('rd.tahun', '=', $req->tahun)
                 ->whereNull('rd.deleted_at')
                 ->count('rd.id_riskd');
             array_push($total_risk, $count_risk);
 
             $count_mitigasi = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-                ->where('d.company_id', $c->company_id)
+                ->where('d.divisi_id', $c->divisi_id)
                 ->where('status_mitigasi', '=', 1)
                 ->where('d.tahun', '=', $req->tahun)
                 ->whereNull('d.deleted_at')
@@ -246,7 +246,7 @@ class HomeController extends Controller
 
             $done_mitigasi = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
                 ->join('mitigasi_logs as m', 'm.id_riskd', 'rd.id_riskd')
-                ->where('rd.company_id', $c->company_id)
+                ->where('rd.divisi_id', $c->divisi_id)
                 ->where('m.realisasi', '=', 100)
                 ->where('m.is_approved', '=', 1)
                 ->where('rd.tahun', '=', $req->tahun)
@@ -257,10 +257,10 @@ class HomeController extends Controller
         return response()->json([ "success" => true, "labels" => $labels, "total_risk" => $total_risk, "mitigasi" => $mitigasi, "selesai_mitigasi" => $selesai_mitigasi, ]);
     }
 
-    public function dataPetaRisikoKorporasi(Request $req) {
-        $company = Perusahaan::where('company_id', Auth::user()->company_id)->pluck('company_id');
+    public function dataPetaRisikoDivisi(Request $req) {
+        $divisi = Divisi::where('divisi_id', Auth::user()->divisi_id)->pluck('divisi_id');
         $risiko_rendah = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-			->where('d.company_id', $company)
+			->where('d.divisi_id', $divisi)
 			->where('r_awal', '>=', 1)
 			->where('r_awal', '<', 6)
 			->where('d.tahun', $req->tahun)
@@ -269,7 +269,7 @@ class HomeController extends Controller
 			->count('d.id_riskd');
 
         $risiko_sedang = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-			->where('d.company_id', $company)
+			->where('d.divisi_id', $divisi)
 			->where('r_awal', '>=', 6)
 			->where('r_awal', '<', 12)
             ->where('d.tahun', $req->tahun)
@@ -278,7 +278,7 @@ class HomeController extends Controller
 			->count('d.id_riskd');
 
         $risiko_tinggi = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-            ->where('d.company_id', $company)
+            ->where('d.divisi_id', $divisi)
             ->where('r_awal', '>=', 12)
             ->where('r_awal', '<', 16)
             ->where('d.tahun', $req->tahun)
@@ -287,7 +287,7 @@ class HomeController extends Controller
             ->count('d.id_riskd');
 
         $risiko_ekstrem = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-            ->where('d.company_id', $company)
+            ->where('d.divisi_id', $divisi)
             ->where('r_awal', '>=', 16)
             ->where('d.tahun', $req->tahun)
             ->whereNull('risk_header.deleted_at')
@@ -295,7 +295,7 @@ class HomeController extends Controller
             ->count('d.id_riskd');
 
         $mitigasi = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-            ->where('d.company_id', $company)
+            ->where('d.divisi_id', $divisi)
             ->where('status_mitigasi', '=', 1)
             ->where('d.tahun', $req->tahun)
             ->whereNull('d.deleted_at')
@@ -303,7 +303,7 @@ class HomeController extends Controller
 
         $selesai_mitigasi = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
             ->join('mitigasi_logs as m', 'm.id_riskd', 'rd.id_riskd')
-            ->where('rd.company_id', $company)
+            ->where('rd.divisi_id', $divisi)
             ->where('m.realisasi', '=', 100)
             ->where('m.is_approved', '=', 1)
             ->where('rd.tahun', $req->tahun)
@@ -321,7 +321,7 @@ class HomeController extends Controller
     }
 
     public function dataPetaRisikoIndhan(Request $req) {
-        $companies = Perusahaan::get();
+        $divisi = Divisi::get();
         $risiko_rendah = [];
         $risiko_sedang = [];
         $risiko_tinggi = [];
@@ -329,10 +329,10 @@ class HomeController extends Controller
         $mitigasi = [];
         $selesai_mitigasi = [];
         $progress_mitigasi = [];
-        foreach ($companies as $c) {
-            if ($c->company_code != 'INHAN') {
+        foreach ($divisi as $c) {
+            if ($c->divisi_code != 'INHAN') {
                 $count_risiko_rendah = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-                    ->where('d.company_id', $c->company_id)
+                    ->where('d.divisi_id', $c->divisi_id)
                     ->where('r_awal', '>=', 1)
                     ->where('r_awal', '<', 6)
                     ->where('d.tahun', $req->tahun)
@@ -342,7 +342,7 @@ class HomeController extends Controller
                 array_push($risiko_rendah, $count_risiko_rendah);
 
                 $count_risiko_sedang = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-                    ->where('d.company_id', $c->company_id)
+                    ->where('d.divisi_id', $c->divisi_id)
                     ->where('r_awal', '>=', 6)
                     ->where('r_awal', '<', 12)
                     ->where('d.tahun', $req->tahun)
@@ -352,7 +352,7 @@ class HomeController extends Controller
                 array_push($risiko_sedang, $count_risiko_sedang);
 
                 $count_risiko_tinggi= RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-                    ->where('d.company_id', $c->company_id)
+                    ->where('d.divisi_id', $c->divisi_id)
                     ->where('r_awal', '>=', 12)
                     ->where('r_awal', '<', 16)
                     ->where('d.tahun', $req->tahun)
@@ -362,7 +362,7 @@ class HomeController extends Controller
                 array_push($risiko_tinggi, $count_risiko_tinggi);
 
                 $count_risiko_ekstrem = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-                    ->where('d.company_id', $c->company_id)
+                    ->where('d.divisi_id', $c->divisi_id)
                     ->where('r_awal', '>=', 16)
                     ->where('d.tahun', $req->tahun)
                     ->whereNull('risk_header.deleted_at')
@@ -371,7 +371,7 @@ class HomeController extends Controller
                 array_push($risiko_ekstrem, $count_risiko_ekstrem);
 
                 $count_mitigasi = RiskHeader::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
-                    ->where('d.company_id', $c->company_id)
+                    ->where('d.divisi_id', $c->divisi_id)
                     ->where('status_mitigasi', '=', 1)
                     ->where('d.tahun', '=', $req->tahun)
                     ->whereNull('d.deleted_at')
@@ -380,7 +380,7 @@ class HomeController extends Controller
 
                 $done_mitigasi = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
                     ->join('mitigasi_logs as m', 'm.id_riskd', 'rd.id_riskd')
-                    ->where('rd.company_id', $c->company_id)
+                    ->where('rd.divisi_id', $c->divisi_id)
                     ->where('m.realisasi', '=', 100)
                     ->where('m.is_approved', '=', 1)
                     ->where('rd.tahun', '=', $req->tahun)
@@ -436,7 +436,7 @@ class HomeController extends Controller
 
                 $done_mitigasi = RiskDetail::where('status_indhan', 1)
                     ->join('mitigasi_logs as m', 'm.id_riskd', 'risk_detail.id_riskd')
-                    ->where('risk_detail.company_id', $c->company_id)
+                    ->where('risk_detail.divisi_id', $c->divisi_id)
                     ->where('m.realisasi', '=', 100)
                     ->where('m.is_approved', '=', 1)
                     ->where('risk_detail.tahun', '=', $req->tahun)
@@ -454,7 +454,7 @@ class HomeController extends Controller
             }
         }
 
-        return response()->json([ "success" => true, "companies" => $companies, "risiko_rendah" => $risiko_rendah, "risiko_sedang" => $risiko_sedang, "risiko_tinggi" => $risiko_tinggi, "risiko_ekstrem" => $risiko_ekstrem, "mitigasi" => $mitigasi, "selesai_mitigasi" => $selesai_mitigasi, "progress_mitigasi" => $progress_mitigasi]);
+        return response()->json([ "success" => true, "divisi" => $divisi, "risiko_rendah" => $risiko_rendah, "risiko_sedang" => $risiko_sedang, "risiko_tinggi" => $risiko_tinggi, "risiko_ekstrem" => $risiko_ekstrem, "mitigasi" => $mitigasi, "selesai_mitigasi" => $selesai_mitigasi, "progress_mitigasi" => $progress_mitigasi]);
     }
 
     public function dataKategoriRisiko(Request $req) {
@@ -464,12 +464,12 @@ class HomeController extends Controller
             ->join('s_risiko as s','s.id_s_risiko','=','risk_detail.id_s_risiko')
             ->join('konteks as k','k.id_konteks','=','s.id_konteks')
             ->join('risk as kr', 'kr.id_risk', '=', 'k.id_risk')
-            ->where('risk_detail.company_id', Auth::user()->company_id)
+            ->where('risk_detail.divisi_id', Auth::user()->divisi_id)
             ->where('risk_detail.tahun', '=', $req->tahun)
             ->whereNull('risk_detail.deleted_at')
             ->groupBy('kr.id_risk')
             ->get();
-        $total_risk = RiskDetail::where('risk_detail.company_id', Auth::user()->company_id)
+        $total_risk = RiskDetail::where('risk_detail.divisi_id', Auth::user()->divisi_id)
         ->where('risk_detail.tahun', '=', $req->tahun)
         ->whereNull('risk_detail.deleted_at')
         ->count('id_riskd');
@@ -509,7 +509,7 @@ class HomeController extends Controller
         $countHigh = 0;
         $countMed = 0;
         $countLow = 0;
-        $risk_detail = RiskHeader::where('risk_header.company_id', Auth::user()->company_id)
+        $risk_detail = RiskHeader::where('risk_header.divisi_id', Auth::user()->divisi_id)
             ->join('risk_detail as rd', 'rd.id_riskh', '=', 'risk_header.id_riskh')
             ->whereNull('risk_header.deleted_at')
             ->whereNull('rd.deleted_at')
@@ -525,18 +525,18 @@ class HomeController extends Controller
     }
 
     public function dataLevelRisikoIndhan(Request $req) {
-        $companies = Perusahaan::where('company_code', '!=', 'INHAN')->get();
+        $divisi = Divisi::where('divisi_code', '!=', 'INHAN')->get();
         $labels = [];
         $dataExtreme = [];
         $dataHigh = [];
         $dataMed = [];
         $dataLow = [];
-        foreach ($companies as $c) {
+        foreach ($divisi as $c) {
             $risk_detail = RiskHeader::join('risk_detail as rd', 'rd.id_riskh', '=', 'risk_header.id_riskh')
                 ->whereNull('risk_header.deleted_at')
                 ->whereNull('rd.deleted_at')
                 ->where('rd.tahun', '=', $req->tahun)
-                ->where('risk_header.company_id', $c->company_id)
+                ->where('risk_header.divisi_id', $c->divisi_id)
                 ->get();
             array_push($labels, $c->instansi);
             $countExtreme = 0;
@@ -557,7 +557,7 @@ class HomeController extends Controller
         return response()->json([ "success" => true, "labels" => $labels,"countExtreme" => $dataExtreme, "countHigh" => $dataHigh, "countMed" => $dataMed, "countLow" => $dataLow ]);
     }
 
-    public function dataBiayaRisikoKorporasi(Request $req) {
+    public function dataBiayaRisikoDivisi(Request $req) {
         $total_idr_indhan = RiskHeader::selectRaw('SUM(dampak_kuantitatif) as idr_kuantitatif')
             ->join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
             ->where('rd.tahun','=', $req->tahun)
@@ -565,9 +565,9 @@ class HomeController extends Controller
             ->whereNull('risk_header.deleted_at')
             ->pluck('SUM(dampak_kuantitatif) as idr_kuantitatif')
             ->first();
-        $total_idr_company = RiskHeader::selectRaw('SUM(dampak_kuantitatif) as idr_kuantitatif')
+        $total_idr_divisi = RiskHeader::selectRaw('SUM(dampak_kuantitatif) as idr_kuantitatif')
             ->join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-            ->where('rd.company_id', Auth::user()->company_id)
+            ->where('rd.divisi_id', Auth::user()->divisi_id)
             ->where('rd.tahun', $req->tahun)
             ->whereNull('rd.deleted_at')
             ->whereNull('risk_header.deleted_at')
@@ -576,7 +576,7 @@ class HomeController extends Controller
 
         $total_idr_residu = RiskHeader::selectRaw('SUM(dampak_kuantitatif_residu) as idr_kuantitatif_residu')
             ->join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-            ->where('rd.company_id', Auth::user()->company_id)
+            ->where('rd.divisi_id', Auth::user()->divisi_id)
             ->where('rd.tahun', $req->tahun)
             ->whereNull('rd.deleted_at')
             ->whereNull('risk_header.deleted_at')
@@ -585,27 +585,27 @@ class HomeController extends Controller
         
         $total_biaya_mitigasi = RiskHeader::selectRaw('SUM(biaya_penanganan) as biaya_mitigasi')
             ->join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-            ->where('rd.company_id', Auth::user()->company_id)
+            ->where('rd.divisi_id', Auth::user()->divisi_id)
             ->where('rd.tahun', $req->tahun)
             ->whereNull('rd.deleted_at')
             ->whereNull('risk_header.deleted_at')
             ->pluck('SUM(biaya_penanganan) as biaya_mitigasi')
             ->first();
-            // dd($sum_idr_company);
+            // dd($sum_idr_divisi);
         
         if($total_idr_indhan != 0 ){
-            $percent =  intval($total_idr_company / $total_idr_indhan * 100);
+            $percent =  intval($total_idr_divisi / $total_idr_indhan * 100);
         }else{
             $percent =  0;
         }
 
-        $company = Perusahaan::where('company_id', Auth::user()->company_id)->pluck('instansi')->first();
+        $divisi = Divisi::where('divisi_id', Auth::user()->divisi_id)->pluck('instansi')->first();
 
-        return response()->json([ "success" => true, "total_idr_indhan" => $total_idr_indhan, "total_idr_company" => $total_idr_company , "total_idr_residu" => $total_idr_residu , "total_biaya_mitigasi" => $total_biaya_mitigasi , "percent" => $percent, "company" => $company ]);
+        return response()->json([ "success" => true, "total_idr_indhan" => $total_idr_indhan, "total_idr_divisi" => $total_idr_divisi , "total_idr_residu" => $total_idr_residu , "total_biaya_mitigasi" => $total_biaya_mitigasi , "percent" => $percent, "divisi" => $divisi ]);
     }
 
     public function dataBiayaRisikoIndhan(Request $req) {
-        $companies = Perusahaan::where('company_code', '!=', 'INHAN')->get();
+        $divisi = Divisi::where('divisi_code', '!=', 'INHAN')->get();
         $total_idr_indhan = RiskHeader::selectRaw('SUM(dampak_kuantitatif) as idr_kuantitatif')
             ->join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
             ->where('rd.tahun','=', $req->tahun)
@@ -613,24 +613,24 @@ class HomeController extends Controller
             ->whereNull('risk_header.deleted_at')
             ->pluck('SUM(dampak_kuantitatif) as idr_kuantitatif')
             ->first();
-        $total_idr_company = [];
+        $total_idr_divisi = [];
         $total_idr_residu = [];
         $total_biaya_mitigasi = [];
         $percent = [];
-        foreach ($companies as $c) {
-            $sum_idr_company = RiskHeader::selectRaw('SUM(dampak_kuantitatif) as idr_kuantitatif')
+        foreach ($divisi as $c) {
+            $sum_idr_divisi = RiskHeader::selectRaw('SUM(dampak_kuantitatif) as idr_kuantitatif')
                     ->join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-                    ->where('rd.company_id', $c->company_id)
+                    ->where('rd.divisi_id', $c->divisi_id)
                     ->where('rd.tahun', $req->tahun)
                     ->whereNull('rd.deleted_at')
                     ->whereNull('risk_header.deleted_at')
                     ->pluck('SUM(dampak_kuantitatif) as idr_kuantitatif')
                     ->first();
-            array_push($total_idr_company, $sum_idr_company);
+            array_push($total_idr_divisi, $sum_idr_divisi);
 
             $sum_idr_residu = RiskHeader::selectRaw('SUM(dampak_kuantitatif_residu) as idr_kuantitatif_residu')
                     ->join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-                    ->where('rd.company_id',  $c->company_id)
+                    ->where('rd.divisi_id',  $c->divisi_id)
                     ->where('rd.tahun', $req->tahun)
                     ->whereNull('rd.deleted_at')
                     ->whereNull('risk_header.deleted_at')
@@ -640,7 +640,7 @@ class HomeController extends Controller
 
             $sum_biaya_mitigasi = RiskHeader::selectRaw('SUM(biaya_penanganan) as biaya_mitigasi')
                     ->join('risk_detail as rd', 'rd.id_riskh', 'risk_header.id_riskh')
-                    ->where('rd.company_id',$c->company_id)
+                    ->where('rd.divisi_id',$c->divisi_id)
                     ->where('rd.tahun', $req->tahun)
                     ->whereNull('rd.deleted_at')
                     ->whereNull('risk_header.deleted_at')
@@ -649,14 +649,14 @@ class HomeController extends Controller
             array_push($total_biaya_mitigasi, $sum_biaya_mitigasi);
 
             if($total_idr_indhan != 0 ){
-                $hitung_percent =  intval($sum_idr_company / $total_idr_indhan * 100);
+                $hitung_percent =  intval($sum_idr_divisi / $total_idr_indhan * 100);
             }else{
                 $hitung_percent =  0;
             }
             array_push($percent, $hitung_percent);
         }
 
-        return response()->json([ "success" => true, "total_idr_indhan" => $total_idr_indhan, "total_idr_company" => $total_idr_company , "total_idr_residu" => $total_idr_residu , "total_biaya_mitigasi" => $total_biaya_mitigasi , "percent" => $percent, "companies" => $companies ]);
+        return response()->json([ "success" => true, "total_idr_indhan" => $total_idr_indhan, "total_idr_divisi" => $total_idr_divisi , "total_idr_residu" => $total_idr_residu , "total_biaya_mitigasi" => $total_biaya_mitigasi , "percent" => $percent, "divisi" => $divisi ]);
     }
 
     public function dataBiayaRisikoSelectedIndhan(Request $req) {
@@ -693,7 +693,7 @@ class HomeController extends Controller
             ->whereNull('risk_header.deleted_at')
             ->pluck('SUM(biaya_penanganan) as biaya_mitigasi')
             ->first();
-            // dd($sum_idr_company);
+            // dd($sum_idr_divisi);
         
         if($total_idr_indhan != 0 ){
             $percent =  intval($total_idr_selected/ $total_idr_indhan * 100);
@@ -701,15 +701,15 @@ class HomeController extends Controller
             $percent =  0;
         }
 
-        $company = Perusahaan::where('company_id', 6)->pluck('instansi')->first();
+        $divisi = Divisi::where('divisi_id', 6)->pluck('instansi')->first();
 
-        return response()->json([ "success" => true, "total_idr_indhan" => $total_idr_indhan, "total_idr_selected" => $total_idr_selected , "total_idr_residu" => $total_idr_residu , "total_biaya_mitigasi" => $total_biaya_mitigasi , "percent" => $percent, "company" => $company ]);
+        return response()->json([ "success" => true, "total_idr_indhan" => $total_idr_indhan, "total_idr_selected" => $total_idr_selected , "total_idr_residu" => $total_idr_residu , "total_biaya_mitigasi" => $total_biaya_mitigasi , "percent" => $percent, "divisi" => $divisi ]);
     }
 
     public function dataStatusProses(Request $request) {
         $proses_list = ProsesManrisk::all();
         $data = StatusProses::join('proses_manrisks as pm', 'status_proses.id_proses', '=', 'pm.id_proses')
-            ->where('company_id', '=', Auth::user()->company_id)
+            ->where('divisi_id', '=', Auth::user()->divisi_id)
             ->where('tahun', '=', $request->tahun)
             ->orderBy('status_proses.created_at', 'DESC')
             ->first();
@@ -717,18 +717,18 @@ class HomeController extends Controller
     }
 
     public function dataStatusProsesIndhan(Request $request) {
-        $companies = Perusahaan::where('company_code', '!=', 'INHAN')->get();
+        $divisi = Divisi::where('divisi_code', '!=', 'INHAN')->get();
         $proses_list = ProsesManrisk::all();
         $i = 0;
         $data = [];
-        foreach ($companies as $c) {
+        foreach ($divisi as $c) {
             $data[$i] = StatusProses::join('proses_manrisks as pm', 'status_proses.id_proses', '=', 'pm.id_proses')
-                ->where('company_id', '=', $c->company_id)
+                ->where('divisi_id', '=', $c->divisi_id)
                 ->where('tahun', '=', $request->tahun)
                 ->orderBy('status_proses.created_at', 'DESC')
                 ->first();
             $i++;
         }
-        return response()->json([ "success" => true, "list" => $proses_list, "data" => $data, 'company' => $companies ]);
+        return response()->json([ "success" => true, "list" => $proses_list, "data" => $data, 'divisi' => $divisi ]);
     }
 }

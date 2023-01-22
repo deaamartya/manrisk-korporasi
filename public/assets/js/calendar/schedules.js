@@ -45,7 +45,7 @@ function ScheduleInfo() {
         creator: {
             name: '',
             avatar: '',
-            company: '',
+            divisi: '',
             email: '',
             phone: ''
         }
@@ -136,7 +136,7 @@ function generateRandomSchedule(calendar, renderStart, renderEnd) {
     schedule.raw.memo = chance.sentence();
     schedule.raw.creator.name = chance.name();
     schedule.raw.creator.avatar = chance.avatar();
-    schedule.raw.creator.company = chance.company();
+    schedule.raw.creator.divisi = chance.divisi();
     schedule.raw.creator.email = chance.email();
     schedule.raw.creator.phone = chance.phone();
 

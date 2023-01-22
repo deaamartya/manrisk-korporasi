@@ -33,7 +33,7 @@ class SRisiko extends Model
 	protected $casts = [
 		'id_user' => 'int',
 		'status_s_risiko' => 'int',
-		'company_id' => 'int',
+		'divisi_id' => 'int',
 	];
 
 	protected $fillable = [
@@ -43,7 +43,7 @@ class SRisiko extends Model
 		'tahun',
 		'catatan',
 		'status_s_risiko',
-		'company_id',
+		'divisi_id',
 	];
 
 	public function konteks()
@@ -51,8 +51,8 @@ class SRisiko extends Model
 		return $this->belongsTo(Kontek::class, 'id_konteks');
 	}
 
-	public function perusahaan()
+	public function divisi()
 	{
-		return $this->belongsTo(Perusahaan::class, 'company_id');
+		return $this->belongsTo(Divisi::class, 'divisi_id');
 	}
 }

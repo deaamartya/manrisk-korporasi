@@ -22,7 +22,7 @@ class DefendidPengukurTableSeeder extends Seeder
             0 =>
             array (
                 'id_pengukur' => 1,
-                'company_id' => '1',
+                'divisi_id' => '1',
                 'id_user' => 1,
                 'jabatan' => 'Risk Officer PT PAL INDONESIA',
                 'nip' => NULL,
@@ -36,7 +36,7 @@ class DefendidPengukurTableSeeder extends Seeder
             1 =>
             array (
                 'id_pengukur' => 2,
-                'company_id' => '1',
+                'divisi_id' => '1',
                 'id_user' => 7,
                 'jabatan' => 'Kepala Divisi TI',
                 'nip' => '105194549',
@@ -50,7 +50,7 @@ class DefendidPengukurTableSeeder extends Seeder
             2 =>
             array (
                 'id_pengukur' => 4,
-                'company_id' => '1',
+                'divisi_id' => '1',
                 'id_user' => 9,
                 'jabatan' => 'Kepala Departemen A',
                 'nip' => '151811513048',
@@ -64,7 +64,7 @@ class DefendidPengukurTableSeeder extends Seeder
             3 =>
             array (
                 'id_pengukur' => 5,
-                'company_id' => '1',
+                'divisi_id' => '1',
                 'id_user' => 10,
                 'jabatan' => 'Kepala Departemen B',
                 'nip' => '151811513049',

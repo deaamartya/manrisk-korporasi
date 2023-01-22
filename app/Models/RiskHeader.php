@@ -54,7 +54,7 @@ class RiskHeader extends Model
 		'id_penyusun',
 		'id_pemeriksa',
 		'lampiran',
-		'company_id',
+		'divisi_id',
 		'status_h',
 		'status_h_indhan'
 	];
@@ -64,9 +64,9 @@ class RiskHeader extends Model
 		return $this->hasMany(RiskDetail::class, 'id_riskh');
 	}
 
-	public function perusahaan()
+	public function divisi()
 	{
-		return $this->belongsTo(Perusahaan::class, 'company_id');
+		return $this->belongsTo(Divisi::class, 'divisi_id');
 	}
 
 	public function penyusun()
@@ -120,7 +120,7 @@ class RiskHeader extends Model
 	{
         $wr = '1=1';
         if(Auth::user()->is_risk_officer){
-            $wr .= " AND d.company_id = ".Auth::user()->company_id;
+            $wr .= " AND d.divisi_id = ".Auth::user()->divisi_id;
         }
 		$jml = self::join('risk_detail as d','d.id_riskh','=','risk_header.id_riskh')
 			->join('mitigasi_logs as l', 'l.id_riskd', '=', 'd.id_riskd')
@@ -170,7 +170,7 @@ class RiskHeader extends Model
     public function getAllMitigasiDetail() {
 		$wr = '1=1';
         if(!Auth::user()->is_admin){
-            $wr .= " AND d.company_id = ".Auth::user()->company_id;
+            $wr .= " AND d.divisi_id = ".Auth::user()->divisi_id;
         }
         $mitigasi_logs = DB::raw("(
             SELECT realisasi as final_realisasi, id_riskd FROM mitigasi_logs WHERE is_approved = 1

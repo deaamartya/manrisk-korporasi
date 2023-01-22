@@ -178,7 +178,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                        <div class="float-end d-flex">
-                                          <p class="user-emailid">Lormlpsa<span class="digits">23</span>@company.com</p>
+                                          <p class="user-emailid">Lormlpsa<span class="digits">23</span>@divisi.com</p>
                                           <i class="fa fa-star-o f-18 mt-1"></i>
                                        </div>
                                     </div>

@@ -80,7 +80,7 @@
                 </div>
             </div>
             @else
-            <div class="alert alert-danger">Belum ada klasifikasi risiko pada tahun ini, silahkan melakukan pemilihan risiko korporasi menjadi risiko indhan terlebih dahulu</div>
+            <div class="alert alert-danger">Belum ada klasifikasi risiko pada tahun ini, silahkan melakukan pemilihan risiko divisi menjadi risiko indhan terlebih dahulu</div>
             @endif
         </div>
     </div>

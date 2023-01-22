@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableRiskDetailAddCompanyIdAndTahun extends Migration
+class AlterTableRiskDetailAddDivisiIdAndTahun extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,9 @@ class AlterTableRiskDetailAddCompanyIdAndTahun extends Migration
     public function up()
     {
         Schema::table('risk_detail', function (Blueprint $table) {
-            $table->UnsignedInteger('company_id')->after('id_s_risiko')->nullable();
-            $table->integer('tahun')->after('company_id')->nullable();
-            $table->foreign('company_id')->references('company_id')->on('perusahaan');
+            $table->UnsignedInteger('divisi_id')->after('id_s_risiko')->nullable();
+            $table->integer('tahun')->after('divisi_id')->nullable();
+            $table->foreign('divisi_id')->references('divisi_id')->on('divisi');
         });
     }
 
@@ -28,9 +28,9 @@ class AlterTableRiskDetailAddCompanyIdAndTahun extends Migration
     public function down()
     {
         Schema::table('risk_detail', function (Blueprint $table) {
-            $table->dropForeign('risk_detail_company_id_foreign');
-            $table->dropColumn('company_id')->after('id_s_risiko')->nullable();
-            $table->dropColumn('tahun')->after('company_id')->nullable();
+            $table->dropForeign('risk_detail_divisi_id_foreign');
+            $table->dropColumn('divisi_id')->after('id_s_risiko')->nullable();
+            $table->dropColumn('tahun')->after('divisi_id')->nullable();
         });
     }
 }

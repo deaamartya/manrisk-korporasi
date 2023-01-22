@@ -13,7 +13,7 @@ class PengajuanAdminController extends Controller
 {
     public function index()
     {
-        $pengajuan = PengajuanMitigasi::where('company_id', '=', Auth::user()->company_id)
+        $pengajuan = PengajuanMitigasi::where('divisi_id', '=', Auth::user()->divisi_id)
             ->orderBy('status', 'ASC')
             ->orderBy('created_at', 'ASC')
             ->get();

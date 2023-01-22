@@ -27,10 +27,10 @@
                             <div class="col-sm-4">
                                 {{-- <label class="col-md-3 col-sm-3 col-xs-12">Divisi</label> --}}
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <select class="js-example-basic-single" name="company_id" id="formPerusahaan">
-                                        <option selected disabled>Pilih Perusahaan..</option>
-                                        @foreach($companies as $c)
-                                            <option value="{{ $c->company_id }}">{{ $c->company_code }} - {{ $c->instansi }}</option>
+                                    <select class="js-example-basic-single" name="divisi_id" id="formDivisi">
+                                        <option selected disabled>Pilih Divisi..</option>
+                                        @foreach($divisi as $c)
+                                            <option value="{{ $c->divisi_id }}">{{ $c->divisi_code }} - {{ $c->instansi }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -87,7 +87,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Perusahaan</th>
+                                    <th>Divisi</th>
                                     <th>Konteks</th>
                                     <th>Risiko</th>
                                     <th>Tahun</th>

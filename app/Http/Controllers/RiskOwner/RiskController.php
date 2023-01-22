@@ -27,7 +27,7 @@ class RiskController extends Controller
      */
     public function index()
     {
-        $headers = RiskHeader::where('company_id', '=', Auth::user()->company_id)->whereNull('deleted_at')->get();
+        $headers = RiskHeader::where('divisi_id', '=', Auth::user()->divisi_id)->whereNull('deleted_at')->get();
         return view('risk-owner.risk', compact("headers"));
     }
 
@@ -61,16 +61,16 @@ class RiskController extends Controller
         //     ['id_user', '=', Auth::user()->id_user],
         //     ['tahun', '=', date('Y')],
         //     ['status_s_risiko', '=', 1],
-        //     ['company_id', '=', Auth::user()->company_id],
+        //     ['divisi_id', '=', Auth::user()->divisi_id],
         // ])->orderBy('id_s_risiko')->get();
 
         $s_risk_diinput = RiskDetail::where([
-            ['company_id', '=', Auth::user()->company_id],
+            ['divisi_id', '=', Auth::user()->divisi_id],
         ])->pluck('id_s_risiko');
         // dd($s_risk_diinput);
         $pilihan_s_risiko = SRisiko::where([
             ['status_s_risiko', '=', 1],
-            ['company_id', '=', Auth::user()->company_id],
+            ['divisi_id', '=', Auth::user()->divisi_id],
         ]
         )
         ->whereNotIn('id_s_risiko', $s_risk_diinput)
@@ -102,7 +102,7 @@ class RiskController extends Controller
         $document_type = 'risk_register_ro';
         $url = "url='risk-owner/risiko/print/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa->name : '-').";".
-            "instansi=".$header->perusahaan->instansi.";".
+            "instansi=".$header->divisi->instansi.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun->name : '-').";";
@@ -134,7 +134,7 @@ class RiskController extends Controller
         $pdf = PDF::loadView('risk-owner.risk-header-pdf', compact('header', 'user', 'qrcode'))->setPaper('a4', 'landscape');
         Session::forget('is_bypass');
         // return view('risk-officer.risk-header-pdf', compact('header', 'user'));
-        return $pdf->stream('Laporan Manajemen Risiko '.$header->perusahaan->instansi.' Tahun '.$header->tahun.'.pdf');
+        return $pdf->stream('Laporan Manajemen Risiko '.$header->divisi->instansi.' Tahun '.$header->tahun.'.pdf');
     }
 
     public function toggleIndhan($id) {

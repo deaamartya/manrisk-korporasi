@@ -22,7 +22,7 @@ class AbsPengukuran
             }
         }
         else{
-            $wr .= " AND defendid_pengukur.company_id = ".Auth::user()->company_id;
+            $wr .= " AND defendid_pengukur.divisi_id = ".Auth::user()->divisi_id;
         }
         $data_pengukur = DefendidPengukur::whereRaw($wr)->get();
         if($filter == 'penilai_indhan'){
@@ -58,26 +58,26 @@ class AbsPengukuran
                 $pengukuran_2 = [];
 
                 foreach($data_pengukur as $dp) {
-                    // get all id_s_risiko korporasi dengan status_indhan 1
-                    $s_risk_korporasi = SRisiko::join('risk_detail', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
+                    // get all id_s_risiko divisi dengan status_indhan 1
+                    $s_risk_divisi = SRisiko::join('risk_detail', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
                         ->where('risk_detail.status_indhan', 1)
-                        ->where('risk_detail.company_id', '!=', 6)
+                        ->where('risk_detail.divisi_id', '!=', 6)
                         ->whereNull('s_risiko.deleted_at')
                         ->whereNull('risk_detail.deleted_at')
                         ->groupBy('s_risiko.id_s_risiko')
                         ->pluck('s_risiko.id_s_risiko')->toArray();
                     
                     // get all id_s_risiko indhan
-                    $s_risk_indhan = SRisiko::where('s_risiko.company_id', 6)
+                    $s_risk_indhan = SRisiko::where('s_risiko.divisi_id', 6)
                         ->whereNull('s_risiko.deleted_at')
                         ->pluck('id_s_risiko')->toArray();
 
-                    $s_risk_all = array_merge($s_risk_korporasi, $s_risk_indhan);
+                    $s_risk_all = array_merge($s_risk_divisi, $s_risk_indhan);
 
-                    // get all id_s_risiko korporasi yang sudah dinilai
-                    $s_risk_dinilai_korporasi = SRisiko::join('pengukuran_indhan as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
+                    // get all id_s_risiko divisi yang sudah dinilai
+                    $s_risk_dinilai_divisi = SRisiko::join('pengukuran_indhan as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
                         ->where('p.id_pengukur', '=', $dp->id_pengukur)
-                        ->whereIn('s_risiko.id_s_risiko', $s_risk_korporasi)
+                        ->whereIn('s_risiko.id_s_risiko', $s_risk_divisi)
                         ->selectRaw('s_risiko.*, p.*')
                         ->whereNull('p.deleted_at')
                         ->groupBy('s_risiko.id_s_risiko')
@@ -92,7 +92,7 @@ class AbsPengukuran
                         ->groupBy('s_risiko.id_s_risiko')
                         ->pluck('s_risiko.id_s_risiko')->toArray();
 
-                    $s_risk_dinilai = array_merge($s_risk_dinilai_korporasi, $s_risk_dinilai_indhan);
+                    $s_risk_dinilai = array_merge($s_risk_dinilai_divisi, $s_risk_dinilai_indhan);
 
                     // count id_s_risiko yang sudah dinilai group by tahun
                     $s_risk_dinilai_yearly = SRisiko::join('pengukuran_indhan as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
@@ -131,8 +131,8 @@ class AbsPengukuran
             }
             $results['sr_exists'] = $sr_exists;
         } else {
-            $data_sr = SRisiko::where('company_id', Auth::user()->company_id)->where('status_s_risiko', 1)->get();
-            // dd(Auth::user()->company_id);
+            $data_sr = SRisiko::where('divisi_id', Auth::user()->divisi_id)->where('status_s_risiko', 1)->get();
+            // dd(Auth::user()->divisi_id);
             // dd($data_sr);
             if(count($data_sr) > 0){
                 $sr_exists = true;
@@ -161,7 +161,7 @@ class AbsPengukuran
                         $pengukuran_1[] = $s;
                     }
                     $s_risk = SRisiko::where('status_s_risiko', 1)
-                        ->where('s_risiko.company_id', $dp->company_id)
+                        ->where('s_risiko.divisi_id', $dp->divisi_id)
                         ->whereNotIn('s_risiko.id_s_risiko', $s_risk_dinilai)
                         ->groupBy('s_risiko.tahun')
                         ->selectRaw('s_risiko.*, COUNT(s_risiko.id_s_risiko) as jml_risk')
@@ -178,7 +178,7 @@ class AbsPengukuran
                 $sumber_risiko = Pengukuran::join('s_risiko', 'pengukuran.id_s_risiko', 's_risiko.id_s_risiko')
                                 ->join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks')
                                 ->join('defendid_pengukur', 'pengukuran.id_pengukur', 'defendid_pengukur.id_pengukur')
-                                ->where('s_risiko.company_id', '=', Auth::user()->company_id)
+                                ->where('s_risiko.divisi_id', '=', Auth::user()->divisi_id)
                                 ->whereRaw($wr_sr)
                                 ->whereNull('s_risiko.deleted_at')
                                 ->whereNull('defendid_pengukur.deleted_at')

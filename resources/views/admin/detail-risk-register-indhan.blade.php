@@ -92,7 +92,7 @@
                 <thead>
                   <tr>
                     <th>Id Risk</th>
-                    <th>Korporasi</th>
+                    <th>Divisi</th>
                     <th>Konteks Organisasi</th>
                     <th>Risiko</th>
                     <th>Penyebab</th>

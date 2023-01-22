@@ -31,9 +31,9 @@ class PengukuranRisikoIndhanController extends Controller
         $id_responden = $request->id_responden;
         $nama_responden = $request->nama_responden;
 
-        $s_risk_korporasi = SRisiko::join('risk_detail', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
+        $s_risk_divisi = SRisiko::join('risk_detail', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
             ->where('risk_detail.status_indhan', 1)
-            ->where('risk_detail.company_id', '!=', 6)
+            ->where('risk_detail.divisi_id', '!=', 6)
             ->where('s_risiko.tahun', $tahun)
             ->whereNull('s_risiko.deleted_at')
             ->whereNull('risk_detail.deleted_at')
@@ -41,17 +41,17 @@ class PengukuranRisikoIndhanController extends Controller
             ->pluck('s_risiko.id_s_risiko')->toArray();
         
         // get all id_s_risiko indhan
-        $s_risk_indhan = SRisiko::where('company_id', 6)
+        $s_risk_indhan = SRisiko::where('divisi_id', 6)
             ->where('tahun', $tahun)
             ->whereNull('deleted_at')
             ->pluck('id_s_risiko')->toArray();
 
-        $s_risk_all = array_merge($s_risk_korporasi, $s_risk_indhan);
+        $s_risk_all = array_merge($s_risk_divisi, $s_risk_indhan);
 
-        // get all id_s_risiko korporasi yang sudah dinilai
-        $s_risk_dinilai_korporasi = SRisiko::join('pengukuran_indhan as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
+        // get all id_s_risiko divisi yang sudah dinilai
+        $s_risk_dinilai_divisi = SRisiko::join('pengukuran_indhan as p', 'p.id_s_risiko', 's_risiko.id_s_risiko')
             ->where('p.id_pengukur', '=', $id_responden)
-            ->whereIn('s_risiko.id_s_risiko', $s_risk_korporasi)
+            ->whereIn('s_risiko.id_s_risiko', $s_risk_divisi)
             ->selectRaw('s_risiko.*, p.*')
             ->whereNull('p.deleted_at')
             ->groupBy('s_risiko.id_s_risiko')
@@ -66,7 +66,7 @@ class PengukuranRisikoIndhanController extends Controller
             ->groupBy('s_risiko.id_s_risiko')
             ->pluck('s_risiko.id_s_risiko')->toArray();
 
-        $s_risk_dinilai = array_merge($s_risk_dinilai_korporasi, $s_risk_dinilai_indhan);
+        $s_risk_dinilai = array_merge($s_risk_dinilai_divisi, $s_risk_dinilai_indhan);
 
         $sumber_risiko = SRisiko::select('*')
             ->join('konteks as k', 's_risiko.id_konteks', 'k.id_konteks')
@@ -103,10 +103,10 @@ class PengukuranRisikoIndhanController extends Controller
                 'nilai_L' => $request->nilai_L[$i],
                 'nilai_C' => $request->nilai_C[$i],
             ]);
-            if (RiskDetail::where('id_s_risiko', '=', $request->id_s_risk[$i])->where('company_id', '=', 6)->exists()) {
+            if (RiskDetail::where('id_s_risiko', '=', $request->id_s_risk[$i])->where('divisi_id', '=', 6)->exists()) {
                 $nilai_pengukuran = PengukuranIndhan::select(DB::raw('AVG(nilai_L) as L'), DB::raw('AVG(nilai_C) as C'))->where('id_s_risiko', '=', $request->id_s_risk[$i])->first();
                 $status_mitigasi = ($nilai_pengukuran->L * $nilai_pengukuran->C >= 12);
-                RiskDetail::where('id_s_risiko', '=', $request->id_s_risk[$i])->where('company_id', '=', 6)->update([
+                RiskDetail::where('id_s_risiko', '=', $request->id_s_risk[$i])->where('divisi_id', '=', 6)->update([
                     'l_awal' => number_format($nilai_pengukuran->L, 2) + 0,
                     'c_awal' => number_format($nilai_pengukuran->C, 2) + 0,
                     'r_awal' => number_format($nilai_pengukuran->L * $nilai_pengukuran->C, 2) + 0,
@@ -125,7 +125,7 @@ class PengukuranRisikoIndhanController extends Controller
                 ->join('risk_detail as rd', 's_risiko.id_s_risiko', 'risk_detail.id_s_risiko')
                 ->join('konteks as k', 'sr.id_konteks', 'k.id_konteks')
                 ->join('defendid_pengukur as d', 'pengukuran_indhan.id_pengukur', 'd.id_pengukur')
-                ->join('perusahaan as p', 'd.company_id', 'p.company_id')
+                ->join('divisi as p', 'd.divisi_id', 'p.divisi_id')
                 ->where('pengukuran_indhan.tahun_p', date('Y'))
                 ->whereNull('rd.deleted_at')
                 ->where('rd.status_indhan', '1')

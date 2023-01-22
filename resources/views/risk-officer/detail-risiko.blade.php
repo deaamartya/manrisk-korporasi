@@ -7,12 +7,12 @@
 @endsection
 
 @section('page-title')
-<h3>Detail Risk Register Korporasi</h3>
+<h3>Detail Risk Register Divisi</h3>
 @endsection
 
 @section('breadcrumb')
-<li class="breadcrumb-item">Risk Register Korporasi</li>
-<li class="breadcrumb-item active">Detail Risk Register Korporasi</li>
+<li class="breadcrumb-item">Risk Register Divisi</li>
+<li class="breadcrumb-item active">Detail Risk Register Divisi</li>
 @endsection
 
 @section('content')
@@ -36,7 +36,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="col-md-4"><h6>Instansi</h6><hr class="hr-custom"></div>
-                <div class="col-md-12 mb-2">{{ $headers->perusahaan->instansi }}</div>
+                <div class="col-md-12 mb-2">{{ $headers->divisi->instansi }}</div>
                 <div class="col-md-4"><h6>Tahun Risiko</h6><hr class="hr-custom"></div>
                 <div class="col-md-12 mb-2">{{ $headers->tahun }}</div>
                 <div class="col-md-4"><h6>Tanggal Dibuat</h6><hr class="hr-custom"></div>
@@ -231,7 +231,7 @@
             @csrf
             <input type="hidden" name="id_riskh" value="{{ $headers->id_riskh }}">
             <input type="hidden" name="tahun" value="{{ $headers->tahun }}">
-            <input type="hidden" name="company_id" value="{{ $headers->company_id }}">
+            <input type="hidden" name="divisi_id" value="{{ $headers->divisi_id }}">
             <input type="hidden" name="status_mitigasi" value="0">
             <div class="modal-body">
               <div class="row">

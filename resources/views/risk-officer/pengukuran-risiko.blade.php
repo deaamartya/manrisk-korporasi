@@ -93,7 +93,7 @@
         <div class="card-body">
             <center>
                 <h5>Sumber Risiko</h5>
-                <h6 style="color:#3C88F7">{{  Auth::user()->perusahaan->instansi }}</h6>
+                <h6 style="color:#3C88F7">{{  Auth::user()->divisi->instansi }}</h6>
             </center>
             <br>
             <div class="table-responsive">
@@ -144,7 +144,7 @@
             <div class="alert alert-danger">Maaf Anda belum memiliki akses sebagai penilai untuk pengukuran. Silahkan hubungi risk officer / admin untuk mengatur ulang hak akses Anda.</div>
             @endif
         @else
-        <div class="alert alert-danger">Sumber risiko untuk perusahaan ini belum tersedia. Silahkan menambahkan sumber risiko terlebih dahulu.</div>
+        <div class="alert alert-danger">Sumber risiko untuk divisi ini belum tersedia. Silahkan menambahkan sumber risiko terlebih dahulu.</div>
         @endif
         </div>
     </div>

@@ -40,7 +40,7 @@ class PengukuranRisikoController extends Controller
             ->where('p.id_pengukur', '=', $id_responden)
             ->where('status_s_risiko', 1)
             ->where('s_risiko.tahun', $tahun)
-            ->where('s_risiko.company_id',  Auth::user()->company_id)
+            ->where('s_risiko.divisi_id',  Auth::user()->divisi_id)
             ->whereNull('p.deleted_at')
             ->whereNull('s_risiko.deleted_at')
             ->selectRaw('s_risiko.*, p.*')
@@ -48,7 +48,7 @@ class PengukuranRisikoController extends Controller
 
         $sumber_risiko = SRisiko::select('*')->join('konteks as k', 's_risiko.id_konteks', 'k.id_konteks')
             ->join('risk as r', 'r.id_risk', 'k.id_risk')
-            ->where('s_risiko.company_id',  Auth::user()->company_id)
+            ->where('s_risiko.divisi_id',  Auth::user()->divisi_id)
             ->where('s_risiko.tahun', $tahun)
             ->where('s_risiko.status_s_risiko', 1)
             ->whereNull('s_risiko.deleted_at')
@@ -93,9 +93,9 @@ class PengukuranRisikoController extends Controller
                 ->join('s_risiko as sr', 'pengukuran.id_s_risiko', 'sr.id_s_risiko')
                 ->join('konteks as k', 'sr.id_konteks', 'k.id_konteks')
                 ->join('defendid_pengukur as d', 'pengukuran.id_pengukur', 'd.id_pengukur')
-                ->join('perusahaan as p', 'd.company_id', 'p.company_id')
+                ->join('divisi as p', 'd.divisi_id', 'p.divisi_id')
                 ->where('sr.status_s_risiko', '1')
-                ->where('sr.company_id', '=', Auth::user()->company_id)
+                ->where('sr.divisi_id', '=', Auth::user()->divisi_id)
                 ->groupBy('k.id_risk', 'k.konteks',  'sr.s_risiko', 'sr.id_s_risiko')
                 ->get();
         $pdf = PDF::loadView('penilai.form_kompilasi', compact('data'))->setPaper( 'a4','landscape');

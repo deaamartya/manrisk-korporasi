@@ -16,15 +16,15 @@ class AbsDataMaster
     {
         $wr = "1=1";
         if(auth()->user()->is_risk_officer == 1){
-            $wr .= " AND defendid_user.company_id = ".auth()->user()->company_id;
+            $wr .= " AND defendid_user.divisi_id = ".auth()->user()->divisi_id;
         }
 
         $user = DefendidUser::where('is_admin', 0)
         ->whereRaw($wr)
-        ->leftJoin('perusahaan', 'perusahaan.company_id', 'defendid_user.company_id')
+        ->leftJoin('divisi', 'divisi.divisi_id', 'defendid_user.divisi_id')
         ->select(
             'defendid_user.*',
-            'perusahaan.instansi',
+            'divisi.instansi',
             // DB::raw("
             //     (CASE
             //         WHEN is_risk_officer = 1 THEN 'Risk Officer'
@@ -44,7 +44,7 @@ class AbsDataMaster
     public static function user_store($request, $id = null){
         $results = [];
         $params = [
-            'company_id' => $request->company_id,
+            'divisi_id' => $request->divisi_id,
             'name' => $request->name,
             'jabatan' => $request->jabatan,
             'nip' => $request->nip,
@@ -69,7 +69,7 @@ class AbsDataMaster
             $id_user = DefendidUser::insertGetId($params);
             if($request->melakukan_penilaian == 1){
                 DefendidPengukur::insert([
-                    'company_id' => $request->company_id,
+                    'divisi_id' => $request->divisi_id,
                     'id_user' => $id_user,
                     'jabatan' => $request->jabatan,
                     'nip' => $request->nip,
@@ -87,7 +87,7 @@ class AbsDataMaster
             if($request->melakukan_penilaian == 1){
                 if(DefendidPengukur::where('id_user', $id)->exists()){
                     DefendidPengukur::where('id_user', $id)->update([
-                        'company_id' => $request->company_id,
+                        'divisi_id' => $request->divisi_id,
                         'id_user' => $id,
                         'jabatan' => $request->jabatan,
                         'nip' => $request->nip,
@@ -98,7 +98,7 @@ class AbsDataMaster
                 }
                 else{
                     DefendidPengukur::insert([
-                        'company_id' => $request->company_id,
+                        'divisi_id' => $request->divisi_id,
                         'id_user' => $id,
                         'jabatan' => $request->jabatan,
                         'nip' => $request->nip,
@@ -137,7 +137,7 @@ class AbsDataMaster
     public static function get_user($id)
     {
         $user = DefendidUser::where('id_user', $id)->get();
-        $pengukur = DefendidPengukur::selectRaw('company_id, id_user, nama, nip, jabatan, status_pengukur, jenis')->where('id_user', $id)->get();
+        $pengukur = DefendidPengukur::selectRaw('divisi_id, id_user, nama, nip, jabatan, status_pengukur, jenis')->where('id_user', $id)->get();
 
         $data = $user->merge($pengukur);
         $msg = ['data' => $data, 'status' => 200];

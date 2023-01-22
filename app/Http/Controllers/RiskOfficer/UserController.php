@@ -6,7 +6,7 @@ use App\Abstracts\AbsDataMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DefendidUser;
-use App\Models\Perusahaan;
+use App\Models\Divisi;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $user = AbsDataMaster::user_data();
-        // $perusahaan = Perusahaan::all();
+        // $divisi = Divisi::all();
 
         return view('risk-officer.user', compact('user'));
     }
@@ -22,13 +22,13 @@ class UserController extends Controller
     public function store(Request $request, $id = null)
     {
         $req = [
-            'company_id' => 'required',
+            'divisi_id' => 'required',
             'username' => 'required',
             'jabatan' => 'required',
         ];
 
         $msg = [
-            'company_id.required' => 'Perusahaan tidak boleh kosong',
+            'divisi_id.required' => 'Divisi tidak boleh kosong',
             'username.required' => 'Nama user tidak boleh kosong',
             'jabatan.required' => 'Jabatan user tidak boleh kosong'
         ];

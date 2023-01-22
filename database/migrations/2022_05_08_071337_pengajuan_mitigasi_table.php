@@ -18,8 +18,8 @@ class PengajuanMitigasiTable extends Migration
             $table->integer('id_riskd');
             $table->foreign('id_riskd')->references('id_riskd')->on('risk_detail');
             $table->integer('id_user');
-            $table->unsignedInteger('company_id')->default(1);
-            $table->foreign('company_id')->references('company_id')->on('perusahaan');
+            $table->unsignedInteger('divisi_id')->default(1);
+            $table->foreign('divisi_id')->references('divisi_id')->on('divisi');
             $table->boolean('tipe_pengajuan')->comment('0 : tidak perlu mitigasi, 1: perlu mitigasi');
             $table->string('alasan')->nullable();
             $table->boolean('status')->comment('0 : menunggu jawaban admin, 1: sudah dijawab')->default(0);

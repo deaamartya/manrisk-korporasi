@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * Class DefendidUser
  * 
  * @property int $id_user
- * @property int $company_id
+ * @property int $divisi_id
  * @property string $username
  * @property string $password
  * @property int|null $status_user
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property bool $is_risk_owner
  * @property bool $is_admin
  * 
- * @property Perusahaan $perusahaan
+ * @property Divisi $divisi
  *
  * @package App\Models
  */
@@ -40,7 +40,7 @@ class DefendidUser extends Authenticatable
 	protected $dates = ['deleted_at'];
 
 	protected $casts = [
-		'company_id' => 'int',
+		'divisi_id' => 'int',
 		'status_user' => 'int',
 		'is_risk_officer' => 'bool',
 		'is_penilai' => 'bool',
@@ -54,7 +54,7 @@ class DefendidUser extends Authenticatable
 	];
 
 	protected $fillable = [
-		'company_id',
+		'divisi_id',
 		'username',
 		'password',
 		'status_user',
@@ -65,9 +65,9 @@ class DefendidUser extends Authenticatable
 		'is_admin'
 	];
 	
-	public function perusahaan()
+	public function divisi()
 	{
-		return $this->belongsTo(Perusahaan::class, 'company_id');
+		return $this->belongsTo(Divisi::class, 'divisi_id');
 	}
 	
 	public function defendid_pengukur(){

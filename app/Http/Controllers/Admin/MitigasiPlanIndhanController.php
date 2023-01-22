@@ -58,13 +58,13 @@ class MitigasiPlanIndhanController extends Controller
     {
         $headers = RiskHeaderIndhan::where('id_riskh', '=', $id)->first();
         $detail_risk = RiskHeader::selectRaw('*,avg(pi.nilai_L) as avg_nilai_l, avg(pi.nilai_C) as avg_nilai_c')
-                ->join('perusahaan', 'risk_header.company_id', 'perusahaan.company_id')
+                ->join('divisi', 'risk_header.divisi_id', 'divisi.divisi_id')
                 ->join('risk_detail', 'risk_header.id_riskh', 'risk_detail.id_riskh' )  
                 ->join('s_risiko', 'risk_detail.id_s_risiko', 's_risiko.id_s_risiko' )
                 ->join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks')
                 ->leftJoin('pengukuran_indhan as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
                 ->where('risk_detail.status_indhan', '=', 1)
-                ->where('risk_detail.company_id', '!=', 6)
+                ->where('risk_detail.divisi_id', '!=', 6)
                 ->whereNull('risk_detail.deleted_at')
                 ->where('risk_header.tahun', '=', $headers->tahun)
                 ->whereNull('risk_header.deleted_at')
@@ -72,12 +72,12 @@ class MitigasiPlanIndhanController extends Controller
                 ->groupBy('id_riskd')
                 ->get();
         $detail_risk_indhan = RiskDetail::selectRaw('*,avg(pi.nilai_L) as avg_nilai_l, avg(pi.nilai_C) as avg_nilai_c')
-            ->join('perusahaan as p', 'p.company_id', '=', 'risk_detail.company_id')
+            ->join('divisi as p', 'p.divisi_id', '=', 'risk_detail.divisi_id')
             ->join('s_risiko', 'risk_detail.id_s_risiko', 's_risiko.id_s_risiko' )
             ->join('konteks', 's_risiko.id_konteks', 'konteks.id_konteks' )
             ->leftJoin('pengukuran_indhan as pi', 'pi.id_s_risiko', 's_risiko.id_s_risiko')
             ->where('risk_detail.status_indhan', '=', 1)
-            ->where('risk_detail.company_id', '=', 6)
+            ->where('risk_detail.divisi_id', '=', 6)
             ->whereNull('risk_detail.deleted_at')
             ->where('risk_detail.tahun', '=', $headers->tahun)
             ->where('status_mitigasi', '=', 1)
@@ -209,7 +209,7 @@ class MitigasiPlanIndhanController extends Controller
                 ->orderBy('konteks.no_k', 'ASC')
                 ->get();
         foreach ($detail_risk as $key => $value) {
-            if ($detail_risk[$key]->company_id === 6) {
+            if ($detail_risk[$key]->divisi_id === 6) {
                 $detail_risk[$key]->r_awal = $detail_risk[$key]->r_awal;
             } else {
                 $temp_pi = PengukuranIndhan::where('id_s_risiko', '=', $value->id_s_risiko)->selectRaw('avg(nilai_L) as avg_nilai_l, avg(nilai_C) as avg_nilai_c')->first();

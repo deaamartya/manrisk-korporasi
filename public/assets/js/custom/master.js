@@ -15,7 +15,7 @@ $(document).ready(function() {
                 var pengukuran_risiko = 0;
                 var pengukuran_risiko_indhan = 0;
                 var mitigasi_indhan = 0;
-                var riskregister_korporasi = 0;
+                var riskregister_divisi = 0;
                 var hasil_mitigasi = 0;
                 // var hasil_mitigasi_indhan = 0;
                 var deadline_mitigasi = 0;
@@ -31,8 +31,8 @@ $(document).ready(function() {
                     if (data[i].title == 'Terdapat pengajuan mitigasi yang belum disetujui sebanyak ') {
                         mitigasi_indhan += data[i].jumlah;
                     }
-                    if (data[i].title == 'Terdapat risk register korporasi yang belum disetujui sebanyak ') {
-                        riskregister_korporasi += data[i].jumlah;
+                    if (data[i].title == 'Terdapat risk register divisi yang belum disetujui sebanyak ') {
+                        riskregister_divisi += data[i].jumlah;
                     }
                     if (data[i].title == 'Terdapat hasil mitigasi yang belum disetujui sebanyak ') {
                         hasil_mitigasi += data[i].jumlah;
@@ -43,7 +43,7 @@ $(document).ready(function() {
                     if (data[i].title == 'Terdapat risiko telah melewati tanggal jatuh tempo sebanyak ') {
                         deadline_mitigasi += data[i].jumlah;
                     }
-                    if (data[i].title == 'Terdapat pengukuran risiko korporasi sebanyak ') {
+                    if (data[i].title == 'Terdapat pengukuran risiko divisi sebanyak ') {
                         pengukuran_risiko += data[i].jumlah;
                     }
                     if (data[i].title == 'Terdapat pengukuran risiko indhan sebanyak ') {
@@ -59,8 +59,8 @@ $(document).ready(function() {
                     $('.srisiko-indhan-notif').html(srisiko_indhan)
                 } if (mitigasi_indhan > 0) {
                     $('.mitigasi-indhan-notif').html(mitigasi_indhan)
-                } if (riskregister_korporasi > 0) {
-                    $('.riskregister-korporasi-notif').html(riskregister_korporasi)
+                } if (riskregister_divisi > 0) {
+                    $('.riskregister-divisi-notif').html(riskregister_divisi)
                 } if (hasil_mitigasi > 0) {
                     $('.hasil-mitigasi-notif').html(hasil_mitigasi)
                 } if (deadline_mitigasi > 0) {

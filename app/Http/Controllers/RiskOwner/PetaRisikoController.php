@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\RiskOwner;
 
 use App\Http\Controllers\Controller;
-use App\Models\Perusahaan;
+use App\Models\Divisi;
 use Illuminate\Http\Request;
 use App\Models\SRisiko;
 use DB;
@@ -16,7 +16,7 @@ class PetaRisikoController extends Controller
             ->join('risk_detail as rd', 's_risiko.id_s_risiko', '=', 'rd.id_s_risiko')
             ->join('pengukuran as p', 's_risiko.id_s_risiko', '=', 'p.id_s_risiko')
             ->join('konteks as k', 'k.id_konteks', 's_risiko.id_konteks')
-            ->where('s_risiko.company_id', '=', $id)
+            ->where('s_risiko.divisi_id', '=', $id)
             ->where('s_risiko.tahun', '=', $req->tahun_risk)
             ->whereNull('s_risiko.deleted_at')
             ->whereNull('rd.deleted_at')
@@ -61,7 +61,7 @@ class PetaRisikoController extends Controller
         }
         if (count($val_r) > 1) $r_tertinggi = floatval(max($val_r));
         $tahun_req = $req->tahun_risk;
-        $company = Perusahaan::where('company_id', $id)->first();
-        return view('risk-owner.peta-risiko',  compact("s_risiko", "data_low", "data_med", "data_high", "data_extreme", 'r_total', 'r_tertinggi', 'tahun_req', 'company', "data_low_mitigasi", "data_med_mitigasi", "data_high_mitigasi", "data_extreme_mitigasi"));
+        $divisi = Divisi::where('divisi_id', $id)->first();
+        return view('risk-owner.peta-risiko',  compact("s_risiko", "data_low", "data_med", "data_high", "data_extreme", 'r_total', 'r_tertinggi', 'tahun_req', 'divisi', "data_low_mitigasi", "data_med_mitigasi", "data_high_mitigasi", "data_extreme_mitigasi"));
     }
 }

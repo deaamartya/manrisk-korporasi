@@ -477,7 +477,7 @@
                                                       <div class="col-lg-4 col-sm-6">
                                                          <select class="js-example-basic-single">
                                                             <option value="pw">Personal web address</option>
-                                                            <option value="cw">Company web address</option>
+                                                            <option value="cw">Divisi web address</option>
                                                             <option value="fb">Fabebook URL</option>
                                                             <option value="tw">Twitter URL</option>
                                                          </select>

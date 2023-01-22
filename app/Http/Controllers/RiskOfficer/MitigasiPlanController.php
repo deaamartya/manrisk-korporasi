@@ -134,7 +134,7 @@ class MitigasiPlanController extends Controller
         $document_type = 'mitigasi_plan';
         $url = "url='risk-officer/mitigasi-plan/print/".$header->id_riskh."';".
             "signed_by=".($header->pemeriksa ? $header->pemeriksa->name : '-').";".
-            "instansi=".$header->perusahaan->instansi.";".
+            "instansi=".$header->divisi->instansi.";".
             "tahun=".$header->tahun.";".
             "created_at=".$header->created_at.";".
             "penyusun=".($header->penyusun ? $header->penyusun->name : '-').";";

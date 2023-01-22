@@ -6,12 +6,12 @@
 @endsection
 
 @section('page-title')
-<h3>Detail Risk Register Korporasi</h3>
+<h3>Detail Risk Register Divisi</h3>
 @endsection
 
 @section('breadcrumb')
-<li class="breadcrumb-item">Risk Register Korporasi</li>
-<li class="breadcrumb-item active">Detail Risk Register Korporasi</li>
+<li class="breadcrumb-item">Risk Register Divisi</li>
+<li class="breadcrumb-item active">Detail Risk Register Divisi</li>
 @endsection
 
 @section('content')
@@ -225,7 +225,7 @@
         <h5 class="modal-title">Konfirmasi Status INDHAN</h5>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="GET" action="{{ route('admin.risk-register-korporasi.indhan', $data->id_riskd) }}">
+      <form method="GET" action="{{ route('admin.risk-register-divisi.indhan', $data->id_riskd) }}">
         <div class="modal-body">
         <input type="hidden" name="id_risk" value="{{ $data->sumber_risiko->konteks->id_risk .'-'. $data->no_urut }}">
           Apakah Anda yakin menyimpan risiko ini sebagai risiko INDHAN?
@@ -246,7 +246,7 @@
         <h5 class="modal-title">Konfirmasi Status INDHAN</h5>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="GET" action="{{ route('admin.risk-register-korporasi.non-indhan', $data->id_riskd) }}">
+      <form method="GET" action="{{ route('admin.risk-register-divisi.non-indhan', $data->id_riskd) }}">
         <div class="modal-body">
         <input type="hidden" name="id_risk" value="{{ $data->sumber_risiko->konteks->id_risk .'-'. $data->no_urut }}">
           Apakah Anda yakin menyimpan risiko ini sebagai risiko BUKAN INDHAN?
@@ -326,7 +326,7 @@
           <h5 class="modal-title">Set Nomor Urut</h5>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" action="{{ route('admin.risk-register-korporasi.set-urut-risk') }}">
+        <form method="POST" action="{{ route('admin.risk-register-divisi.set-urut-risk') }}">
           @csrf
           <div class="modal-body">
           <input type="hidden" name="id_riskh" value="{{ $headers->id_riskh }}">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableStatusProsesAddCompanyIdCol extends Migration
+class AlterTableStatusProsesAddDivisiIdCol extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AlterTableStatusProsesAddCompanyIdCol extends Migration
     public function up()
     {
         Schema::table('status_proses', function (Blueprint $table) {
-            $table->unsignedInteger('company_id')->after('tahun');
-            $table->foreign('company_id')->references('company_id')->on('perusahaan');
+            $table->unsignedInteger('divisi_id')->after('tahun');
+            $table->foreign('divisi_id')->references('divisi_id')->on('divisi');
         });
     }
 
@@ -27,7 +27,7 @@ class AlterTableStatusProsesAddCompanyIdCol extends Migration
     public function down()
     {
         Schema::table('status_proses', function (Blueprint $table) {
-            $table->dropColumn('company_id');
+            $table->dropColumn('divisi_id');
         });
     }
 }

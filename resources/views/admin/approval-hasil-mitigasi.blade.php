@@ -33,7 +33,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="col-md-4"><h6>Instansi</h6><hr class="hr-custom"></div>
-                      <div class="col-md-12 mb-2">{{ $data['headers']->perusahaan->instansi }}</div>
+                      <div class="col-md-12 mb-2">{{ $data['headers']->divisi->instansi }}</div>
                       <div class="col-md-4"><h6>Tahun Risiko</h6><hr class="hr-custom"></div>
                       <div class="col-md-12 mb-2">{{ $data['headers']->tahun }}</div>
                       <div class="col-md-4"><h6>Tanggal Dibuat</h6><hr class="hr-custom"></div>

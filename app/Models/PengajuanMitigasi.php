@@ -21,7 +21,7 @@ class PengajuanMitigasi extends Model
 	protected $fillable = [
 		'id_riskd',
 		'id_user',
-		'company_id',
+		'divisi_id',
 		'alasan',
 		'status',
 		'is_approved',

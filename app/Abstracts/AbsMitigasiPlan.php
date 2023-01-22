@@ -18,7 +18,7 @@ class AbsMitigasiPlan
     {
         $wr = '1=1';
         if(!Auth::user()->is_admin){
-            $wr .= ' AND company_id = '.Auth::user()->company_id;
+            $wr .= ' AND divisi_id = '.Auth::user()->divisi_id;
         }
         $headers = RiskHeader::whereRaw($wr)->get();
 

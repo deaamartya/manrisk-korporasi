@@ -14,7 +14,7 @@ class AlterTableRiskDetailAddNoUrutColumn extends Migration
     public function up()
     {
         Schema::table('risk_detail', function (Blueprint $table) {
-            $table->integer('no_urut')->after('company_id')->nullable();
+            $table->integer('no_urut')->after('divisi_id')->nullable();
         });
     }
 
