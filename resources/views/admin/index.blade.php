@@ -988,6 +988,8 @@
 		$('#tahun-biaya-risiko-korporasi').change();
 		$('#tahun-status-proses').val(date.getUTCFullYear());
 		$('#tahun-status-proses').change();
+		$('#tahun-jumlah-risiko').val(date.getUTCFullYear());
+		$('#tahun-jumlah-risiko').change();
 	});
 </script>
 @endsection
